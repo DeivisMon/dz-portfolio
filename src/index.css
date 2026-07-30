@@ -1,0 +1,239 @@
+/* css imports */
+@import url(./css/form.css);
+@import url(./css/frame.css);
+@import url(./css/slider.css);
+@import url(./css/contactButton.css);
+
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poiret+One&family=Sevillana&family=Syne:wght@400..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+@import url("https://db.onlinewebfonts.com/c/62123f44beddc6527e8ed8403f7d6198?family=Thomas+Mag+Regular");
+@import url("https://fonts.cdnfonts.com/css/gretha");
+@import url("https://fonts.cdnfonts.com/css/mirage-2");
+@import url("https://fonts.cdnfonts.com/css/aventi");
+@import url("https://fonts.cdnfonts.com/css/kaldera");
+@import url("https://fonts.cdnfonts.com/css/neroit-mission");
+@import url("https://fonts.cdnfonts.com/css/mories");
+@import url("https://fonts.cdnfonts.com/css/lt-binary-neue");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poiret+One&family=Sevillana&family=Syne:wght@400..800&display=swap");
+@import url("https://db.onlinewebfonts.com/c/384a6031928e262848e4e7ef80037466?family=Kudryashev+Display+Sans");
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap");
+@import url("https://fonts.cdnfonts.com/css/sf-old-republic");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Boldonse&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Sofia+Sans+Condensed:ital,wght@0,1..1000;1,1..1000&display=swap");
+@import url("https://fonts.cdnfonts.com/css/elgoc");
+@import url("https://fonts.cdnfonts.com/css/pp-neue-montreal");
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap");
+@import url("https://fonts.cdnfonts.com/css/amoera");
+
+@import "tailwindcss";
+
+@theme {
+  --color-bckg: #0a0908;
+  --color-navbar: #1b1815;
+  --color-surface: #221d19;
+  --color-text: #d8c8b8;
+  --color-muted: #a99988;
+  --color-header: #efe3d3;
+  --color-accent: #a67c52;
+  --color-border: #443a33;
+}
+
+/* hide scrollbar for all browsers */
+html {
+  overflow: -moz-scrollbar-none;
+  /* Old Firefox */
+  scrollbar-width: none;
+  /* New Firefox */
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+  overscroll-behavior: none;
+}
+
+html,
+body {
+  overscroll-behavior: none;
+  overflow: hidden;
+}
+
+* {
+  cursor: none;
+}
+
+::selection {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+body {
+  /* font-family: "Roboto", sans-serif; */
+  /* font-family: "Thomas Mag Regular", sans-serif; */
+  /* font-family: "Gretha", sans-serif; */
+  /* font-family: "Mirage", sans-serif; */
+  /* font-family: "Aventi", sans-serif; */
+  /* font-family: "Kaldera", sans-serif; */
+  /* font-family: "Neroit Mission", sans-serif; */
+  /* font-family: "Mories", sans-serif; */
+  /* font-family: "LT Binary Neue", sans-serif; */
+  /* font-family: "Syne", sans-serif; */
+  /* font-family: "Playfair Display", Georgia, serif; */
+  /* font-family: "Anton", sans-serif; */
+  /* font-family: "Kudryashev Display Sans", sans-serif; */
+  font-family: "Poiret One", cursive;
+  /* font-family: "SF Old Republic", sans-serif; */
+  /* font-family: "Montserrat", sans-serif; */
+  /* font-family: "Inter", sans-serif; */
+  /* font-family: "Sofia Sans Condensed", sans-serif; */
+  /* font-family: "Boldonse", system-ui; */
+  /* font-family: "Bebas Neue", sans-serif; */
+  /* font-family: "Elgoc", sans-serif; */
+  /* font-family: "PP Neue Montreal", sans-serif; */
+  /* font-family: "Cinzel", serif; */
+  /* font-family: "Cormorant Garamond", serif; */
+  /* font-weight: 100; */
+  /* background-color: #0a0908; */
+  /* background: #0a0908; */
+  background-image: url("/public/images/background.jpg");
+  background-position: bottom;
+  background-repeat: no-repeat;
+  /* background-size: cover;  */
+  min-height: 100dvh;
+}
+
+.background-effect {
+  background-image: url("/public/images/background1.jpg");
+  background-size: 70px;
+  background-position: bottom;
+  background-repeat: repeat;
+}
+
+/* .bg {
+  background-image: url("/public/images/background.jpg");
+  background-size: 500px;
+  background-position: top;
+  background-repeat: repeat;
+  opacity: 1;
+} */
+
+.border {
+  color: #443a33;
+  background: #0a0908;
+}
+
+/* @media (pointer: coarse) {
+  .custom-cursor {
+    display: none !important;
+  }
+} */
+
+.logo {
+  /* font-family: "SF Old Republic", sans-serif; */
+  font-weight: 100;
+  /* font-family: "Cinzel", serif; */
+  font-family: "amoera", sans-serif;
+  /* font-family: "Cormorant Garamond", serif; */
+}
+
+.navbar-container {
+  /* font-family: "Cinzel", serif; */
+  /* font-family: "SF Old Republic", sans-serif; */
+  font-family: "Poiret One", cursive;
+  font-weight: 600;
+}
+
+textarea {
+  min-height: 50px;
+}
+
+.scrollable-container::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollable-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* .navbar::after {
+  content: "";
+  position: absolute;
+  z-index: 1000;
+  left: 0;
+  bottom: -144px;
+  width: 100%;
+  height: 1px;
+  margin: 0;
+  background: #a99988;
+  opacity: 0.5;
+  transform-origin: left;
+  animation: drawLine 2.75s ease forwards;
+  animation-delay: .5s;
+} */
+
+.mobile-filter-item {
+  opacity: 0;
+  transform: translateY(-50px);
+}
+
+.mobile-layout-item {
+  opacity: 0;
+  /* transform: translateX(-20px); */
+}
+
+@keyframes drawLine {
+  0% {
+    transform: scaleX(0);
+  }
+  25% {
+    transform: scaleX(0);
+  }
+  50% {
+    transform: scaleX(0);
+  }
+  75% {
+    transform: scaleX(0.5);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+.animated-underline {
+  opacity: 0;
+  animation: underline 0.5s ease forwards;
+  animation-delay: 1s;
+}
+
+@keyframes underline {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 50;
+  }
+  100% {
+    opacity: 100;
+  }
+}
+
+/* Vertical Mobile Styles */
+@media (max-width: 767px) and (orientation: portrait) {
+  .navbar::after {
+    top: 36px;
+  }
+}
+
+/* Horizontal Mobile Styles */
+@media (max-height: 500px) and (orientation: landscape) {
+  .navbar::after {
+    top: 36px;
+  }
+}

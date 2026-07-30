@@ -1,0 +1,65 @@
+import { motion as Motion } from "framer-motion";
+import { MdArrowOutward } from "react-icons/md";
+
+const containerVariants = {
+  hidden: { y: 65, opacity: 0 },
+  show: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      delay: 2.2,
+      duration: 0.5,
+      staggerChildren: 0.15,
+      delayChildren: 2.5,
+    },
+  },
+  exit: { y: -15, opacity: 0, transition: { duration: 0.25 } },
+};
+
+const iconVariants = {
+  hidden: { y: "50%", opacity: 0 },
+  show: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.25,
+      ease: "easeOut",
+    },
+  },
+};
+
+export default function Socials() {
+  const icons = [
+    { id: "facebook", label: "Facebook" },
+    { id: "instagram", label: "Instagram" },
+  ];
+
+  return (
+    <Motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="show"
+      exit="exit"
+      className="social-icons relative text-muted flex gap-4 pb-2 mix-blend-difference"
+    >
+      {icons.map(({ id, label }) => (
+        <div
+          key={id}
+          className="cursor-trigger group hidden lg:flex justify-top items-center"
+          // data-cursor-type="link"
+        >
+          <Motion.div
+            variants={iconVariants}
+            style={{ fontSize: 16 }}
+            aria-label={label}
+          >
+            {label}
+          </Motion.div>
+          <span className="opacity-0 -rotate-180 translate-y-2 w-4 group-hover:translate-y-0 group-hover:opacity-100 group-hover:rotate-0 transition-all duration-300 ease-in-out ">
+            <MdArrowOutward />
+          </span>
+        </div>
+      ))}
+    </Motion.div>
+  );
+}

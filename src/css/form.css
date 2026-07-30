@@ -1,0 +1,115 @@
+/* Form inputs */
+
+.input-container {
+  position: relative;
+  /* margin: 50px auto; */
+  /* width: 200px; */
+}
+
+.input-container #input {
+  width: 100%;
+  /* padding: 5px 0; */
+  background-color: transparent;
+  outline: none;
+}
+
+.input-container .label {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  color: #333;
+  transition: all 0.25s ease;
+  pointer-events: none;
+}
+
+.input-container #input:focus ~ .label,
+.input-container #input:valid ~ .label {
+  top: -18px;
+  font-size: 18px;
+  color: #ccc;
+}
+
+.input-container .underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 0.25px;
+  width: 100%;
+  background-color: #ffffff;
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: all 0.25s ease;
+}
+
+.input-container #input:focus ~ .underline,
+.input-container #input:valid ~ .underline {
+  transform: scaleX(1);
+  opacity: 0.5;
+}
+
+/* Textarea */
+.textarea-container {
+  position: relative;
+  /* margin: 50px auto; */
+  /* width: 200px; */
+}
+
+.textarea-container #textarea-message {
+  /* font-size: 20px; */
+  width: 100%;
+  /* padding: 5px 0; */
+  background-color: transparent;
+  outline: none;
+}
+
+.textarea-container .label {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  color: #333;
+  transition: all 0.25s ease;
+  pointer-events: none;
+  /* background-color: #c47425; */
+  /* font-size: 18px; */
+}
+
+.textarea-container #textarea-message:focus ~ .label,
+.textarea-container #textarea-message:valid ~ .label {
+  top: -26px;
+  font-size: 18px;
+  color: #ccc;
+}
+
+.textarea-container .underline {
+  position: absolute;
+  bottom: 6px;
+  left: 0;
+  height: 1px;
+  width: 100%;
+  background-color: #ffffff;
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: all 0.25s ease;
+}
+
+.textarea-container #textarea-message:focus ~ .underline,
+.textarea-container #textarea-message:valid ~ .underline {
+  transform: scaleX(1);
+  opacity: 0.5;
+}
+
+@media (max-width: 767px) {
+  .textarea-container #textarea-message:focus ~ .label,
+  .textarea-container #textarea-message:valid ~ .label {
+    top: -14px;
+    font-size: 12px;
+  }
+
+  .input-container #input:focus ~ .label,
+  .input-container #input:valid ~ .label {
+    top: -12px;
+    font-size: 12px;
+  }
+}
