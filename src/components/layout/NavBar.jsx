@@ -12,6 +12,7 @@ import Frame from "../utils/Frame(Menu overlay)";
 import { useResponsive } from "../../hooks/useResponsive";
 import { usePageTransition } from "../../context/TransitionContext";
 import ClockWithCity from "../utils/ClockWithCity";
+import MenuBtn from "../utils/MenuButton";
 
 // Timing constants — keep these in sync with the transition objects below.
 // handleNavClick uses them to delay navigation until the overlay has
@@ -384,83 +385,16 @@ export default function NavBar() {
         ref={magneticRef}
         onMouseMove={handleMagneticMove}
         onMouseLeave={resetMagnetic}
-        className={`cursor-trigger fixed right-0 -top-2 w-14 h-14 xl:w-48 xl:h-48 flex items-center justify-center mix-blend-difference ${
+        className={`cursor-trigger fixed right-0 -top-2 w-14 h-14 xl:w-54 xl:h-48 flex items-center justify-center mix-blend-difference ${
           isTransitioning ? "z-[5]" : "z-[1000]"
         }`}
       >
-        <Motion.button
-          // initial={{ opacity: 0, y: -30 }}
-          // animate={{
-          //   opacity: isNavigatingAway ? 0 : 1,
-          //   y: isNavigatingAway ? -30 : 0,
-          // }}
-          // transition={{
-          //   duration: NAV_EXIT_DURATION,
-          //   delay: 1.5,
-          //   ease: [0.53, 0.2, 0.17, 1],
-          // }}
-          onClick={toggleMenu}
-          style={{
-            x: springX,
-            y: springY,
-            backgroundColor: "rgba(46, 45, 45, 0.06)",
-            borderColor: "rgba(255, 255, 255, 0.3)",
-          }}
-          className="relative w-10 h-10 xl:w-28 xl:h-28 rounded-full border border-black flex flex-col justify-center items-center gap-1.5 transition-colors duration-300 hover:bg-white/25"
-          aria-label="Toggle menu"
-        >
-          <Motion.span
-            className="w-5 xl:w-12 h-0.25 bg-white origin-center block"
-            initial={{
-              opacity: 0,
-              y: 10,
-            }}
-            animate={
-              isMenuOpen
-                ? {
-                    opacity: 1,
-                    x: 0,
-                    rotate: 45,
-                    y: 6,
-                  }
-                : {
-                    opacity: 1,
-                    x: 0,
-                    rotate: 0,
-                    y: 0,
-                  }
-            }
-            transition={{
-              duration: 0.3,
-              delay: 0.25,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          />
-          <Motion.span
-            className="w-5 xl:w-12 h-0.25 bg-white block"
-            initial={{ opacity: 0, y: 0 }}
-            animate={
-              isMenuOpen
-                ? { y: 10, opacity: 0, scaleX: 0 }
-                : { y: 0, opacity: 1, scaleX: 1 }
-            }
-            transition={{ duration: 0.2, delay: 0.15 }}
-          />
-          <Motion.span
-            className="w-5 xl:w-12 h-0.25 bg-white origin-center block"
-            initial={{ opacity: 0, y: -10 }}
-            animate={
-              isMenuOpen
-                ? { opacity: 1, x: 0, rotate: -45, y: -8 }
-                : { opacity: 1, x: 0, rotate: 0, y: 0 }
-            }
-            transition={{
-              duration: 0.3,
-              delay: 0.25,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          />
-        </Motion.button>
+        <MenuBtn
+          isMenuOpen={isMenuOpen}
+          toggleMenu={toggleMenu}
+          springX={springX}
+          springY={springY}
+        />
       </div>
 
       {/* Fullscreen menu overlay */}

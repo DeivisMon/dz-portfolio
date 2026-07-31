@@ -60,7 +60,7 @@ const ScrollProgressBar = ({
 
       {/* Track */}
       <div
-        className={`relative w-full mx-2 ${backgroundColor} ${responsive.isMobile || responsive.isTablet ? "h-1" : "h-[5px]"}`}
+        className={`relative w-full ${backgroundColor} ${responsive.isMobile || responsive.isTablet ? "h-1" : "h-[5px]"}`}
         style={{
           transform: `translateY(${active ? 0 : 10}px)`,
           transition:
@@ -69,7 +69,7 @@ const ScrollProgressBar = ({
       >
         {/* Progress bar */}
         <div
-          className={`${progressColor} ${responsive.isMobile || responsive.isTablet ? "h-1" : "h-[4px]"} mx-2 absolute bottom-0 left-1/2`}
+          className={`${progressColor} ${responsive.isMobile || responsive.isTablet ? "h-1" : "h-[4px]"} absolute bottom-0 left-1/2`}
           style={{
             width: "100%",
             transformOrigin: "50% 50%",
