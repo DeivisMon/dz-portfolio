@@ -33,7 +33,7 @@ export default function Frame() {
   return (
     <Motion.div
       // {...Animate(frame)}
-      className={`film-frame h-[calc(100dvh-42px)] xl:h-[calc(100dvh-212px)] mix-blend-difference`}
+      className={`film-frame h-[calc(100dvh-64px)] xl:h-[calc(100dvh-212px)] mix-blend-difference`}
     >
       <div
         style={{
@@ -69,7 +69,7 @@ export default function Frame() {
       /> */}
       <div className="absolute left-1 top-1 md:left-2 md:top-2 z-[100] flex flex-col items-center mix-blend-difference">
         {Array.from({
-          length: responsive.isMobile || responsive.isTablet ? 6 : 12,
+          length: responsive.isMobile || responsive.isTablet ? 4 : 12,
         }).map((_, i) => (
           <div
             key={i}
@@ -79,7 +79,7 @@ export default function Frame() {
       </div>
       <div className="absolute right-1 bottom-1 md:right-2 md:bottom-2 z-[100] flex flex-col items-center mix-blend-difference">
         {Array.from({
-          length: responsive.isMobile || responsive.isTablet ? 6 : 12,
+          length: responsive.isMobile || responsive.isTablet ? 4 : 12,
         }).map((_, i) => (
           <div
             key={i}

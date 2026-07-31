@@ -15,14 +15,14 @@ export default function PageSlideInTransition({ children }) {
         ease: [0.53, 0.2, 0.17, 1],
       },
     },
-    exit: {
-      y: "30%",
-      opacity: 1,
-      transition: {
-        delay: responsive.isMobile || responsive.isTablet ? 0.75 : 0.75,
-        duration: responsive.isMobile || responsive.isTablet ? 0.25 : 1.25,
-      },
-    },
+    // exit: {
+    //   y: "30%",
+    //   opacity: 1,
+    //   transition: {
+    //     delay: responsive.isMobile || responsive.isTablet ? 0.75 : 0.75,
+    //     duration: responsive.isMobile || responsive.isTablet ? 0.25 : 1.25,
+    //   },
+    // },
   };
 
   return (

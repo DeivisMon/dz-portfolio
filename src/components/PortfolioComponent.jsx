@@ -30,6 +30,32 @@ function shuffleArray(array) {
   return arr;
 }
 
+const Animations = (variants) => ({
+  initial: "initial",
+  animate: "animate",
+  exit: "exit",
+  variants,
+});
+
+const imgVariants = {
+  initial: { opacity: 0 },
+  animate: {
+    opacity: 1,
+    transition: {
+      duration: 0.25,
+      delay: 0.75,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      duration: 0.25,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
 const items = shuffleArray(galleryData);
 
 const FilterButton = ({ filter, isActive, onClick, index }) => {
@@ -322,7 +348,8 @@ export default function PortfolioComponent() {
           onClick={() => openLightbox(item.img, i)}
         >
           <div className="w-full group overflow-hidden m-1">
-            <img
+            <Motion.img
+              // {...Animations(imgVariants)}
               src={item.img}
               alt={item.title}
               loading="lazy"
@@ -706,7 +733,7 @@ export default function PortfolioComponent() {
 
   return (
     <div
-      className={`relative w-[100vw] h-[calc(100dvh-36px)] mt-[36px] xl:h-[calc(100dvh-204px)] xl:mt-[204px] overflow-hidden shadow-xl bg-bckg/70`}
+      className={`relative w-[100vw] h-[calc(100dvh-56px)] mt-[56px] xl:h-[calc(100dvh-204px)] xl:mt-[204px] overflow-hidden shadow-xl bg-bckg/70`}
     >
       <Frame />
       {/* Desktop Filters */}

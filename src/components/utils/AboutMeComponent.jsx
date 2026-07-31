@@ -17,11 +17,11 @@ export default function AboutMeComponent() {
   });
 
   return (
-    <div className="relative w-full h-full flex flex-col items-center justify-top md:justify-center text-text px-4 py-0 md:py-2">
+    <div className="relative w-full h-full flex flex-col items-center justify-start md:justify-center text-text px-4 py-0 md:py-2">
       {/* h1 */}
       <h1
         style={fadeUp(0.62)}
-        className="font-thin tracking-[0.3em] text-header text-[clamp(1.1rem,3vw,2rem)] mb-2 md:mb-4 text-center"
+        className="font-thin p-0 tracking-[0.3em] text-header text-[clamp(1.1rem,3vw,2rem)] mb-2 md:mb-4 text-center"
       >
         Apie Mane
       </h1>
@@ -44,8 +44,8 @@ export default function AboutMeComponent() {
         <p>
           Prieš penkerius metus fotografija man buvo tik pomėgis — šiandien tai
           būdas sustabdyti akimirkas, kurios kitaip praeitų nepastebėtos.
-          Fotografuoju vestuves, portretus ir gamtą, tačiau kiekvienam kadrui
-          taikau tą patį principą: pirmiausia jausmas, tik tada technika.
+          Kiekvienam kadrui taikau tą patį principą: pirmiausia jausmas, tik
+          tada technika.
         </p>
         <p>
           Man svarbu ne poza, o žmogus už jos — todėl dažniausiai renkuosi

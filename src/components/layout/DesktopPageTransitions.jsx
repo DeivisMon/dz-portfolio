@@ -1,5 +1,4 @@
 import { motion as Motion } from "framer-motion";
-// import TextTransition from "./TextTransition";
 import { usePageTransition } from "../../context/TransitionContext";
 
 export default function DesktopPageTransitions({ children }) {
@@ -19,17 +18,16 @@ export default function DesktopPageTransitions({ children }) {
     animate: { y: "100vh" },
     exit: {
       y: 0,
-      transition: { duration: 1.5, delay: 0.5, ease: [-0.53, -0.4, 0.53, 1] },
+      transition: { duration: 1, delay: 0.125, ease: [0.87, 0, 0.13, 1] },
     },
   };
 
   const zoomOut = {
-    initial: { y: 0, scale: 1, opacity: 1 },
-    animate: { y: 0, scale: 1, opacity: 1 },
+    initial: { y: 0, opacity: 1 },
+    animate: { y: 0, opacity: 1 },
     exit: {
-      y: 20,
-      scale: 0.95,
-      opacity: 1,
+      y: "100vh",
+      opacity: 0,
       transition: { duration: 1, ease: [0.53, 0.2, 0.17, 1] },
     },
   };

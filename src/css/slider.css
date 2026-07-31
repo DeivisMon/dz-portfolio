@@ -70,8 +70,8 @@
   }
 
   .slider {
-    height: calc(100dvh - 32px) !important;
-    margin-top: 32px !important;
+    height: calc(100dvh - 56px) !important;
+    margin-top: 56px !important;
   }
 }
 

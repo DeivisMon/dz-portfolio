@@ -60,7 +60,7 @@ const overlayVariants = {
     y: "100%",
     transition: {
       duration: NAV_EXIT_DURATION,
-      delay: NAV_EXIT_DELAY,
+      delay: 0.125,
       ease: [0.53, 0.2, 0.17, 1],
     },
   },
@@ -343,11 +343,11 @@ export default function NavBar() {
 
       {/* Logo: own top-level fixed stacking context, sibling to hamburger */}
       <div
-        className={`fixed left-0 top-0 xl:-top-10 w-1/2 overflow-hidden flex flex-col justify-between items-start xl:px-6 mix-blend-difference transition-[z-index] ${
+        className={`fixed left-2 top-2 xl:-top-10 w-1/2 overflow-hidden flex flex-col justify-between items-start xl:px-6 mix-blend-difference transition-[z-index] ${
           isTransitioning ? "z-[2000]" : "z-[500]"
         }`}
       >
-        <div className="logo text-[24px] xl:text-[204px]">
+        <div className="logo text-[32px] xl:text-[204px]">
           <Link
             className="flex transition-all duration-500 ease-in-out"
             to="/"
@@ -364,7 +364,7 @@ export default function NavBar() {
               textShadow="text-shadow-lg/40"
               letterSpacing={
                 responsive.isTablet || responsive.isMobile
-                  ? "px-[4px] pl-2"
+                  ? "px-[2px]"
                   : "px-[8px]"
               }
             />
@@ -376,7 +376,7 @@ export default function NavBar() {
         />
         <Motion.div
           {...Animations(lowerLineVariants)}
-          className="fixed top-[32px] md:top-42 left-0 w-full h-[1px] bg-muted/50 origin-right"
+          className="fixed top-[56px] md:top-42 left-0 w-full h-[1px] bg-muted/50 origin-right"
         />
       </div>
 
