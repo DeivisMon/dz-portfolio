@@ -20,7 +20,7 @@ import MenuBtn from "../utils/MenuButton";
 // a still-animating menu.
 const NAV_EXIT_DELAY = 0.5; // seconds
 const NAV_EXIT_DURATION = 0.9; // seconds
-const MAGNETIC_STRENGTH = 0.4;
+const MAGNETIC_STRENGTH = 0.3;
 
 const NAV_ITEMS = [
   { path: "/", label: "Pradžia" },
@@ -51,13 +51,13 @@ const Animations = (variants) => ({
 });
 
 const overlayVariants = {
-  initial: { clipPath: "inset(0% 0% 100% 0%)" },
+  initial: { y: "-100%" },
   animate: {
-    clipPath: "inset(0% 0% 0% 0%)",
+    y: 0,
     transition: { duration: 0.75, delay: 0.25, ease: [0.87, 0, 0.13, 1] },
   },
   exit: {
-    clipPath: "inset(100% 0% 0% 0%)",
+    y: "100%",
     transition: {
       duration: NAV_EXIT_DURATION,
       delay: NAV_EXIT_DELAY,
@@ -385,7 +385,7 @@ export default function NavBar() {
         ref={magneticRef}
         onMouseMove={handleMagneticMove}
         onMouseLeave={resetMagnetic}
-        className={`cursor-trigger fixed right-0 -top-2 w-14 h-14 xl:w-54 xl:h-48 flex items-center justify-center mix-blend-difference ${
+        className={`cursor-trigger fixed right-0 -top-2 w-14 h-14 xl:w-54 xl:h-48 flex items-center justify-center mix-blend-difference isolate ${
           isTransitioning ? "z-[5]" : "z-[1000]"
         }`}
       >
