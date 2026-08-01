@@ -10,7 +10,7 @@ export default function PageSlideInTransition({ children }) {
       y: 0,
       opacity: 1,
       transition: {
-        delay: responsive.isMobile || responsive.isTablet ? 1.25 : 0.9,
+        delay: responsive.isMobile || responsive.isTablet ? 1.25 : 1.05,
         duration: 0.85,
         ease: [0.53, 0.2, 0.17, 1],
       },

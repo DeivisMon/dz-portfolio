@@ -7,22 +7,22 @@ const containerVariants = {
     y: 0,
     opacity: 1,
     transition: {
-      delay: 2.2,
+      delay: 0.5,
       duration: 0.5,
       staggerChildren: 0.15,
-      delayChildren: 2.5,
+      delayChildren: 0.75,
     },
   },
-  exit: { y: -15, opacity: 0, transition: { duration: 0.25 } },
+  exit: { y: 15, opacity: 0, transition: { duration: 0.25 } },
 };
 
 const iconVariants = {
-  hidden: { y: "50%", opacity: 0 },
+  hidden: { y: "100%", opacity: 0 },
   show: {
     y: 0,
     opacity: 1,
     transition: {
-      duration: 0.25,
+      duration: 0.35,
       ease: "easeOut",
     },
   },
@@ -40,24 +40,25 @@ export default function Socials() {
       initial="hidden"
       animate="show"
       exit="exit"
-      className="social-icons relative text-muted flex gap-4 pb-2 mix-blend-difference"
+      className="social-icons relative border-b border-muted/50 px-8 text-muted flex gap-4 pb-2 mix-blend-difference"
     >
       {icons.map(({ id, label }) => (
         <div
           key={id}
-          className="cursor-trigger group hidden lg:flex justify-top items-center"
-          // data-cursor-type="link"
+          className="cursor-trigger group w-full px-6 flex justify-top items-center overflow-hidden"
+          data-cursor-type="link"
         >
           <Motion.div
             variants={iconVariants}
-            style={{ fontSize: 16 }}
+            style={{ fontSize: 32 }}
             aria-label={label}
+            className="border-b border-t border-muted/0 group-hover:border-muted/50 transition-all duration-300 ease-in-out"
           >
             {label}
           </Motion.div>
-          <span className="opacity-0 -rotate-180 translate-y-2 w-4 group-hover:translate-y-0 group-hover:opacity-100 group-hover:rotate-0 transition-all duration-300 ease-in-out ">
-            <MdArrowOutward />
-          </span>
+          {/* <span className="opacity-0 rotate-360 translate-y-4 w-4 group-hover:translate-y-0 group-hover:opacity-100 group-hover:rotate-0 transition-all duration-300 ease-in-out ">
+            <MdArrowOutward size={32} />
+          </span> */}
         </div>
       ))}
     </Motion.div>

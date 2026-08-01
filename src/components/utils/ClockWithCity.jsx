@@ -15,7 +15,7 @@ export default function ClockWithCity() {
   const [city, country] = useCityFromIP();
 
   return (
-    <span className="tabular-nums border-b border-muted/50">
+    <span className="tabular-nums">
       <span className="inline-block w-[26px] text-center">
         {now.getHours().toString().padStart(2, "0")}
       </span>

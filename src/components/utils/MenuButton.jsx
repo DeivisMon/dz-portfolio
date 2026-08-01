@@ -11,7 +11,7 @@ const MenuBtn = ({ isMenuOpen, toggleMenu, springX, springY }) => {
   return (
     <Motion.div
       className={`
-        group fixed top-2 right-4 xl:top-8 xl:right-8 z-[2]
+        group fixed top-2 right-4 xl:top-12 xl:right-8 z-[2]
         w-[90px] h-11 xl:w-40 xl:h-20
         ${isMenuOpen ? "w-10 xl:w-[60px]" : "w-[90px] xl:w-40"}
         rounded-[8em] origin-center cursor-pointer
@@ -25,7 +25,7 @@ const MenuBtn = ({ isMenuOpen, toggleMenu, springX, springY }) => {
       {/* shadow layer */}
       <div
         className={`
-          absolute inset-0 rounded-[8em] shadow-xs shadow-accent/35
+          absolute inset-0 rounded-[8em] shadow-xs shadow-accent/55
           transition-opacity duration-500 ease-[cubic-bezier(0.075,0.82,0.165,1)]
           ${isMenuOpen ? "opacity-0" : "opacity-100"}
         `}
@@ -50,8 +50,8 @@ const MenuBtn = ({ isMenuOpen, toggleMenu, springX, springY }) => {
           transition-all duration-[350ms] ease-[cubic-bezier(0.075,0.82,0.165,1)]
           ${
             isMenuOpen
-              ? "[clip-path:circle(50%_at_50%_50%)] scale-[1.125] bg-transparent border border-accent"
-              : "[clip-path:circle(10%_at_50%_50%)] group-hover:[clip-path:circle(35%_at_50%_50%)] bg-accent/70"
+              ? "[clip-path:circle(50%_at_50%_50%)] scale-[1.125] bg-transparent border border-muted/85"
+              : "[clip-path:circle(10%_at_50%_50%)] group-hover:[clip-path:circle(35%_at_50%_50%)] bg-muted/85"
           }
         `}
       >

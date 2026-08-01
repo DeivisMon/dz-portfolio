@@ -74,17 +74,17 @@ export default function AboutMeComponent() {
         "
       >
         <span className="flex flex-col md:flex-row gap-x-1 items-center">
-          <span>5+ </span>
+          <span>15 + </span>
           <span>metai patirties</span>
         </span>
         <span className="text-accent">·</span>
         <span className="flex flex-col md:flex-row gap-x-1 items-center">
-          <span>100 000+</span>
+          <span>100 000 +</span>
           <span>nuotraukų</span>
         </span>
         <span className="text-accent">·</span>
         <span className="flex flex-col md:flex-row gap-x-1 items-center">
-          <span>200+</span>
+          <span>200 +</span>
           <span>laimingų klientų</span>
         </span>
       </div>

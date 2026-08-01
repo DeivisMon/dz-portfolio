@@ -11,6 +11,7 @@ import AboutMe from "./pages/AboutMe";
 import Contact from "./pages/Contact";
 import NavBar from "./components/layout/NavBar";
 import CustomCursor from "./components/utils/CustomCursor";
+import MovingBackground from "./components/utils/MovingBackgound";
 
 export default function App() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -27,6 +28,9 @@ export default function App() {
           !responsive.isTablet &&
           !responsive.isMobile ? (
             <>
+              <MovingBackground />
+              <div className="fixed right-0 top-0 flex w-full h-[188px] bg-bckg/35 z-[1]"></div>
+
               <NavBar />
               <AnimatePresence mode="wait">
                 <DesktopPageTransitions key={location.pathname}>

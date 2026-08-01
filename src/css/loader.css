@@ -1,0 +1,99 @@
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100svh;
+  background-color: var(--dark, #000);
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  will-change: clip-path;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 7px;
+  background-color: var(--light, #fff);
+  transform: scaleX(0);
+  transform-origin: left;
+  will-change: transform;
+}
+
+.preloader-images {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30rem;
+  aspect-ratio: 3 / 4; /* portrait — match your image's real width/height ratio */
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  will-change: clip-path;
+  overflow: hidden;
+}
+
+.preloader-images .img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+  will-change: clip-path;
+  overflow: hidden;
+}
+
+.preloader-images .img img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform: scale(2);
+  will-change: transform;
+}
+
+.preloader-header {
+  position: fixed;
+  top: 75%;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-50%);
+  transform-origin: center;
+  will-change: transform;
+  z-index: 3;
+  font-weight: 100;
+  font-family: "amoera", sans-serif;
+}
+
+.preloader-header a {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--light, #fff);
+  font-family: "Agdasima", sans-serif;
+  font-size: 7.5rem;
+  font-weight: 600;
+  line-height: 0.9;
+  display: block;
+}
+
+.preloader-header a .line {
+  position: relative;
+  display: inline-block;
+  transform: translateY(0);
+  will-change: transform;
+}
+
+@media (max-width: 1000px) {
+  .preloader-images {
+    top: 35%;
+    width: 10rem;
+    height: 10rem;
+  }
+
+  .preloader-header a {
+    font-size: 4rem;
+  }
+}

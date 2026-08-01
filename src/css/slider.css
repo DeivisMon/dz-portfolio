@@ -2,7 +2,7 @@
   position: relative;
   width: 100vw;
   height: 100dvh;
-  margin-top: 204px;
+  margin-top: 188px;
   overflow: hidden;
   user-select: none;
   z-index: 10;
@@ -20,8 +20,8 @@
 .slide {
   flex-shrink: 0;
   width: 24.5vw;
-  height: calc(100dvh - 204px);
-  margin-top: 204px;
+  height: calc(100dvh - 188px);
+  margin-top: 188px;
   margin: 0 0.25vw;
   position: relative;
   bottom: 0;

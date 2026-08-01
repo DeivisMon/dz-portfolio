@@ -8,10 +8,11 @@ import {
 } from "framer-motion";
 import AnimatedText from "../utils/AnimatedText";
 import SocialIcons from "../utils/SocialIcons";
-import Frame from "../utils/Frame(Menu overlay)";
+import Socials from "../utils/Socials";
 import { useResponsive } from "../../hooks/useResponsive";
 import { usePageTransition } from "../../context/TransitionContext";
 import ClockWithCity from "../utils/ClockWithCity";
+import PhotographerQuoteSlide from "../utils/PhotographerQuoteSlide";
 import MenuBtn from "../utils/MenuButton";
 
 // Timing constants — keep these in sync with the transition objects below.
@@ -19,7 +20,7 @@ import MenuBtn from "../utils/MenuButton";
 // actually finished closing, avoiding a flash of the new route underneath
 // a still-animating menu.
 const NAV_EXIT_DELAY = 0.5; // seconds
-const NAV_EXIT_DURATION = 0.9; // seconds
+const NAV_EXIT_DURATION = 0.75; // seconds
 const MAGNETIC_STRENGTH = 0.3;
 
 const NAV_ITEMS = [
@@ -38,7 +39,6 @@ const MARQUEE_ITEMS = [
   "Vestuvės",
   "Architektūra",
   "Gamta",
-  "Studijinė fotografija",
 ];
 
 // Animation variants
@@ -60,7 +60,7 @@ const overlayVariants = {
     y: "100%",
     transition: {
       duration: NAV_EXIT_DURATION,
-      delay: 0.125,
+      delay: 0.25,
       ease: [0.53, 0.2, 0.17, 1],
     },
   },
@@ -110,7 +110,7 @@ const upperLineVariants = {
   initial: { scaleX: 0 },
   animate: {
     scaleX: 1,
-    transition: { duration: 0.75, delay: 2.25, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 1.25, delay: 1.75, ease: [0.82, 1, 0.36, 1] },
   },
   // exit: {
   //   scaleX: 50,
@@ -127,7 +127,7 @@ const lowerLineVariants = {
   initial: { scaleX: 0 },
   animate: {
     scaleX: 1,
-    transition: { duration: 1.25, delay: 1.75, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 1.25, delay: 1.75, ease: [0.82, 1, 0.36, 1] },
   },
   // exit: {
   //   scaleX: 50,
@@ -176,7 +176,7 @@ const Marquee = ({
   const renderItems = (groupRef = null) => (
     <div
       ref={groupRef}
-      className="flex shrink-0 items-center bg-bckg whitespace-nowrap"
+      className="flex shrink-0 items-center bg-surface whitespace-nowrap"
       aria-hidden={groupRef ? undefined : true}
     >
       {items.map((item, i) => (
@@ -322,28 +322,36 @@ export default function NavBar() {
       >
         <Marquee
           items={MARQUEE_ITEMS}
-          className={`fixed hidden md:block left-0 top-8 xl:top-[173px]  `}
+          className={`fixed hidden md:block left-0 top-8 xl:top-40 pt-[1px]  `}
         />
-        <div className="fixed right-0 top-4 w-1/2 h-[36px] xl:h-[204px] flex items-top justify-between px-4 xl:px-2">
+        <div className="fixed right-0 -top-[2px] w-full h-[36px] xl:h-[204px] flex items-top justify-between px-4 xl:pl-44">
           <Motion.span
             {...Animations(dateVariants)}
-            className="hidden md:block text-[18px] text-muted uppercase whitespace-nowrap mix-blend-difference"
+            className="hidden md:block text-[16px] text-muted uppercase whitespace-nowrap mix-blend-difference"
           >
-            {month}' {year}
+            {/* {month}' {year} */}
           </Motion.span>
           <Motion.span
             {...Animations(dateVariants)}
-            className="hidden md:block text-[18px] text-muted uppercase whitespace-nowrap mix-blend-difference"
+            className="hidden md:block text-[16px] text-muted uppercase whitespace-nowrap mix-blend-difference"
           >
             <ClockWithCity />
           </Motion.span>
-          <span></span>
+          <Motion.span
+            {...Animations(dateVariants)}
+            className="hidden md:block fixed top-6 right-62"
+          >
+            <PhotographerQuoteSlide
+              textColor="text-header"
+              textSize="text-[18px] xl:text-[64px]"
+            />
+          </Motion.span>
         </div>
       </div>
 
       {/* Logo: own top-level fixed stacking context, sibling to hamburger */}
       <div
-        className={`fixed left-2 top-2 xl:-top-10 w-1/2 overflow-hidden flex flex-col justify-between items-start xl:px-6 mix-blend-difference transition-[z-index] ${
+        className={`fixed left-2 top-2 xl:-top-11 w-1/2 overflow-hidden flex flex-col justify-between items-start xl:px-6 mix-blend-difference transition-[z-index] ${
           isTransitioning ? "z-[2000]" : "z-[500]"
         }`}
       >
@@ -372,11 +380,11 @@ export default function NavBar() {
         </div>
         <Motion.div
           {...Animations(upperLineVariants)}
-          className={`fixed hidden md:block top-4 left-0 w-[calc(50vw+80px)] h-[1px] bg-muted/50 origin-left`}
+          className={`fixed hidden md:block top-4 left-0 w-full h-[1px] bg-muted/50 origin-left`}
         />
         <Motion.div
           {...Animations(lowerLineVariants)}
-          className="fixed top-[56px] md:top-42 left-0 w-full h-[1px] bg-muted/50 origin-right"
+          className="fixed top-[56px] md:top-40 left-0 w-full h-[1px] bg-muted/50 origin-right"
         />
       </div>
 
@@ -385,7 +393,7 @@ export default function NavBar() {
         ref={magneticRef}
         onMouseMove={handleMagneticMove}
         onMouseLeave={resetMagnetic}
-        className={`cursor-trigger fixed right-0 -top-2 w-14 h-14 xl:w-54 xl:h-48 flex items-center justify-center mix-blend-difference isolate ${
+        className={`cursor-trigger fixed right-0 -top-2 md:top-12 w-14 h-14 xl:w-54 xl:h-48 flex items-center justify-center mix-blend-difference isolate ${
           isTransitioning ? "z-[5]" : "z-[1000]"
         }`}
       >
@@ -433,8 +441,8 @@ export default function NavBar() {
               ))}
             </nav>
 
-            <div className="fixed left-0 bottom-8 w-full">
-              <SocialIcons />
+            <div className="fixed left-0 bottom-8 flex justify-center w-full">
+              <Socials />
             </div>
 
             {/* Decorative background logo */}

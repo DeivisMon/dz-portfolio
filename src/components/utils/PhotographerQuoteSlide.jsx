@@ -1,0 +1,165 @@
+import { useState, useCallback, useEffect, useRef } from "react";
+
+const AUTO_ADVANCE_MS = 10000;
+
+const QUOTES = [
+  { text: "Nuotrauką ne fotografuoji – ją sukuri.", author: "Ansel Adams" },
+  {
+    text: "Tavo pirmos 10 000 nuotraukų yra prasčiausios.",
+    author: "Henri Cartier-Bresson",
+  },
+  {
+    text: "Fotoaparatas – įrankis, mokantis žmones matyti.",
+    author: "Dorothea Lange",
+  },
+  { text: "Nuotrauka yra paslaptis apie paslaptį.", author: "Diane Arbus" },
+  {
+    text: "Jei tavo nuotraukos nepakankamai geros, vadinasi, esi nepakankamai arti.",
+    author: "Robert Capa",
+  },
+  {
+    text: "Fotografija: nuotrauka, nutapyta saulės be instrukcijų mene..",
+    author: "Ambrose Bierce",
+  },
+  { text: "Fotografija – tai stebėjimo menas.", author: "Elliott Erwitt" },
+  {
+    text: "Kuri mano nuotrauka mėgstamiausia? Ta, kurią nufotografuosiu rytoj.",
+    author: "Imogen Cunningham",
+  },
+  {
+    text: "Fotografuoju, kad sužinočiau, kaip kas nors atrodys nufotografuota.",
+    author: "Garry Winogrand",
+  },
+  {
+    text: "Portretas sukuriamas ne fotoaparate, o iš abiejų jo pusių.",
+    author: "Edward Steichen",
+  },
+  {
+    text: "Nuotrauka yra – arba turėtų būti – reikšmingas dokumentas, giliai persmelkiantis teiginys.",
+    author: "Berenice Abbott",
+  },
+  {
+    text: "Fotografija yra mano meditacija",
+    author: "Czar Anthony Lopez",
+  },
+];
+
+export default function PhotographerQuoteSlide() {
+  const [index, setIndex] = useState(() =>
+    Math.floor(Math.random() * QUOTES.length),
+  );
+  const [visible, setVisible] = useState(true);
+  const [paused, setPaused] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const pausedRef = useRef(paused);
+
+  const next = useCallback(() => {
+    setVisible(false);
+    setTimeout(() => {
+      setIndex((prev) => {
+        if (QUOTES.length === 1) return prev;
+        let n = Math.floor(Math.random() * QUOTES.length);
+        while (n === prev) n = Math.floor(Math.random() * QUOTES.length);
+        return n;
+      });
+      setVisible(true);
+    }, 220);
+  }, []);
+
+  useEffect(() => {
+    pausedRef.current = paused;
+  }, [paused]);
+
+  useEffect(() => {
+    let raf;
+    let elapsed = 0;
+    let last = performance.now();
+    setProgress(0);
+
+    const loop = (now) => {
+      const dt = now - last;
+      last = now;
+      if (!pausedRef.current) elapsed += dt;
+      const pct = Math.min(elapsed / AUTO_ADVANCE_MS, 1);
+      setProgress(pct);
+      if (pct >= 1) {
+        next();
+        return;
+      }
+      raf = requestAnimationFrame(loop);
+    };
+
+    raf = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(raf);
+  }, [index, next]);
+
+  const quote = QUOTES[index];
+  const frameNo = String(index + 1).padStart(2, "0");
+  const total = String(QUOTES.length).padStart(2, "0");
+
+  return (
+    <div className="w-full flex items-center justify-center mix-blend-difference">
+      <div className="relative w-[40rem]">
+        <div
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          className="relative overflow-hidden h-[125px] flex flex-col justify-between"
+        >
+          <span
+            aria-hidden="true"
+            className="quote-font absolute -top-5 left-2 text-[5rem] text-[#c9962f] opacity-[0.20] select-none"
+          >
+            &ldquo;
+          </span>
+          <span
+            aria-hidden="true"
+            className="quote-font absolute -bottom-10 right-2 text-[5rem] text-[#c9962f] opacity-[0.20] select-none"
+          >
+            &ldquo;
+          </span>
+          <div
+            className={`relative flex-1 flex items-center transition-all duration-300 ease-out ${
+              visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
+            }`}
+          >
+            <p className="quote-font italic text-muted text-2xl sm:text-3xl md:text-[1.2rem]">
+              {quote.text}
+            </p>
+          </div>
+
+          <div
+            className={`relative flex items-end justify-end transition-all duration-300 ease-out ${
+              visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
+            }`}
+          >
+            <div className="text-right">
+              <div className="h-px w-full bg-[#3a342c]" />
+              <span className="text-xs sm:text-sm tracking-[0.15em] uppercase text-[#d8cfb8]">
+                &mdash; {quote.author}
+              </span>
+            </div>
+          </div>
+
+          <button
+            onClick={next}
+            aria-label="Show another quote now"
+            className="absolute bottom-0 left-0 w-full focus:outline-none"
+          >
+            <span className="block h-[1px] w-full bg-muted/20 overflow-hidden">
+              <span
+                className="block h-full bg-muted"
+                style={{ width: `${progress * 100}%` }}
+              />
+            </span>
+          </button>
+        </div>
+
+        <div className="flex items-center justify-between text-[10px] tracking-[0.2em] text-[#d8cfb8] uppercase -mt-4 px-1">
+          <span>
+            {frameNo} / {total}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}

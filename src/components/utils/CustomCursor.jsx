@@ -66,7 +66,7 @@ const CursorElement = ({
       styles[key].previous = lerp(
         styles[key].previous,
         styles[key].current,
-        styles[key].amount
+        styles[key].amount,
       );
     }
 
@@ -337,7 +337,7 @@ const CustomCursor = ({ triggerSelector = ".cursor-trigger" }) => {
   const checkElementUnderCursor = useCallback(() => {
     const elementUnderCursor = document.elementFromPoint(
       globalCursor.x,
-      globalCursor.y
+      globalCursor.y,
     );
     if (!elementUnderCursor) return;
 
@@ -352,18 +352,18 @@ const CustomCursor = ({ triggerSelector = ".cursor-trigger" }) => {
         (triggerElement.classList.contains("cursor-expand")
           ? "expand"
           : triggerElement.classList.contains("cursor-close")
-          ? "close"
-          : triggerElement.classList.contains("cursor-view")
-          ? "view"
-          : triggerElement.classList.contains("cursor-link")
-          ? "link"
-          : triggerElement.classList.contains("cursor-up")
-          ? "up"
-          : triggerElement.classList.contains("cursor-next")
-          ? "next"
-          : triggerElement.classList.contains("cursor-prev")
-          ? "prev"
-          : null);
+            ? "close"
+            : triggerElement.classList.contains("cursor-view")
+              ? "view"
+              : triggerElement.classList.contains("cursor-link")
+                ? "link"
+                : triggerElement.classList.contains("cursor-up")
+                  ? "up"
+                  : triggerElement.classList.contains("cursor-next")
+                    ? "next"
+                    : triggerElement.classList.contains("cursor-prev")
+                      ? "prev"
+                      : null);
 
       setIconType(cursorType);
     } else {
@@ -387,18 +387,18 @@ const CustomCursor = ({ triggerSelector = ".cursor-trigger" }) => {
         (element.classList.contains("cursor-expand")
           ? "expand"
           : element.classList.contains("cursor-close")
-          ? "close"
-          : element.classList.contains("cursor-view")
-          ? "view"
-          : element.classList.contains("cursor-link")
-          ? "link"
-          : element.classList.contains("cursor-up")
-          ? "up"
-          : element.classList.contains("cursor-next")
-          ? "next"
-          : element.classList.contains("cursor-prev")
-          ? "prev"
-          : null);
+            ? "close"
+            : element.classList.contains("cursor-view")
+              ? "view"
+              : element.classList.contains("cursor-link")
+                ? "link"
+                : element.classList.contains("cursor-up")
+                  ? "up"
+                  : element.classList.contains("cursor-next")
+                    ? "next"
+                    : element.classList.contains("cursor-prev")
+                      ? "prev"
+                      : null);
 
       setIconType(cursorType);
     };
@@ -501,6 +501,7 @@ const CustomCursor = ({ triggerSelector = ".cursor-trigger" }) => {
 
       {/* Large cursor circle with icon */}
       <CursorElement
+        className="backdrop-blur-[50px]"
         size={72}
         viewBox="0 0 72 72"
         radius={16}

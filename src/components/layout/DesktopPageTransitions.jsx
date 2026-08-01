@@ -18,7 +18,7 @@ export default function DesktopPageTransitions({ children }) {
     animate: { y: "100vh" },
     exit: {
       y: 0,
-      transition: { duration: 1, delay: 0.125, ease: [0.87, 0, 0.13, 1] },
+      transition: { duration: 1, delay: 0.025, ease: [0.87, 0, 0.13, 1] },
     },
   };
 
@@ -28,7 +28,7 @@ export default function DesktopPageTransitions({ children }) {
     exit: {
       y: "100vh",
       opacity: 0,
-      transition: { duration: 1, ease: [0.53, 0.2, 0.17, 1] },
+      transition: { duration: 1, ease: [0.87, 0.25, 0.13, 1] },
     },
   };
 

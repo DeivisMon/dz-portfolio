@@ -108,9 +108,9 @@ const FilterButton = ({ filter, isActive, onClick, index }) => {
 
     if (spans) {
       gsap.to(spans, {
-        fontSize: isActive ? "60px" : "54px",
+        fontSize: isActive ? "54px" : "48px",
         scaleX: isActive ? "1.95" : "1",
-        scaleY: isActive ? "1.6" : "1",
+        scaleY: isActive ? "1.35" : "1",
         stagger: 0.035,
         duration: 0.5,
         ease: "circ.inOut",
@@ -152,7 +152,7 @@ const FilterButton = ({ filter, isActive, onClick, index }) => {
         key={i}
         className={`relative inline-block uppercase tracking-[0.4em] transition-colors duration-300 ${
           isActive
-            ? "text-accent border-gray-600 border-b text-shadow-lg/20"
+            ? "text-accent border-gray-600 border-b pt-[2px] text-shadow-lg/20"
             : "text-text"
         }`}
       >
@@ -165,7 +165,6 @@ const FilterButton = ({ filter, isActive, onClick, index }) => {
     <div
       ref={buttonRef} //Cia animacija filtro isejimui
       className={`cursor-trigger relative h-full cursor-pointer pr-2 pointer-events-auto tracking-[2em]`}
-      data-cursor-type="link"
       style={{ height: "125px" }}
       onClick={onClick}
     >
@@ -179,7 +178,7 @@ const FilterButton = ({ filter, isActive, onClick, index }) => {
       </h1>
       <p
         ref={counterRef}
-        className="absolute -right-2 top-[110px] transform -translate-y-1/2 px-2 text-xl font-medium text-muted tracking-[0.8em] pointer-events-none"
+        className="absolute -right-2 top-[108px] transform -translate-y-1/2 px-2 text-xl font-medium text-muted tracking-[0.8em] pointer-events-none"
       >
         ({filter.count})
       </p>
@@ -733,7 +732,7 @@ export default function PortfolioComponent() {
 
   return (
     <div
-      className={`relative w-[100vw] h-[calc(100dvh-56px)] mt-[56px] xl:h-[calc(100dvh-204px)] xl:mt-[204px] overflow-hidden shadow-xl bg-bckg/70`}
+      className={`relative w-[100vw] h-[calc(100dvh-56px)] mt-[56px] xl:h-[calc(100dvh-188px)] xl:mt-[188px] overflow-hidden shadow-xl bg-bckg/70`}
     >
       <Frame />
       {/* Desktop Filters */}
