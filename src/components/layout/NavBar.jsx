@@ -322,7 +322,7 @@ export default function NavBar() {
       >
         <Marquee
           items={MARQUEE_ITEMS}
-          className={`fixed hidden md:block left-0 top-8 xl:top-40 pt-[1px]  `}
+          className={`fixed hidden xl:block left-0 top-8 xl:top-40 pt-[1px]  `}
         />
         <div className="fixed right-0 -top-[2px] w-full h-[36px] xl:h-[204px] flex items-top justify-between px-4 xl:pl-44">
           <Motion.span
@@ -333,13 +333,13 @@ export default function NavBar() {
           </Motion.span>
           <Motion.span
             {...Animations(dateVariants)}
-            className="hidden md:block text-[16px] text-muted uppercase whitespace-nowrap mix-blend-difference"
+            className="hidden xl:block text-[15px] text-muted/50 uppercase whitespace-nowrap mix-blend-difference"
           >
             <ClockWithCity />
           </Motion.span>
           <Motion.span
             {...Animations(dateVariants)}
-            className="hidden md:block fixed top-6 right-62"
+            className="hidden xl:block fixed top-6 right-62"
           >
             <PhotographerQuoteSlide
               textColor="text-header"
@@ -351,7 +351,7 @@ export default function NavBar() {
 
       {/* Logo: own top-level fixed stacking context, sibling to hamburger */}
       <div
-        className={`fixed left-2 top-2 xl:-top-11 w-1/2 overflow-hidden flex flex-col justify-between items-start xl:px-6 mix-blend-difference transition-[z-index] ${
+        className={`fixed left-2 top-2 xl:-top-11 w-full overflow-hidden flex flex-col justify-between items-start xl:px-6 mix-blend-difference transition-[z-index] ${
           isTransitioning ? "z-[2000]" : "z-[500]"
         }`}
       >

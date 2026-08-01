@@ -578,7 +578,7 @@ export default function PortfolioComponent() {
       gsap.to(itemsRef.current, {
         opacity: 0,
         y: 10,
-        duration: 0.2,
+        duration: 0.25,
         ease: "power2.out",
         onComplete: () => {
           setActiveFilter(filterId);
@@ -594,7 +594,7 @@ export default function PortfolioComponent() {
               gsap.to(itemsRef.current, {
                 opacity: 1,
                 y: 0,
-                duration: 0.8,
+                duration: 0.95,
                 ease: "power3.inOut",
               });
             });
@@ -663,7 +663,7 @@ export default function PortfolioComponent() {
         gsap.to(itemsRef.current, {
           opacity: 0,
           y: 10,
-          duration: 0.2,
+          duration: 0.25,
           onComplete: () => {
             setColumnLayout(newColumns);
             requestAnimationFrame(() => {
@@ -678,7 +678,7 @@ export default function PortfolioComponent() {
                 gsap.to(itemsRef.current, {
                   opacity: 1,
                   y: 0,
-                  duration: 0.8,
+                  duration: 0.95,
                   ease: "power3.inOut",
                 });
               });
@@ -719,11 +719,11 @@ export default function PortfolioComponent() {
         suppressScrollTop.current = true;
         setTimeout(() => {
           suppressScrollTop.current = false;
-        }, 600); // matches fade duration
+        }, 600);
         gsap.to(itemsRef.current, {
           opacity: 1,
           y: 0,
-          duration: 0.8,
+          duration: 0.95,
           ease: "power3.inOut",
         });
       },
@@ -732,7 +732,7 @@ export default function PortfolioComponent() {
 
   return (
     <div
-      className={`relative w-[100vw] h-[calc(100dvh-56px)] mt-[56px] xl:h-[calc(100dvh-188px)] xl:mt-[188px] overflow-hidden shadow-xl bg-bckg/70`}
+      className={`relative w-[100vw] h-[calc(100dvh-56px)] mt-[56px] xl:h-[calc(100dvh-188px)] xl:mt-[188px] overflow-hidden shadow-xl bg-bckg/70 `}
     >
       <Frame />
       {/* Desktop Filters */}
@@ -864,7 +864,7 @@ export default function PortfolioComponent() {
       {lightboxImage && (
         <div
           ref={lightboxRef}
-          className="fixed inset-0 z-[1000] bg-black/95 backdrop-blur flex items-center justify-center pointer-events-auto overflow-hidden"
+          className="fixed inset-0 z-[10000] bg-black/95 backdrop-blur flex items-center justify-center pointer-events-auto overflow-hidden"
           style={{ touchAction: "none", overscrollBehavior: "none" }}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}

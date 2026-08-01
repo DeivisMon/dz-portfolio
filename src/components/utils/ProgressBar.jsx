@@ -48,11 +48,18 @@ const ScrollProgressBar = ({
         <div
           className="pointer-events-none -mb-1 relative "
           style={{
+            willChange: "transform",
             transform: `translateY(${active ? 0 : 25}px)`,
             transition: "transform 0.5s cubic-bezier(0.22, -0.5, 0.36, 1)",
           }}
         >
-          <span className="text-white text-lg lg:text-xl font-medium ">
+          <span
+            className="text-white text-lg lg:text-xl font-medium mix-blend-mode"
+            style={{
+              WebkitFontSmoothing: "antialiased",
+              textRendering: "optimizeLegibility",
+            }}
+          >
             {Math.round(progress * 100)}%
           </span>
         </div>

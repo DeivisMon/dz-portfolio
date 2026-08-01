@@ -96,18 +96,6 @@ body {
   /* font-weight: 100; */
   /* background-color: #0a0908; */
   /* background: #0a0908; */
-  background-image: url("/public/images/background.jpg");
-  background-position: bottom;
-  background-repeat: no-repeat;
-  /* background-size: cover;  */
-  min-height: 100dvh;
-}
-
-.background-effect {
-  background-image: url("/public/images/background1.jpg");
-  background-size: 70px;
-  background-position: bottom;
-  background-repeat: repeat;
 }
 
 .quote-font {

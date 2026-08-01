@@ -15,7 +15,7 @@ const MenuBtn = ({ isMenuOpen, toggleMenu, springX, springY }) => {
         w-[90px] h-11 xl:w-40 xl:h-20
         ${isMenuOpen ? "w-10 xl:w-[60px]" : "w-[90px] xl:w-40"}
         rounded-[8em] origin-center cursor-pointer
-        bg-transparent
+        bg-bckg/65 backdrop-blur-[200px] 
         transition-[width] duration-500 ease-[cubic-bezier(0.075,0.82,0.165,1)]
         will-change-transform
       `}

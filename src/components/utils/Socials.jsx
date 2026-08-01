@@ -45,12 +45,11 @@ export default function Socials() {
       {icons.map(({ id, label }) => (
         <div
           key={id}
-          className="cursor-trigger group w-full px-6 flex justify-top items-center overflow-hidden"
+          className="cursor-trigger text-[16px] xl:text-[28px] group w-full px-6 flex justify-top items-center overflow-hidden"
           data-cursor-type="link"
         >
           <Motion.div
             variants={iconVariants}
-            style={{ fontSize: 32 }}
             aria-label={label}
             className="border-b border-t border-muted/0 group-hover:border-muted/50 transition-all duration-300 ease-in-out"
           >

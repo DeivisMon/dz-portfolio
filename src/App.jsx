@@ -30,7 +30,6 @@ export default function App() {
             <>
               <MovingBackground />
               <div className="fixed right-0 top-0 flex w-full h-[188px] bg-bckg/35 z-[1]"></div>
-
               <NavBar />
               <AnimatePresence mode="wait">
                 <DesktopPageTransitions key={location.pathname}>
@@ -45,6 +44,8 @@ export default function App() {
             </>
           ) : (
             <>
+              <MovingBackground />
+              <div className="fixed right-0 top-0 flex w-full h-[56px] bg-bckg/35 z-[1]"></div>
               <NavBar />
               <AnimatePresence mode="wait">
                 <MobilePageTransition key={location.pathname}>

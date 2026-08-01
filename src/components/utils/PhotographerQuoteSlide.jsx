@@ -56,12 +56,7 @@ export default function PhotographerQuoteSlide() {
   const next = useCallback(() => {
     setVisible(false);
     setTimeout(() => {
-      setIndex((prev) => {
-        if (QUOTES.length === 1) return prev;
-        let n = Math.floor(Math.random() * QUOTES.length);
-        while (n === prev) n = Math.floor(Math.random() * QUOTES.length);
-        return n;
-      });
+      setIndex((prev) => (prev + 1) % QUOTES.length);
       setVisible(true);
     }, 220);
   }, []);
