@@ -14,7 +14,7 @@ export default function Portfolio() {
       </PageSlideInTransitions>
 
       {/* <Footer /> */}
-      {!isTouchDevice ? <WiperDesktop /> : <WiperMobile />}
+      {!isTouchDevice ? <WiperDesktop /> : <WiperDesktop />}
     </>
   );
 }

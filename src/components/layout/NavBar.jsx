@@ -39,6 +39,15 @@ const MARQUEE_ITEMS = [
   "Vestuvės",
   "Architektūra",
   "Gamta",
+  "Fotosesijos",
+  "Renginiai",
+  "Sporto varžybos",
+  "Komercinė fotografija",
+  "Kraštovaizdžiai",
+  "Portretai",
+  "Vestuvės",
+  "Architektūra",
+  "Gamta",
 ];
 
 // Animation variants
@@ -93,7 +102,7 @@ const dateVariants = {
   animate: {
     y: 0,
     opacity: 1,
-    transition: { duration: 0.5, delay: 2.85, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.5, delay: 2.15, ease: [0.22, 1, 0.36, 1] },
   },
   exit: {
     y: 10,
@@ -320,75 +329,74 @@ export default function NavBar() {
       <div
         className={`navbar fixed transition-[z-index] ${isTransitioning ? "z-[2000]" : "z-[500]"}`}
       >
+        {/* Marquee — unchanged, fixed as before */}
         <Marquee
           items={MARQUEE_ITEMS}
-          className={`fixed hidden xl:block left-0 top-8 xl:top-40 pt-[1px]  `}
+          className="fixed hidden xl:block left-0 top-8 xl:top-40 pt-[1px]"
         />
-        <div className="fixed right-0 -top-[2px] w-full h-[36px] xl:h-[204px] flex items-top justify-between px-4 xl:pl-44">
-          <Motion.span
-            {...Animations(dateVariants)}
-            className="hidden md:block text-[16px] text-muted uppercase whitespace-nowrap mix-blend-difference"
+
+        {/* Clock — fixed independently */}
+        <Motion.span
+          {...Animations(dateVariants)}
+          className="fixed hidden xl:block right-4 top-[-2px] text-[15px] text-muted/50 uppercase whitespace-nowrap mix-blend-difference"
+        >
+          <ClockWithCity />
+        </Motion.span>
+
+        {/* Shared row: logo left, quote right — hamburger removed from here */}
+        <div className="fixed top-0 left-0 w-full h-[188px] flex justify-between items-center pointer-events-none">
+          {/* LEFT — logo (unchanged) */}
+          <div
+            className={`pointer-events-auto mix-blend-difference transition-[z-index]
+          pt-1 xl:pt-0 mt-8 pl-2 xl:pl-6
+          max-w-[65vw] overflow-hidden flex flex-1
+          ${isTransitioning ? "z-[2000]" : "z-[500]"}`}
           >
-            {/* {month}' {year} */}
-          </Motion.span>
-          <Motion.span
-            {...Animations(dateVariants)}
-            className="hidden xl:block text-[15px] text-muted/50 uppercase whitespace-nowrap mix-blend-difference"
-          >
-            <ClockWithCity />
-          </Motion.span>
-          <Motion.span
-            {...Animations(dateVariants)}
-            className="hidden xl:block fixed top-6 right-62"
-          >
-            <PhotographerQuoteSlide
-              textColor="text-header"
-              textSize="text-[18px] xl:text-[64px]"
+            <div className="logo text-[clamp(2.5rem,10vw+0.5rem,12.5rem)]">
+              <Link
+                className="flex transition-all duration-500 ease-in-out"
+                to="/"
+                onClick={() => handleNavClick("/")}
+              >
+                <AnimatedText
+                  text="Žvinklys"
+                  textColor="text-header"
+                  duration={0.75}
+                  delay={0.5}
+                  delayChildren={1.25}
+                  enableHover={false}
+                  scaleX="scale-x-152"
+                  textShadow="text-shadow-lg/40"
+                  letterSpacing="px-[clamp(1px,0.35vw,8px)]"
+                />
+              </Link>
+            </div>
+
+            <Motion.div
+              {...Animations(upperLineVariants)}
+              className="fixed hidden md:block top-4 left-0 w-full h-[1px] bg-muted/50 origin-left"
             />
-          </Motion.span>
+            <Motion.div
+              {...Animations(lowerLineVariants)}
+              className="fixed top-[56px] md:top-40 left-0 w-full h-[1px] bg-muted/50 origin-right"
+            />
+          </div>
+
+          {/* RIGHT — quote only now */}
+          <div className="pointer-events-auto flex flex-1 flex-col items-start pr-2 xl:pr-6">
+            <Motion.span
+              {...Animations(dateVariants)}
+              className="hidden xl:block text-[18px] xl:text-[64px] text-header mix-blend-difference"
+            >
+              <PhotographerQuoteSlide
+                textColor="text-header"
+                textSize="text-[18px] xl:text-[64px]"
+              />
+            </Motion.span>
+          </div>
         </div>
       </div>
-
-      {/* Logo: own top-level fixed stacking context, sibling to hamburger */}
-      <div
-        className={`fixed left-2 top-2 xl:-top-11 w-full overflow-hidden flex flex-col justify-between items-start xl:px-6 mix-blend-difference transition-[z-index] ${
-          isTransitioning ? "z-[2000]" : "z-[500]"
-        }`}
-      >
-        <div className="logo text-[32px] xl:text-[204px]">
-          <Link
-            className="flex transition-all duration-500 ease-in-out"
-            to="/"
-            onClick={() => handleNavClick("/")}
-          >
-            <AnimatedText
-              text="Žvinklys"
-              textColor="text-header"
-              duration={0.75}
-              delay={0.5}
-              delayChildren={1.25}
-              enableHover={false}
-              scaleX="scale-x-152"
-              textShadow="text-shadow-lg/40"
-              letterSpacing={
-                responsive.isTablet || responsive.isMobile
-                  ? "px-[2px]"
-                  : "px-[8px]"
-              }
-            />
-          </Link>
-        </div>
-        <Motion.div
-          {...Animations(upperLineVariants)}
-          className={`fixed hidden md:block top-4 left-0 w-full h-[1px] bg-muted/50 origin-left`}
-        />
-        <Motion.div
-          {...Animations(lowerLineVariants)}
-          className="fixed top-[56px] md:top-40 left-0 w-full h-[1px] bg-muted/50 origin-right"
-        />
-      </div>
-
-      {/* Hamburger button: white, circular, magnetic */}
+      {/* Hamburger — restored to its own fixed positioning, original size */}
       <div
         ref={magneticRef}
         onMouseMove={handleMagneticMove}

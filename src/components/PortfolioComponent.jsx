@@ -108,7 +108,7 @@ const FilterButton = ({ filter, isActive, onClick, index }) => {
 
     if (spans) {
       gsap.to(spans, {
-        fontSize: isActive ? "54px" : "48px",
+        fontSize: isActive ? "2.8125vw" : "2.5vw", // was 54px / 48px
         scaleX: isActive ? "1.95" : "1",
         scaleY: isActive ? "1.35" : "1",
         stagger: 0.035,
@@ -152,7 +152,7 @@ const FilterButton = ({ filter, isActive, onClick, index }) => {
         key={i}
         className={`relative inline-block uppercase tracking-[0.4em] transition-colors duration-300 ${
           isActive
-            ? "text-accent border-gray-600 border-b pt-[2px] text-shadow-lg/20"
+            ? "text-accent pt-[2px] border-b border-border/50 text-shadow-lg/20"
             : "text-text"
         }`}
       >
@@ -163,13 +163,13 @@ const FilterButton = ({ filter, isActive, onClick, index }) => {
 
   return (
     <div
-      ref={buttonRef} //Cia animacija filtro isejimui
+      ref={buttonRef}
       className={`cursor-trigger relative h-full cursor-pointer pr-2 pointer-events-auto tracking-[2em]`}
-      style={{ height: "125px" }}
+      style={{ height: "6.51vw" }} // was 125px
       onClick={onClick}
     >
       <span
-        className={`absolute w-full bottom-7 border border-muted origin-right transition-all duration-300 ease-in ${
+        className={`absolute w-full bottom-[22.4%] border border-muted/50 origin-left transition-all duration-300 ease-in ${
           isActive ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"
         }`}
       ></span>
@@ -178,7 +178,7 @@ const FilterButton = ({ filter, isActive, onClick, index }) => {
       </h1>
       <p
         ref={counterRef}
-        className="absolute -right-2 top-[108px] transform -translate-y-1/2 px-2 text-xl font-medium text-muted tracking-[0.8em] pointer-events-none"
+        className="absolute -right-2 bottom-[4%] px-2 text-xl font-medium text-muted tracking-[0.8em] pointer-events-none"
       >
         ({filter.count})
       </p>
@@ -737,7 +737,9 @@ export default function PortfolioComponent() {
       <Frame />
       {/* Desktop Filters */}
       <div
-        className={`${responsive.isMobile || responsive.isTablet ? "hidden" : "flex"} fixed z-[990] mt-32 -right-2 w-1/2 h-screen flex-col justify-start items-end mix-blend-difference pointer-events-none`}
+        className={`${
+          responsive.isMobile || responsive.isTablet ? "hidden" : "flex"
+        } fixed right-[-0.5rem] z-[990] xl:h-[calc(100dvh-188px)] w-1/3 flex-col justify-center items-end mix-blend-difference pointer-events-none`}
       >
         {filters.map((filter, index) => (
           <FilterButton

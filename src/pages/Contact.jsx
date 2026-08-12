@@ -15,7 +15,7 @@ export default function Contact() {
       </PageSlideInTransitions>
 
       {/* <Footer /> */}
-      {!isTouchDevice ? <WiperDesktop /> : <WiperMobile />}
+      {!isTouchDevice ? <WiperDesktop /> : <WiperDesktop />}
     </>
   );
 }

@@ -96,19 +96,24 @@ body {
   /* font-weight: 100; */
   /* background-color: #0a0908; */
   /* background: #0a0908; */
+  background-image: url("/public/images/background.jpg");
+  background-position: bottom;
+  background-repeat: no-repeat;
+  /* background-size: cover;  */
+  min-height: 100dvh;
 }
 
 .quote-font {
   font-weight: 600;
 }
 
-/* .bg {
+.bg {
   background-image: url("/public/images/background.jpg");
   background-size: 500px;
   background-position: top;
   background-repeat: repeat;
   opacity: 1;
-} */
+}
 
 .border {
   color: #443a33;

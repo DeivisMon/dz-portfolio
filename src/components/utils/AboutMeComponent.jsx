@@ -17,11 +17,11 @@ export default function AboutMeComponent() {
   });
 
   return (
-    <div className="relative w-full h-full flex flex-col items-center justify-start md:justify-center text-text px-4 py-0 md:py-2">
+    <div className="relative w-full h-full flex flex-col items-center justify-center md:justify-center text-text">
       {/* h1 */}
       <h1
         style={fadeUp(0.62)}
-        className="font-thin p-0 tracking-[0.3em] text-header text-[clamp(1.1rem,3vw,2rem)] mb-2 md:mb-4 text-center"
+        className="font-thin p-0 tracking-[0.3em] text-header text-[clamp(1.1rem,3vw,2rem)] mb-2 md:mb-6 text-center"
       >
         Apie Mane
       </h1>
@@ -33,7 +33,7 @@ export default function AboutMeComponent() {
           max-w-[660px] text-center text-muted
           leading-[1] md:leading-[1.95] font-extralight
           text-[clamp(0.72rem,1.25vw,1rem)]
-          flex flex-col gap-1 md:gap-3
+          flex flex-col gap-1 md:gap-4
         "
       >
         <p>
@@ -69,7 +69,7 @@ export default function AboutMeComponent() {
         style={fadeUp(1.3)}
         className="
           mt-2 md:mt-8 flex items-center justify-center
-          gap-x-4 md:gap-x-2 gap-y-1 text-[0.7rem] md:text-sm
+          gap-x-4 md:gap-x-8 gap-y-1 text-[0.7rem] md:text-sm
           text-muted font-extralight tracking-wide text-center
         "
       >

@@ -14,20 +14,20 @@ export default function DesktopPageTransitions({ children }) {
   };
 
   const slide = {
-    initial: { y: "100vh" },
-    animate: { y: "100vh" },
+    initial: { y: "100vh", scaleX: 0.5 },
+    animate: { y: "100vh", scaleX: 0.5 },
     exit: {
       y: 0,
+      scaleX: 1,
       transition: { duration: 1, delay: 0.025, ease: [0.87, 0, 0.13, 1] },
     },
   };
 
   const zoomOut = {
-    initial: { y: 0, opacity: 1 },
-    animate: { y: 0, opacity: 1 },
+    initial: { y: 0 },
+    animate: { y: 0 },
     exit: {
       y: "100vh",
-      opacity: 0,
       transition: { duration: 1, ease: [0.87, 0.25, 0.13, 1] },
     },
   };

@@ -70,13 +70,13 @@ export default function InfoComponent() {
 
       {/* Content Container - 50/50 split */}
       <div
-        className={`absolute inset-0 mt-8 flex ${isVerticalLayout ? "flex-col" : "flex-row"}`}
+        className={`absolute inset-0 flex ${isVerticalLayout ? "flex-col" : "flex-row"}`}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >
         {/* About Me Section (LEFT / TOP) */}
         <div
-          className={`absolute ${isVerticalLayout ? "top-0 left-0 w-full h-1/2" : "left-0 top-0 w-1/2 h-full"} flex justify-center px-2 z-10 sm:px-8 lg:px-24`}
+          className={`absolute ${isVerticalLayout ? "top-0 left-0 w-full h-1/2" : "left-0 top-0 w-1/2 h-full"} flex justify-center items-center px-8 z-10 sm:px-8 lg:px-24`}
         >
           <AboutMeComponent />
         </div>

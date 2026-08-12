@@ -94,11 +94,11 @@ export default function PhotographerQuoteSlide() {
 
   return (
     <div className="w-full flex items-center justify-center mix-blend-difference">
-      <div className="relative w-[40rem]">
+      <div className="relative md:w-[10rem] lg:w-[12rem] xl:w-[20rem] 2xl:w-[40rem] ">
         <div
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
-          className="relative overflow-hidden h-[125px] flex flex-col justify-between"
+          className="relative overflow-hidden h-[120px] flex flex-col items-between justify-center"
         >
           <span
             aria-hidden="true"
@@ -117,22 +117,12 @@ export default function PhotographerQuoteSlide() {
               visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
             }`}
           >
-            <p className="quote-font italic text-muted text-2xl sm:text-3xl md:text-[1.2rem]">
+            <p
+              className="quote-font italic text-muted text-2xl md:text-xl xl:text-[2xl]  md:text-[1.2rem] truncate
+                xl:whitespace-normal"
+            >
               {quote.text}
             </p>
-          </div>
-
-          <div
-            className={`relative flex items-end justify-end transition-all duration-300 ease-out ${
-              visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
-            }`}
-          >
-            <div className="text-right">
-              <div className="h-px w-full bg-[#3a342c]" />
-              <span className="text-xs sm:text-sm tracking-[0.15em] uppercase text-[#d8cfb8]">
-                &mdash; {quote.author}
-              </span>
-            </div>
           </div>
 
           <button
@@ -149,10 +139,22 @@ export default function PhotographerQuoteSlide() {
           </button>
         </div>
 
-        <div className="flex items-center justify-between text-[10px] tracking-[0.2em] text-[#d8cfb8] uppercase -mt-4 px-1">
+        <div className="flex items-center justify-between text-[10px] tracking-[0.2em] text-[#d8cfb8] uppercase -mt-5 px-1">
           <span>
             {frameNo} / {total}
           </span>
+          <div
+            className={`relative flex items-center justify-end transition-all duration-300 ease-out ${
+              visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
+            }`}
+          >
+            <div className="text-right">
+              <div className="h-px w-full bg-[#3a342c]" />
+              <span className="text-xs sm:text-sm tracking-[0.15em] uppercase text-[#d8cfb8]">
+                &mdash; {quote.author}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,18 +1,5 @@
 import { useMemo } from "react";
 
-/**
- * MovingBackground
- * A slow-drifting, low-poly triangular background inspired by a dark
- * geometric wallpaper: overlapping translucent triangles on a
- * charcoal-to-black gradient, gently floating and fading in and out.
- *
- * Usage:
- *   <div className="relative min-h-screen">
- *     <MovingBackground />
- *     <div className="relative z-10">... your content ...</div>
- *   </div>
- */
-
 // One triangle's shape + animation parameters
 function makeTriangle(seed) {
   // Simple deterministic pseudo-random based on seed so triangles
@@ -47,7 +34,7 @@ function makeTriangle(seed) {
   };
 }
 
-const TRIANGLE_COUNT = 42;
+const TRIANGLE_COUNT = 22;
 
 export default function MovingBackground({ className = "" }) {
   const triangles = useMemo(

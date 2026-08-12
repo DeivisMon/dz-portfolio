@@ -15,7 +15,7 @@ export default function Index() {
       </PageSlideInTransitions>
 
       {/* <Footer /> */}
-      {!isTouchDevice ? <WiperDesktop /> : <WiperMobile />}
+      {!isTouchDevice ? <WiperDesktop /> : <WiperDesktop />}
       {/* {!isTouchDevice ? <Wiper /> : ""} */}
     </>
   );

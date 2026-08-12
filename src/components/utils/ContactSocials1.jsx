@@ -193,7 +193,7 @@ export default function ContactSocials() {
       className="flex flex-col items-center justify-center w-6/7 lg:w-3/4 h-full"
     >
       {/* Heading */}
-      <Motion.div variants={itemVariants} className="mb-2 lg:mb-12">
+      <Motion.div variants={itemVariants} className="mb-2 md:mb-6">
         <h2 className="font-thin tracking-[0.3em] text-header text-[clamp(1.1rem,3vw,2rem)] mb-2 md:mb-4 text-center">
           Susisiekime
         </h2>
@@ -209,7 +209,7 @@ export default function ContactSocials() {
             <Motion.div
               key={row.id}
               variants={itemVariants}
-              className="flex cursor-trigger group relative "
+              className="flex cursor-trigger group relative md:border-t md:border-border/50"
               data-cursor-type="link"
               onMouseEnter={() => setHoveredRow(row.id)}
               onMouseLeave={() => setHoveredRow(null)}
@@ -219,7 +219,7 @@ export default function ContactSocials() {
                 href={row.copyable ? undefined : row.href}
                 target={row.external ? "_blank" : undefined}
                 rel={row.external ? "noopener noreferrer" : undefined}
-                className="flex w-full flex-col justify-center md:flex-row items-center md:items-center gap-0 lg:gap-4 px-0 lg:px-4 py-0 lg:py-8 border-none md:border-t md:border-border/50 group-hover:translate-y-[2px] group-hover:translate-x-[-16px] md:group-hover:bg-[rgba(166,124,82,0.07)] transition-all duration-400 no-underline"
+                className="flex w-full flex-col justify-center md:flex-row items-center md:items-center gap-0 lg:gap-4 px-0 lg:px-4 py-0 lg:py-8 group-hover:translate-y-[2px] group-hover:translate-x-[-16px] md:group-hover:bg-[rgba(166,124,82,0.25)] transition-all duration-400 no-underline"
                 onClick={
                   row.copyable
                     ? (e) => {

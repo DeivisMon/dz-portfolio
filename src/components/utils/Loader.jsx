@@ -116,7 +116,7 @@ export default function Loader({ onComplete }) {
         {
           strokeDashoffset: circumference * (1 - progress),
           duration: 0.4,
-          ease: "expo.inOut",
+          ease: "expo.out",
           rotation: -180,
           transformOrigin: "50% 50%",
         },
@@ -127,7 +127,7 @@ export default function Loader({ onComplete }) {
         {
           strokeDashoffset: circumference * (1 - progress),
           duration: 0.4,
-          ease: "expo.inOut",
+          ease: "expo.out",
           rotation: 90,
           transformOrigin: "50% 50%",
         },
@@ -138,7 +138,7 @@ export default function Loader({ onComplete }) {
         {
           strokeDashoffset: circumference * (1 - progress),
           duration: 0.4,
-          ease: "expo.inOut",
+          ease: "expo.out",
           rotation: 180,
           transformOrigin: "50% 50%",
         },
@@ -149,7 +149,7 @@ export default function Loader({ onComplete }) {
         {
           strokeDashoffset: circumference * (1 - progress),
           duration: 0.4,
-          ease: "expo.inOut",
+          ease: "expo.out",
           rotation: -90,
           transformOrigin: "50% 50%",
         },
@@ -160,7 +160,7 @@ export default function Loader({ onComplete }) {
         {
           strokeDashoffset: circumference * (1 - progress),
           duration: 0.4,
-          ease: "expo.inOut",
+          ease: "expo.out",
           rotation: 90,
           transformOrigin: "50% 50%",
         },
@@ -202,7 +202,7 @@ export default function Loader({ onComplete }) {
           top: "0",
           stagger: 0.2,
           duration: 2.5,
-          ease: "expo.inOut",
+          ease: "expo.out",
         },
         "-=2",
       );
@@ -213,7 +213,7 @@ export default function Loader({ onComplete }) {
           top: "0",
           stagger: 0.2,
           duration: 2.5,
-          ease: "expo.inOut",
+          ease: "expo.out",
         },
         "<",
       );
@@ -224,7 +224,7 @@ export default function Loader({ onComplete }) {
           top: "0",
           stagger: -0.15,
           duration: 2.5,
-          ease: "expo.inOut",
+          ease: "expo.out",
         },
         "-=3",
       );
@@ -236,7 +236,7 @@ export default function Loader({ onComplete }) {
           top: "0",
           stagger: 0.2,
           duration: 3,
-          ease: "expo.inOut",
+          ease: "expo.out",
         },
         "-=2",
       );
@@ -247,7 +247,7 @@ export default function Loader({ onComplete }) {
           top: "0",
           stagger: 0.2,
           duration: 3,
-          ease: "expo.inOut",
+          ease: "expo.out",
         },
         "<",
       );
@@ -258,7 +258,7 @@ export default function Loader({ onComplete }) {
           top: "0",
           stagger: -0.2,
           duration: 3,
-          ease: "expo.inOut",
+          ease: "expo.out",
         },
         "-=4",
       );
@@ -269,7 +269,7 @@ export default function Loader({ onComplete }) {
           top: "0",
           stagger: -0.2,
           duration: 3,
-          ease: "expo.inOut",
+          ease: "expo.out",
         },
         "-=4",
       );
@@ -280,7 +280,7 @@ export default function Loader({ onComplete }) {
           top: "0",
           stagger: 0.1,
           duration: 3,
-          ease: "expo.inOut",
+          ease: "expo.out",
         },
         "-=4",
       );
@@ -296,7 +296,7 @@ export default function Loader({ onComplete }) {
           if (onComplete) onComplete();
         },
       },
-      "<2.5",
+      "<2",
     );
 
     timelineRef.current = tl;

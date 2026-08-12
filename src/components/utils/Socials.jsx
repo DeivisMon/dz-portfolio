@@ -51,7 +51,7 @@ export default function Socials() {
           <Motion.div
             variants={iconVariants}
             aria-label={label}
-            className="border-b border-t border-muted/0 group-hover:border-muted/50 transition-all duration-300 ease-in-out"
+            className="border-b border-muted/0 group-hover:border-muted/50 transition-all duration-300 ease-in-out"
           >
             {label}
           </Motion.div>

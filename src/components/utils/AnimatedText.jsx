@@ -82,7 +82,7 @@ const AnimatedText = ({
           {text.split("").map((char, i) => (
             <Motion.span
               key={`main-${char}-${i}`}
-              className={`overflow-hidden relative ${scaleX} ${textShadow}`}
+              className={`overflow-hidden relative ${scaleX} ${textShadow} p-0`}
               style={{
                 display: "inline-block",
                 ...flippedStyle(i),
@@ -127,7 +127,7 @@ const AnimatedText = ({
                     show: { y: "100%" },
                     hover: { y: 0 },
                   }}
-                  className={`inline-block ${textColor} flex justify-center ${letterSpacing} ${pyPadding}`}
+                  className={`inline-block ${textColor} flex justify-center ${letterSpacing} ${pyPadding} p-0`}
                   transition={{
                     duration: 0.25,
                     ease: "easeInOut",
