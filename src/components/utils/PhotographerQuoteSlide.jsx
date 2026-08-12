@@ -118,7 +118,7 @@ export default function PhotographerQuoteSlide() {
             }`}
           >
             <p
-              className="quote-font italic text-muted text-2xl md:text-xl xl:text-[2xl]  md:text-[1.2rem] truncate
+              className="quote-font italic text-muted px-2 text-2xl md:text-xl xl:text-[2xl] truncate
                 xl:whitespace-normal"
             >
               {quote.text}

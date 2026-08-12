@@ -17,9 +17,10 @@ export default function DesktopPageTransitions({ children }) {
     initial: { y: "100vh", scaleX: 0.5 },
     animate: { y: "100vh", scaleX: 0.5 },
     exit: {
+      top: "188px",
       y: 0,
       scaleX: 1,
-      transition: { duration: 1, delay: 0.025, ease: [0.87, 0, 0.13, 1] },
+      transition: { duration: 1, delay: 0.005, ease: [0.87, 0, 0.13, 1] },
     },
   };
 

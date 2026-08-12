@@ -17,7 +17,7 @@ export default function WiperDesktop() {
     Object.assign(wipeRef.current.style, {
       position: "fixed",
       left: "0",
-      top: "0",
+      top: "188px",
       width: "100vw",
       height: `${height}px`,
       zIndex: "1000",
@@ -35,7 +35,7 @@ export default function WiperDesktop() {
 
     gsap.to(wipeRef.current, {
       scaleY: 0,
-      delay: 0.5,
+      delay: 0.675,
       transformOrigin: "bottom",
       opacity: 1,
       duration: 1,

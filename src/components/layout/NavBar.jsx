@@ -121,15 +121,6 @@ const upperLineVariants = {
     scaleX: 1,
     transition: { duration: 1.25, delay: 1.75, ease: [0.82, 1, 0.36, 1] },
   },
-  // exit: {
-  //   scaleX: 50,
-  //   opacity: 0,
-  //   transition: {
-  //     duration: 0.25,
-  //     delay: 0.3,
-  //     ease: [0.22, 1, 0.36, 1],
-  //   },
-  // },
 };
 
 const lowerLineVariants = {
@@ -138,15 +129,6 @@ const lowerLineVariants = {
     scaleX: 1,
     transition: { duration: 1.25, delay: 1.75, ease: [0.82, 1, 0.36, 1] },
   },
-  // exit: {
-  //   scaleX: 50,
-  //   opacity: 0,
-  //   transition: {
-  //     duration: 0.25,
-  //     delay: 0.3,
-  //     ease: [0.22, 1, 0.36, 1],
-  //   },
-  // },
 };
 
 const Marquee = ({
@@ -271,8 +253,6 @@ export default function NavBar() {
   const responsive = useResponsive();
   const magneticRef = useRef(null);
   const now = new Date();
-  const month = now.toLocaleDateString("lt-LT", { month: "long" });
-  const year = now.getFullYear().toString().slice(-2);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isNavigatingAway, setIsNavigatingAway] = useState(false);
   const { isTransitioning, setIsTransitioning } = usePageTransition();
@@ -294,13 +274,10 @@ export default function NavBar() {
     }
     setIsMenuOpen(false);
     setIsNavigatingAway(true);
-    setTimeout(
-      () => {
-        setIsTransitioning(true);
-        navigate(path);
-      },
-      (NAV_EXIT_DELAY + NAV_EXIT_DURATION) * 1000,
-    );
+    setTimeout(() => {
+      setIsTransitioning(true);
+      navigate(path);
+    }, 1000);
   };
 
   // Magnetic hamburger button
