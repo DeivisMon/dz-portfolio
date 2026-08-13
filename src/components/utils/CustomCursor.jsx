@@ -1,4 +1,23 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import {
+  FiMaximize2,
+  FiX,
+  FiEye,
+  FiArrowUp,
+  FiArrowUpRight,
+  FiChevronLeft,
+  FiChevronRight,
+} from "react-icons/fi";
+
+const ICONS = {
+  expand: FiMaximize2,
+  close: FiX,
+  view: FiEye,
+  up: FiArrowUp,
+  link: FiArrowUpRight,
+  prev: FiChevronLeft,
+  next: FiChevronRight,
+};
 
 // Lerp
 const lerp = (a, b, n) => (1 - n) * a + n * b;
@@ -9,8 +28,6 @@ let globalCursor = { x: 0, y: 0 };
 // Cursor element
 const CursorElement = ({
   size,
-  viewBox,
-  radius,
   filled = false,
   scaleOnEnter = 1,
   opacityOnEnter = 1,
@@ -115,180 +132,36 @@ const CursorElement = ({
   const renderIcon = () => {
     if (!showIcon || !iconType) return null;
 
-    const centerX = size / 2;
-    const centerY = size / 2;
+    const IconComp = ICONS[iconType];
 
-    switch (iconType) {
-      case "expand":
-        return (
-          <g
-            className="mix-blend-difference"
-            stroke="white"
-            strokeWidth="2"
-            fill="none"
-            opacity="1"
-            transform={`rotate(135 ${centerX} ${centerY})`}
-          >
-            <path
-              d={`
-                M${centerX - 6},${centerY} 
-                L${centerX - 2},${centerY - 4} 
-                M${centerX - 6},${centerY} 
-                L${centerX - 2},${centerY + 4}
-            `}
-            />
-            <path
-              d={`
-                M${centerX + 6},${centerY} 
-                L${centerX + 2},${centerY - 4} 
-                M${centerX + 6},${centerY} 
-                L${centerX + 2},${centerY + 4}
-            `}
-            />
-          </g>
-        );
-      case "close":
-        return (
-          <g
-            className="mix-blend-difference"
-            fill="none"
-            opacity="1"
-            strokeWidth="2"
-            stroke="white"
-          >
-            {/* X icon */}
-            <line
-              x1={centerX - 4}
-              y1={centerY - 4}
-              x2={centerX + 4}
-              y2={centerY + 4}
-            />
-            <line
-              x1={centerX + 4}
-              y1={centerY - 4}
-              x2={centerX - 4}
-              y2={centerY + 4}
-            />
-          </g>
-        );
-      case "view":
-        return (
-          <g className="mix-blend-difference" fill="white" opacity="1">
-            {/* Eye icon */}
-            <ellipse
-              cx={centerX}
-              cy={centerY}
-              rx="8"
-              ry="5"
-              fill="none"
-              stroke="white"
-              strokeWidth="2"
-            />
-            <circle cx={centerX} cy={centerY} r="3" fill="white" />
-          </g>
-        );
-      case "up":
-        return (
-          <g
-            className="mix-blend-difference"
-            stroke="white"
-            strokeWidth="2"
-            fill="none"
-            opacity="1"
-            transform={`rotate(90 ${centerX} ${centerY})`}
-          >
-            <path
-              d={`
-                M${centerX - 6},${centerY} 
-                L${centerX - 2},${centerY - 4} 
-                M${centerX - 6},${centerY} 
-                L${centerX - 2},${centerY + 4}
-              `}
-            />
-          </g>
-        );
-      case "link":
-        return (
-          <g
-            className="mix-blend-difference"
-            fill="none"
-            stroke="white"
-            strokeWidth="2"
-            opacity="1"
-          >
-            <line
-              x1={centerX - 4}
-              y1={centerY + 4}
-              x2={centerX + 4}
-              y2={centerY - 4}
-            />
-            <polyline
-              points={`${centerX + 1},${centerY - 4} ${centerX + 4},${
-                centerY - 4
-              } ${centerX + 4},${centerY - 1}`}
-            />
-          </g>
-        );
-
-      case "prev":
-        return (
-          <path
-            d={`
-        M${centerX + 4},${centerY - 6}
-        L${centerX - 4},${centerY}
-        L${centerX + 4},${centerY + 6}
-      `}
-            stroke="white"
-            strokeWidth="2"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="mix-blend-difference"
-          />
-        );
-
-      case "next":
-        return (
-          <path
-            d={`
-        M${centerX - 4},${centerY - 6}
-        L${centerX + 4},${centerY}
-        L${centerX - 4},${centerY + 6}
-      `}
-            stroke="white"
-            strokeWidth="2"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="mix-blend-difference"
-          />
-        );
-
-      default:
-        return null;
+    if (IconComp) {
+      return (
+        <IconComp
+          size={size * 0.5}
+          color="white"
+          className="mix-blend-difference"
+        />
+      );
     }
+
+    // Anything not in the map is treated as a word/label
+    return (
+      <span className="text-white text-[10px] font-medium tracking-wide mix-blend-difference select-none whitespace-nowrap">
+        {iconType}
+      </span>
+    );
   };
 
   return (
     <div
       ref={elementRef}
-      className={`fixed top-0 left-0 blur-[0.5px] pointer-events-none z-[10000] rounded-full bg-white transition-opacity duration-300 ease-in-out
-      ${
-        isVisible && !isOutside ? "opacity-100" : "opacity-0"
-      } mix-blend-difference`}
+      className={`fixed top-0 left-0 pointer-events-none z-[10000] rounded-full
+      flex items-center justify-center transition-opacity duration-300 ease-in-out
+      ${filled ? "bg-white" : "border border-white"}
+      ${isVisible && !isOutside ? "opacity-100" : "opacity-0"} mix-blend-difference`}
       style={{ width: size, height: size }}
     >
-      <svg width={size} height={size} viewBox={viewBox}>
-        <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={radius}
-          fill={filled ? "white" : "none"}
-          stroke={filled ? "none" : "white"}
-          strokeWidth={filled ? 0 : 1}
-        />
-        {renderIcon()}
-      </svg>
+      {renderIcon()}
     </div>
   );
 };
@@ -488,10 +361,8 @@ const CustomCursor = ({ triggerSelector = ".cursor-trigger" }) => {
       {/* Small filled cursor dot */}
       <CursorElement
         size={24}
-        viewBox="0 0 24 24"
-        radius={6}
-        filled={false}
-        scaleOnEnter={1.25}
+        filled={true}
+        scaleOnEnter={2.5}
         opacityOnEnter={1}
         amount={0.2}
         isHovered={isHovered}
@@ -502,8 +373,6 @@ const CustomCursor = ({ triggerSelector = ".cursor-trigger" }) => {
       {/* Large cursor circle with icon */}
       <CursorElement
         size={54}
-        viewBox="0 0 54 54"
-        radius={24}
         filled={true}
         scaleOnEnter={1.25}
         opacityOnEnter={1}
@@ -516,10 +385,8 @@ const CustomCursor = ({ triggerSelector = ".cursor-trigger" }) => {
 
       {/* Larger cursor circle with icon */}
       <CursorElement
-        size={58}
-        viewBox="0 0 58 58"
-        radius={24}
-        filled={false}
+        size={56}
+        filled={true}
         scaleOnEnter={1.25}
         opacityOnEnter={1}
         amount={0.125}

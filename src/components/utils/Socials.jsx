@@ -1,5 +1,6 @@
 import { motion as Motion } from "framer-motion";
 import { MdArrowOutward } from "react-icons/md";
+import AnimatedText from "./AnimatedText";
 
 const containerVariants = {
   hidden: { y: 65, opacity: 0 },
@@ -48,13 +49,22 @@ export default function Socials() {
           className="cursor-trigger text-[16px] xl:text-[28px] group w-full px-6 flex justify-top items-center overflow-hidden"
           data-cursor-type="link"
         >
-          <Motion.div
-            variants={iconVariants}
+          <div
             aria-label={label}
-            className="border-b border-muted/0 group-hover:border-muted/50 transition-all duration-300 ease-in-out"
+            className=" transition-all duration-300 ease-in-out"
           >
-            {label}
-          </Motion.div>
+            <AnimatedText
+              text={label}
+              textColor="text-header"
+              duration={0.35}
+              delay={0.65}
+              delayChildren={1}
+              enableHover={true}
+              staggerChildren={0.005}
+              border="border-b border-accent/0 hover:border-accent/100"
+              // letterSpacing="px-[clamp(1px,0.35vw,8px)]"
+            />
+          </div>
           {/* <span className="opacity-0 rotate-360 translate-y-4 w-4 group-hover:translate-y-0 group-hover:opacity-100 group-hover:rotate-0 transition-all duration-300 ease-in-out ">
             <MdArrowOutward size={32} />
           </span> */}

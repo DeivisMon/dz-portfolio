@@ -28,9 +28,13 @@ export default function DesktopPageTransitions({ children }) {
     initial: { y: 0 },
     animate: { y: 0 },
     exit: {
-      y: "100vh",
+      y: "20vh",
       // scale: 0.95,
-      transition: { duration: 0.85, delay: 0.15, ease: customEases.pageTransition },
+      transition: {
+        duration: 0.6,
+        delay: 0.4,
+        ease: customEases.pageTransition,
+      },
     },
   };
 

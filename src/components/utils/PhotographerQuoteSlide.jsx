@@ -94,7 +94,7 @@ export default function PhotographerQuoteSlide() {
 
   return (
     <div className="w-full flex items-center justify-center mix-blend-difference">
-      <div className="relative md:w-[10rem] lg:w-[12rem] xl:w-[20rem] 2xl:w-[40rem] ">
+      <div className="relative md:w-[10rem] lg:w-[12rem] xl:w-[28rem] 2xl:w-[38rem] ">
         <div
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}

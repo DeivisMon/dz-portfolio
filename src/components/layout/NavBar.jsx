@@ -315,12 +315,12 @@ export default function NavBar() {
         </Motion.span>
 
         {/* Shared row: logo left, quote right — hamburger removed from here */}
-        <div className="fixed top-0 left-0 w-full h-[188px] flex justify-between items-center pointer-events-none">
+        <div className="fixed top-0 left-0 w-full xl:h-[188px] flex justify-between items-center pointer-events-none">
           {/* LEFT — logo (unchanged) */}
           <div
             className={`pointer-events-auto mix-blend-difference transition-[z-index]
-          pt-1 xl:pt-0 mt-8 pl-2 xl:pl-6
-          max-w-[65vw] overflow-hidden flex flex-1
+          pt-1 xl:pt-0 mt-0 xl:mt-8 pl-2 xl:pl-6
+          max-w-[65vw] overflow-hidden flex flex-2 xl:flex-1
           ${isTransitioning ? "z-[2000]" : "z-[500]"}`}
           >
             <div className="logo text-[clamp(2.5rem,10vw+0.5rem,12.5rem)]">

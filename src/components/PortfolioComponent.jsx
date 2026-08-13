@@ -873,7 +873,7 @@ export default function PortfolioComponent() {
           onTouchEnd={handleTouchEnd}
         >
           <div
-            className="cursor-trigger absolute left-0 top-0 w-1/3 h-full"
+            className="cursor-trigger absolute left-0 top-0 w-2/8 h-full"
             onClick={(e) => {
               e.stopPropagation();
               navigateLightbox(-1);
@@ -881,12 +881,12 @@ export default function PortfolioComponent() {
             data-cursor-type="prev"
           />
           <div
-            className="cursor-trigger absolute top-0 w-1/3 h-full"
+            className="cursor-trigger absolute top-0 w-4/8 h-full"
             onClick={closeLightbox}
             data-cursor-type="close"
           />
           <div
-            className="cursor-trigger absolute right-0 top-0 w-1/3 h-full"
+            className="cursor-trigger absolute right-0 top-0 w-2/8 h-full"
             onClick={(e) => {
               e.stopPropagation();
               navigateLightbox(1);
@@ -897,7 +897,7 @@ export default function PortfolioComponent() {
             ref={currentImageRef}
             src={lightboxImage}
             alt="Lightbox"
-            className="max-w-[95vw] max-h-[100vh] w-auto h-auto object-contain pointer-events-none relative"
+            className="cursor-trigger max-w-[95vw] max-h-[100vh] w-auto h-auto object-contain pointer-events-none relative"
           />
           <div className="absolute bottom-1 text-white text-lg mix-blend-difference pointer-events-none">
             {lightboxIndex + 1} / {filteredItems.length}

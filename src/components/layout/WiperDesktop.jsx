@@ -4,7 +4,7 @@ import { usePageTransition } from "../../context/TransitionContext";
 import { customEases } from "../helpers/CustomEasingFn";
 
 const getViewportHeight = () => {
-  if (typeof window === "undefined") return 0; // SSR guard
+  if (typeof window === "undefined") return 0;
   return window.visualViewport?.height || window.innerHeight;
 };
 
