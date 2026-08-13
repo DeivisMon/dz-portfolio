@@ -19,7 +19,7 @@ export default function MobilePageTransition({ children }) {
     animate: { y: "100vh" },
     exit: {
       y: 0,
-      transition: { duration: 1, ease: customEases.pageTransition },
+      transition: { duration: 1, ease: [0.65, 0, 0.35, 1] },
     },
   };
 
@@ -27,11 +27,11 @@ export default function MobilePageTransition({ children }) {
     initial: { y: 0 },
     animate: { y: 0 },
     exit: {
-      y: "20vh",
+      y: 0,
       transition: {
         duration: 0.6,
         delay: 0.4,
-        ease: customEases.pageTransition,
+        ease: [0.65, 0, 0.35, 1],
       },
     },
   };

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { usePageTransition } from "../../context/TransitionContext";
 import {
   FiMaximize2,
   FiX,
@@ -146,7 +147,7 @@ const CursorElement = ({
 
     // Anything not in the map is treated as a word/label
     return (
-      <span className="text-white text-[10px] font-medium tracking-wide mix-blend-difference select-none whitespace-nowrap">
+      <span className="text-white text-[18px] font-black tracking-wide mix-blend-difference select-none whitespace-nowrap">
         {iconType}
       </span>
     );
@@ -172,6 +173,8 @@ const CustomCursor = ({ triggerSelector = ".cursor-trigger" }) => {
   const [iconType, setIconType] = useState(null);
   const [showCursor, setShowCursor] = useState(false);
   const [isOutside, setIsOutside] = useState(false);
+  const { isTransitioning } = usePageTransition();
+  const pollRef = useRef(null);
 
   useEffect(() => {
     const handleMouseOut = (e) => {
@@ -244,6 +247,23 @@ const CustomCursor = ({ triggerSelector = ".cursor-trigger" }) => {
       setIconType(null);
     }
   }, [triggerSelector]);
+
+  useEffect(() => {
+    if (!isTransitioning) {
+      if (pollRef.current) cancelAnimationFrame(pollRef.current);
+      return;
+    }
+
+    const poll = () => {
+      checkElementUnderCursor();
+      pollRef.current = requestAnimationFrame(poll);
+    };
+    pollRef.current = requestAnimationFrame(poll);
+
+    return () => {
+      if (pollRef.current) cancelAnimationFrame(pollRef.current);
+    };
+  }, [isTransitioning, checkElementUnderCursor]);
 
   // Handle hover events and detect cursor type
   useEffect(() => {
@@ -326,7 +346,7 @@ const CustomCursor = ({ triggerSelector = ".cursor-trigger" }) => {
       childList: true,
       subtree: true,
       attributes: true,
-      attributeFilter: ["data-cursor-type", "class"],
+      attributeFilter: ["data-cursor-type", "class", "style"],
     });
 
     return () => {

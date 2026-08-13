@@ -58,7 +58,7 @@ export default function Socials() {
               textColor="text-header"
               duration={0.35}
               delay={0.65}
-              delayChildren={1}
+              delayChildren={0.75}
               enableHover={true}
               staggerChildren={0.005}
               border="border-b border-accent/0 hover:border-accent/100"

@@ -1,6 +1,5 @@
 import { motion as Motion } from "framer-motion";
 import { usePageTransition } from "../../context/TransitionContext";
-import { customEases } from "../helpers/CustomEasingFn";
 
 export default function DesktopPageTransitions({ children }) {
   const { setIsTransitioning } = usePageTransition();
@@ -20,7 +19,7 @@ export default function DesktopPageTransitions({ children }) {
     exit: {
       y: 0,
       scaleX: 1,
-      transition: { duration: 1, ease: customEases.pageTransition },
+      transition: { duration: 1, ease: [0.65, 0, 0.35, 1] },
     },
   };
 
@@ -28,12 +27,11 @@ export default function DesktopPageTransitions({ children }) {
     initial: { y: 0 },
     animate: { y: 0 },
     exit: {
-      y: "20vh",
-      // scale: 0.95,
+      scaleX: 0.95,
       transition: {
-        duration: 0.6,
-        delay: 0.4,
-        ease: customEases.pageTransition,
+        duration: 0.65,
+        delay: 0.35,
+        ease: [0.65, 0, 0.35, 1],
       },
     },
   };
