@@ -69,21 +69,21 @@
   }
 
   .slider {
-    height: calc(100dvh - 56px) !important;
-    margin-top: 56px !important;
+    height: calc(100dvh - 58px) !important;
+    margin-top: 58px !important;
   }
 }
 
 /* Horizontal Mobile Styles */
 @media (max-height: 500px) and (orientation: landscape) {
   .slide {
-    width: 175px !important;
-    height: 80dvh !important;
-    margin: 0 5px;
+    width: 180px !important;
+    height: 84dvh !important;
+    margin: 0 2.5px;
   }
 
   .slider {
-    height: calc(100dvh - 42px);
-    margin-top: 42px;
+    height: calc(100dvh - 58px);
+    margin-top: 58px;
   }
 }

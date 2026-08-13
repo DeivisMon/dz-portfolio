@@ -105,10 +105,10 @@ export default function IndexComponent() {
 
       if (isVerticalMobile) {
         slide.style.width = "99vw";
-        slide.style.height = "98dvh";
+        slide.style.height = "100dvh";
       } else if (isHorizontalMobile) {
-        slide.style.width = "175px";
-        slide.style.height = "80dvh";
+        slide.style.width = "180px";
+        slide.style.height = "84dvh";
       }
 
       const imageContainer = document.createElement("div");

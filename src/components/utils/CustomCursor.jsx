@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { usePageTransition } from "../../context/TransitionContext";
 import {
   FiMaximize2,
@@ -8,6 +9,7 @@ import {
   FiArrowUpRight,
   FiChevronLeft,
   FiChevronRight,
+  FiCopy,
 } from "react-icons/fi";
 
 const ICONS = {
@@ -18,6 +20,7 @@ const ICONS = {
   link: FiArrowUpRight,
   prev: FiChevronLeft,
   next: FiChevronRight,
+  copy: FiCopy,
 };
 
 // Lerp
@@ -131,25 +134,52 @@ const CursorElement = ({
 
   // Icon components
   const renderIcon = () => {
-    if (!showIcon || !iconType) return null;
+    if (!showIcon) return null;
 
-    const IconComp = ICONS[iconType];
+    const IconComp = iconType ? ICONS[iconType] : null;
 
-    if (IconComp) {
-      return (
-        <IconComp
-          size={size * 0.5}
-          color="white"
-          className="mix-blend-difference"
-        />
-      );
+    function easeOutBounce(x) {
+      const n1 = 7.5625;
+      const d1 = 2.75;
+
+      if (x < 1 / d1) {
+        return n1 * x * x;
+      } else if (x < 2 / d1) {
+        return n1 * (x -= 1.5 / d1) * x + 0.75;
+      } else if (x < 2.5 / d1) {
+        return n1 * (x -= 2.25 / d1) * x + 0.9375;
+      } else {
+        return n1 * (x -= 2.625 / d1) * x + 0.984375;
+      }
     }
 
-    // Anything not in the map is treated as a word/label
+    function easeOutElastic(x) {
+      return x < 0.5
+        ? (1 - easeOutBounce(1 - 2 * x)) / 2
+        : (1 + easeOutBounce(2 * x - 1)) / 2;
+    }
+
     return (
-      <span className="text-white text-[18px] font-black tracking-wide mix-blend-difference select-none whitespace-nowrap">
-        {iconType}
-      </span>
+      <AnimatePresence mode="wait">
+        {iconType && (
+          <motion.div
+            key={iconType}
+            initial={{ opacity: 0.25, rotate: -45, scale: 0.85 }}
+            animate={{ opacity: 1, rotate: 0, scale: 1 }}
+            exit={{ opacity: 0.25, rotate: 45, scale: 0.85 }}
+            transition={{ duration: 0.175, ease: easeOutElastic }}
+            className="flex items-center justify-center mix-blend-difference"
+          >
+            {IconComp ? (
+              <IconComp size={size * 0.5} color="white" />
+            ) : (
+              <span className="text-white text-[10px] font-medium tracking-wide select-none whitespace-nowrap">
+                {iconType}
+              </span>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     );
   };
 

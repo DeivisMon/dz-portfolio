@@ -375,7 +375,7 @@ export default function PortfolioComponent() {
     <div
       ref={containerRef}
       className={`${
-        responsive.isMobile || responsive.isTablet ? "w-full" : "w-3/4"
+        responsive.isResponsive ? "w-full" : "w-3/4"
       } mb-32 h-max flex gap-1 transition-all duration-300 ${
         columnLayout === 1 ? "flex-col " : ""
       }`}
@@ -535,13 +535,13 @@ export default function PortfolioComponent() {
           opacity: 1,
           duration: 0.5,
           stagger: 0.04,
-          ease: "power2.in",
+          ease: "power2.inOut",
         });
         gsap.to(menu, {
           x: 0,
           opacity: 1,
           duration: 0.25,
-          ease: "power2.in",
+          ease: "power2.inOut",
         });
       }
     }
@@ -556,7 +556,7 @@ export default function PortfolioComponent() {
         opacity: 0,
         duration: 0.25,
         stagger: 0.04,
-        ease: "power2.in",
+        ease: "power2.inOut",
         onComplete: () => {
           gsap.set(menuItems, { clearProps: "all" });
           onComplete?.();
@@ -578,7 +578,7 @@ export default function PortfolioComponent() {
       gsap.to(itemsRef.current, {
         opacity: 0,
         y: 10,
-        duration: 0.25,
+        duration: 0.35,
         ease: "power2.out",
         onComplete: () => {
           setActiveFilter(filterId);
@@ -594,7 +594,7 @@ export default function PortfolioComponent() {
               gsap.to(itemsRef.current, {
                 opacity: 1,
                 y: 0,
-                duration: 0.95,
+                duration: 1,
                 ease: "power3.inOut",
               });
             });
@@ -627,8 +627,8 @@ export default function PortfolioComponent() {
           x: 0,
           opacity: 1,
           duration: 0.25,
-          stagger: 0.1,
-          ease: "power2.out",
+          stagger: 0.04,
+          ease: "power2.inOut",
         });
       }
     }
@@ -663,7 +663,7 @@ export default function PortfolioComponent() {
         gsap.to(itemsRef.current, {
           opacity: 0,
           y: 10,
-          duration: 0.25,
+          duration: 0.35,
           onComplete: () => {
             setColumnLayout(newColumns);
             requestAnimationFrame(() => {
@@ -678,7 +678,7 @@ export default function PortfolioComponent() {
                 gsap.to(itemsRef.current, {
                   opacity: 1,
                   y: 0,
-                  duration: 0.95,
+                  duration: 1,
                   ease: "power3.inOut",
                 });
               });
@@ -712,7 +712,7 @@ export default function PortfolioComponent() {
     gsap.to(itemsRef.current, {
       opacity: 0,
       y: 10,
-      duration: 0.2,
+      duration: 0.35,
       ease: "power2.out",
       onComplete: () => {
         lenisRef.current?.scrollTo(0, { immediate: true });
@@ -723,7 +723,7 @@ export default function PortfolioComponent() {
         gsap.to(itemsRef.current, {
           opacity: 1,
           y: 0,
-          duration: 0.95,
+          duration: 1,
           ease: "power3.inOut",
         });
       },
@@ -732,7 +732,7 @@ export default function PortfolioComponent() {
 
   return (
     <div
-      className={`relative w-[100vw] h-[calc(100dvh-56px)] mt-[56px] xl:h-[calc(100dvh-160px)] xl:mt-[160px] overflow-hidden shadow-xl bg-bckg/70 `}
+      className={`relative w-[100vw] h-[calc(100dvh-58px)] mt-[58px] xl:h-[calc(100dvh-160px)] xl:mt-[160px] overflow-hidden shadow-xl bg-bckg/70 `}
     >
       <Frame />
       {/* Desktop Filters */}
@@ -857,7 +857,7 @@ export default function PortfolioComponent() {
       {/* Gallery */}
       <div
         ref={itemsRef}
-        className="w-full h-full overflow-y-auto scrollable-container"
+        className="w-full h-full mx-0 overflow-y-auto scrollable-container"
       >
         <div ref={contentRef}>{galleryContent}</div>
       </div>
@@ -866,14 +866,14 @@ export default function PortfolioComponent() {
       {lightboxImage && (
         <div
           ref={lightboxRef}
-          className="fixed inset-0 z-[10000] bg-black/95 backdrop-blur flex items-center justify-center pointer-events-auto overflow-hidden"
+          className="fixed inset-0 z-[1000] bg-black/95 backdrop-blur flex items-center justify-center pointer-events-auto overflow-hidden"
           style={{ touchAction: "none", overscrollBehavior: "none" }}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
           <div
-            className="cursor-trigger absolute left-0 top-0 w-2/8 h-full"
+            className="cursor-trigger absolute left-0 top-0 w-1/2 h-full"
             onClick={(e) => {
               e.stopPropagation();
               navigateLightbox(-1);
@@ -881,12 +881,7 @@ export default function PortfolioComponent() {
             data-cursor-type="prev"
           />
           <div
-            className="cursor-trigger absolute top-0 w-4/8 h-full"
-            onClick={closeLightbox}
-            data-cursor-type="close"
-          />
-          <div
-            className="cursor-trigger absolute right-0 top-0 w-2/8 h-full"
+            className="cursor-trigger absolute right-0 top-0 w-1/2 h-full"
             onClick={(e) => {
               e.stopPropagation();
               navigateLightbox(1);
@@ -897,7 +892,12 @@ export default function PortfolioComponent() {
             ref={currentImageRef}
             src={lightboxImage}
             alt="Lightbox"
-            className="cursor-trigger max-w-[95vw] max-h-[100vh] w-auto h-auto object-contain pointer-events-none relative"
+            className="cursor-trigger max-w-[95vw] max-h-[100vh] w-auto h-auto object-contain relative"
+            onClick={(e) => {
+              e.stopPropagation();
+              closeLightbox();
+            }}
+            data-cursor-type="close"
           />
           <div className="absolute bottom-1 text-white text-lg mix-blend-difference pointer-events-none">
             {lightboxIndex + 1} / {filteredItems.length}

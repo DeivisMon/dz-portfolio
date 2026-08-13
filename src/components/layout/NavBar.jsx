@@ -268,12 +268,16 @@ export default function NavBar() {
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
   const handleNavClick = (path) => {
+    if (isNavigatingAway) return;
+
     if (path === location.pathname) {
       setIsMenuOpen(false);
       return;
     }
+
     setIsMenuOpen(false);
     setIsNavigatingAway(true);
+
     setTimeout(() => {
       setIsTransitioning(true);
       navigate(path);
@@ -323,7 +327,13 @@ export default function NavBar() {
           max-w-[65vw] overflow-hidden flex flex-2 xl:flex-1
           ${isTransitioning ? "z-[2000]" : "z-[500]"}`}
           >
-            <div className="logo text-[clamp(2.5rem,10vw+0.5rem,12.5rem)]">
+            <div
+              className={`logo ${
+                responsive.isCompactHeight
+                  ? "text-[2.5rem]"
+                  : "text-[clamp(2.5rem,10vw+0.5rem,12.5rem)]"
+              }`}
+            >
               <Link
                 className="flex transition-all duration-500 ease-in-out"
                 to="/"
@@ -345,11 +355,11 @@ export default function NavBar() {
 
             <Motion.div
               {...Animations(upperLineVariants)}
-              className="fixed hidden md:block top-4 left-0 w-full h-[1px] bg-muted/50 origin-left"
+              className={`fixed ${responsive.isResponsive ? "top-1" : "top-4"}  left-0 w-full h-[1px] bg-muted/30 origin-left`}
             />
             <Motion.div
               {...Animations(lowerLineVariants)}
-              className="fixed top-[56px] md:top-40 left-0 w-full h-[1px] bg-muted/50 origin-right"
+              className={`fixed ${responsive.isResponsive ? "top-14" : "top-40"}  left-0 w-full h-[1px] bg-muted/30 origin-right`}
             />
           </div>
 
@@ -373,7 +383,7 @@ export default function NavBar() {
         ref={magneticRef}
         onMouseMove={handleMagneticMove}
         onMouseLeave={resetMagnetic}
-        className={`fixed right-0 -top-2 md:top-12 w-14 h-14 xl:w-54 xl:h-48 flex items-center justify-center mix-blend-difference isolate ${
+        className={`fixed right-0 -top-2 md:-top-2 w-14 h-14 xl:w-54 xl:h-48 flex items-center justify-center mix-blend-difference isolate ${
           isTransitioning ? "z-[5]" : "z-[1000]"
         }`}
       >
@@ -382,6 +392,7 @@ export default function NavBar() {
           toggleMenu={toggleMenu}
           springX={springX}
           springY={springY}
+          isLocked={isNavigatingAway}
         />
       </div>
 

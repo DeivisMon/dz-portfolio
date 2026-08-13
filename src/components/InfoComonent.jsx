@@ -44,7 +44,9 @@ export default function InfoComponent() {
 
   const isVerticalLayout =
     responsive.isMobilePortrait ||
-    (responsive.isShortScreen && responsive.isMobile);
+    (responsive.isShortScreen &&
+      !responsive.isMobileLandscape &&
+      !responsive.isTabletLandscape);
 
   // Image's "home" position (translate 0,0) sits over the LEFT/TOP slot
   // (where About Me lives). To show About Me by default, the photo needs
@@ -64,7 +66,7 @@ export default function InfoComponent() {
 
   return (
     <div
-      className={`relative w-[100vw] h-[calc(100dvh-56px)] mt-[56px] xl:h-[calc(100dvh-160px)] xl:mt-[160px] overflow-hidden shadow-xl bg-bckg/70`}
+      className={`relative w-[100vw] h-[calc(100dvh-58px)] mt-[58px] xl:h-[calc(100dvh-160px)] xl:mt-[160px] overflow-hidden shadow-xl bg-bckg/70`}
     >
       <Frame />
 

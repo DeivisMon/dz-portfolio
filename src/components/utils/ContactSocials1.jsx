@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { motion as Motion } from "framer-motion";
-import { useResponsive } from "../../hooks/useResponsive";
-import AnimatedText from "./AnimatedText";
+// import { useResponsive } from "../../hooks/useResponsive";
 
 const containerVariants = {
   hidden: { y: 65, opacity: 0 },
@@ -32,6 +31,7 @@ const rows = [
     id: "email",
     labelKey: "El. paštas",
     value: "zvinklys@zvinklys.com",
+    data: "copy",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -55,6 +55,7 @@ const rows = [
     id: "phone",
     labelKey: "Telefonas",
     value: "+370 624 84565",
+    data: "link",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -76,6 +77,7 @@ const rows = [
     id: "facebook",
     labelKey: "Facebook",
     value: "facebook.com/zvinklys",
+    data: "link",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -98,6 +100,7 @@ const rows = [
     id: "instagram",
     labelKey: "Instagram",
     value: "@zvinklys",
+    data: "link",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -173,7 +176,7 @@ const CheckIcon = () => (
 export default function ContactSocials() {
   const [copied, setCopied] = useState(false);
   const [hoveredRow, setHoveredRow] = useState(null);
-  const responsive = useResponsive();
+  // const responsive = useResponsive();
 
   const copy = async () => {
     try {
@@ -194,7 +197,7 @@ export default function ContactSocials() {
     >
       {/* Heading */}
       <Motion.div variants={itemVariants} className="mb-2 md:mb-6">
-        <h2 className="font-thin tracking-[0.3em] text-header text-[clamp(1.1rem,3vw,2rem)] mb-2 md:mb-4 text-center">
+        <h2 className="font-thin tracking-[0.3em] text-header text-[clamp(1.1rem,3vw,4rem)] mb-2 md:mb-4 text-center">
           Susisiekime
         </h2>
       </Motion.div>
@@ -210,7 +213,7 @@ export default function ContactSocials() {
               key={row.id}
               variants={itemVariants}
               className="flex cursor-trigger group relative md:border-t md:border-border/50"
-              data-cursor-type="link"
+              data-cursor-type={row.data}
               onMouseEnter={() => setHoveredRow(row.id)}
               onMouseLeave={() => setHoveredRow(null)}
               onClick={row.copyable ? copy : undefined}
@@ -231,7 +234,7 @@ export default function ContactSocials() {
               >
                 {/* Icon circle */}
                 <div
-                  className="flex-shrink-0 w-10 h-10 rounded-full my-4 flex items-center justify-center group-hover:bg-muted/20 group-hover:scale-115  transition-all duration-400"
+                  className="flex-shrink-0 w-10 h-10 2xl:w-20 2xl:h-20 rounded-full my-4 flex items-center justify-center group-hover:bg-muted/20 group-hover:scale-115  transition-all duration-400"
                   style={{
                     border: "0.5px solid",
                     borderColor: isHovered
@@ -246,7 +249,7 @@ export default function ContactSocials() {
                 {/* Label + Value */}
                 <div className="flex flex-col flex-1 ml-0 lg:ml-0 min-w-0">
                   <span
-                    className="text-[10px] md:text-[12px] tracking-[2px] md:tracking-[0.2em] uppercase font-thin transition-colors duration-200"
+                    className="text-[clamp(0.72rem,1vw,2.5rem)] tracking-[2px] md:tracking-[0.2em] uppercase font-thin transition-colors duration-200"
                     style={{
                       color: isHovered
                         ? "rgba(166,124,82,0.8)"
@@ -256,7 +259,7 @@ export default function ContactSocials() {
                     {row.labelKey}
                   </span>
                   <span
-                    className="hidden md:inline-block text-[10px] md:text-sm lg:text-base tracking-[0.05em] font-thin truncate transition-colors duration-200"
+                    className="hidden md:inline-block text-[clamp(0.72rem,1vw,2.5rem)] lg:text-base tracking-[0.05em] font-thin truncate transition-colors duration-200"
                     style={{
                       color: isHovered
                         ? "rgba(255,255,255,0.9)"
@@ -269,7 +272,7 @@ export default function ContactSocials() {
 
                 {/* Right action icon */}
                 <div
-                  className="hidden md:flex flex-shrink-0 transition-all duration-400"
+                  className="hidden md:flex 2xl:h-30 2xl:w-30 flex-shrink-0 transition-all duration-400"
                   style={{
                     color: isHovered ? "#A67C52" : "rgba(255,255,255,0.2)",
                     transform: isHovered

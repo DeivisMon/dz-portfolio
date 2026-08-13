@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 
 export function useResponsive() {
   const [viewport, setViewport] = useState(() => ({
-    width: typeof window !== 'undefined' ? window.innerWidth : 0,
-    height: typeof window !== 'undefined' ? window.innerHeight : 0,
-    isTouch: typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0)
+    width: typeof window !== "undefined" ? window.innerWidth : 0,
+    height: typeof window !== "undefined" ? window.innerHeight : 0,
+    isTouch:
+      typeof window !== "undefined" &&
+      ("ontouchstart" in window || navigator.maxTouchPoints > 0),
   }));
 
   useEffect(() => {
@@ -12,25 +14,32 @@ export function useResponsive() {
       setViewport({
         width: window.innerWidth,
         height: window.innerHeight,
-        isTouch: 'ontouchstart' in window || navigator.maxTouchPoints > 0
+        isTouch: "ontouchstart" in window || navigator.maxTouchPoints > 0,
       });
     };
 
-    window.addEventListener('resize', update);
-    window.addEventListener('orientationchange', update);
+    window.addEventListener("resize", update);
+    window.addEventListener("orientationchange", update);
     return () => {
-      window.removeEventListener('resize', update);
-      window.removeEventListener('orientationchange', update);
+      window.removeEventListener("resize", update);
+      window.removeEventListener("orientationchange", update);
     };
   }, []);
 
-  // Breakpoint logic
-  const isMobile = viewport.width < 768;
-  const isTablet = viewport.width >= 768 && viewport.width <= 1366;
-  const isDesktop = viewport.width >= 1024;
+  // Classify device by its LONG edge so rotating a phone doesn't
+  // reclassify it as a tablet (phones hit ~930px wide in landscape).
+  const longEdge = Math.max(viewport.width, viewport.height);
+  const isMobile = longEdge < 1024;
+  const isTablet = longEdge >= 1024 && longEdge <= 1366;
+  const isDesktop = longEdge > 1366;
+
   const isLandscape = viewport.width > viewport.height;
-  const isPortrait = viewport.height > viewport.width;
-  const isShortScreen = viewport.height < 600; 
+  const isPortrait = !isLandscape;
+
+  // Vertical space is tight *right now* — independent of device class.
+  // This is what layout-squeeze logic (logo size, line spacing, menu
+  // gap) should key off, not isMobile/isLandscape.
+  const isCompactHeight = viewport.height < 500;
 
   return {
     ...viewport,
@@ -39,11 +48,11 @@ export function useResponsive() {
     isDesktop,
     isLandscape,
     isPortrait,
-    isShortScreen,
-    // Combined states for Mobile and Tablet
+    isCompactHeight,
     isMobilePortrait: isMobile && isPortrait,
     isMobileLandscape: isMobile && isLandscape,
     isTabletPortrait: isTablet && isPortrait,
-    isTabletLandscape: isTablet && isLandscape
+    isTabletLandscape: isTablet && isLandscape,
+    isResponsive: isMobile || isTablet,
   };
 }

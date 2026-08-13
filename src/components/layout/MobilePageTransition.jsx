@@ -1,6 +1,5 @@
 import { motion as Motion } from "framer-motion";
 import { usePageTransition } from "../../context/TransitionContext";
-import { customEases } from "../helpers/CustomEasingFn";
 
 export default function MobilePageTransition({ children }) {
   const { setIsTransitioning } = usePageTransition();

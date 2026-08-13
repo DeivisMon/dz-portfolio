@@ -33,7 +33,7 @@ export default function Frame() {
   return (
     <Motion.div
       // {...Animate(frame)}
-      className={`film-frame h-[calc(100dvh-64px)] xl:h-[calc(100dvh-196px)] mix-blend-difference`}
+      className={`film-frame h-[calc(100dvh-66px)] xl:h-[calc(100dvh-196px)] mix-blend-difference`}
     >
       <div
         style={{

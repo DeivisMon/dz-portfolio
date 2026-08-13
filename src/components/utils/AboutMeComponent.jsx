@@ -21,7 +21,7 @@ export default function AboutMeComponent() {
       {/* h1 */}
       <h1
         style={fadeUp(0.62)}
-        className="font-thin p-0 tracking-[0.3em] text-header text-[clamp(1.1rem,3vw,2rem)] mb-2 md:mb-6 text-center"
+        className="font-thin p-0 tracking-[0.3em] text-header text-[clamp(1.1rem,2vw,4rem)] mb-2 md:mb-6 text-center"
       >
         Apie Mane
       </h1>
@@ -30,9 +30,9 @@ export default function AboutMeComponent() {
       <div
         style={fadeUp(0.9)}
         className="
-          max-w-[660px] text-center text-muted
+          px-2 xl:px-2 2xl:px-32 text-center text-muted
           leading-[1] md:leading-[1.95] font-extralight
-          text-[clamp(0.72rem,1.25vw,1rem)]
+          text-[clamp(0.72rem,1vw,2.5rem)]
           flex flex-col gap-1 md:gap-4
         "
       >
@@ -69,7 +69,7 @@ export default function AboutMeComponent() {
         style={fadeUp(1.3)}
         className="
           mt-2 md:mt-8 flex items-center justify-center
-          gap-x-4 md:gap-x-8 gap-y-1 text-[0.7rem] md:text-sm
+          gap-x-4 md:gap-x-8 gap-y-1 text-[clamp(0.72rem,1vw,2.5rem)]
           text-muted font-extralight tracking-wide text-center
         "
       >
