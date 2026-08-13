@@ -1,5 +1,6 @@
 import { motion as Motion } from "framer-motion";
 import { usePageTransition } from "../../context/TransitionContext";
+import { customEases } from "../helpers/CustomEasingFn";
 
 export default function DesktopPageTransitions({ children }) {
   const { setIsTransitioning } = usePageTransition();
@@ -14,13 +15,12 @@ export default function DesktopPageTransitions({ children }) {
   };
 
   const slide = {
-    initial: { y: "100vh", scaleX: 0.5 },
-    animate: { y: "100vh", scaleX: 0.5 },
+    initial: { y: "100vh", scaleX: 0.75 },
+    animate: { y: "100vh", scaleX: 0.75 },
     exit: {
-      top: "188px",
       y: 0,
       scaleX: 1,
-      transition: { duration: 1, delay: 0.005, ease: [0.87, 0, 0.13, 1] },
+      transition: { duration: 1, ease: customEases.pageTransition },
     },
   };
 
@@ -29,7 +29,8 @@ export default function DesktopPageTransitions({ children }) {
     animate: { y: 0 },
     exit: {
       y: "100vh",
-      transition: { duration: 1, ease: [0.87, 0.25, 0.13, 1] },
+      // scale: 0.95,
+      transition: { duration: 0.85, delay: 0.15, ease: customEases.pageTransition },
     },
   };
 
@@ -41,7 +42,7 @@ export default function DesktopPageTransitions({ children }) {
         onAnimationComplete={(def) =>
           def === "exit" && setIsTransitioning(false)
         }
-        className="fixed bottom-0 left-0 bg-bckg min-w-full z-10"
+        className="fixed bottom-0 left-0 bg-bckg min-w-full z-1000"
         style={{ minHeight: "calc(100dvh)" }}
       />
       <Motion.div {...Animate(zoomOut)} style={{ minHeight: "calc(100dvh)" }}>

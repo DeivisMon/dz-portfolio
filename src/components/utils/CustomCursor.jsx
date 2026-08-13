@@ -124,7 +124,7 @@ const CursorElement = ({
           <g
             className="mix-blend-difference"
             stroke="white"
-            strokeWidth="1"
+            strokeWidth="2"
             fill="none"
             opacity="1"
             transform={`rotate(135 ${centerX} ${centerY})`}
@@ -151,9 +151,9 @@ const CursorElement = ({
         return (
           <g
             className="mix-blend-difference"
-            fill="white"
+            fill="none"
             opacity="1"
-            strokeWidth="1"
+            strokeWidth="2"
             stroke="white"
           >
             {/* X icon */}
@@ -182,7 +182,7 @@ const CursorElement = ({
               ry="5"
               fill="none"
               stroke="white"
-              strokeWidth="1"
+              strokeWidth="2"
             />
             <circle cx={centerX} cy={centerY} r="3" fill="white" />
           </g>
@@ -192,7 +192,7 @@ const CursorElement = ({
           <g
             className="mix-blend-difference"
             stroke="white"
-            strokeWidth="1"
+            strokeWidth="2"
             fill="none"
             opacity="1"
             transform={`rotate(90 ${centerX} ${centerY})`}
@@ -213,7 +213,7 @@ const CursorElement = ({
             className="mix-blend-difference"
             fill="none"
             stroke="white"
-            strokeWidth="1.5"
+            strokeWidth="2"
             opacity="1"
           >
             <line
@@ -239,7 +239,7 @@ const CursorElement = ({
         L${centerX + 4},${centerY + 6}
       `}
             stroke="white"
-            strokeWidth="1.5"
+            strokeWidth="2"
             fill="none"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -256,7 +256,7 @@ const CursorElement = ({
         L${centerX - 4},${centerY + 6}
       `}
             stroke="white"
-            strokeWidth="1.5"
+            strokeWidth="2"
             fill="none"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -272,7 +272,7 @@ const CursorElement = ({
   return (
     <div
       ref={elementRef}
-      className={`fixed top-0 left-0 blur-[0.5px] pointer-events-none z-[10000] transition-opacity duration-300 ease-in-out
+      className={`fixed top-0 left-0 blur-[0.5px] pointer-events-none z-[10000] rounded-full bg-white transition-opacity duration-300 ease-in-out
       ${
         isVisible && !isOutside ? "opacity-100" : "opacity-0"
       } mix-blend-difference`}
@@ -490,9 +490,9 @@ const CustomCursor = ({ triggerSelector = ".cursor-trigger" }) => {
         size={24}
         viewBox="0 0 24 24"
         radius={6}
-        filled={true}
-        scaleOnEnter={0}
-        opacityOnEnter={0}
+        filled={false}
+        scaleOnEnter={1.25}
+        opacityOnEnter={1}
         amount={0.2}
         isHovered={isHovered}
         isOutside={isOutside}
@@ -501,17 +501,31 @@ const CustomCursor = ({ triggerSelector = ".cursor-trigger" }) => {
 
       {/* Large cursor circle with icon */}
       <CursorElement
-        className="backdrop-blur-[50px]"
-        size={72}
-        viewBox="0 0 72 72"
-        radius={16}
-        filled={false}
-        scaleOnEnter={1.5}
+        size={54}
+        viewBox="0 0 54 54"
+        radius={24}
+        filled={true}
+        scaleOnEnter={1.25}
         opacityOnEnter={1}
         amount={0.15}
         isHovered={isHovered}
         isOutside={isOutside}
         showIcon={true}
+        iconType={iconType}
+      />
+
+      {/* Larger cursor circle with icon */}
+      <CursorElement
+        size={58}
+        viewBox="0 0 58 58"
+        radius={24}
+        filled={false}
+        scaleOnEnter={1.25}
+        opacityOnEnter={1}
+        amount={0.125}
+        isHovered={isHovered}
+        isOutside={isOutside}
+        showIcon={false}
         iconType={iconType}
       />
     </>

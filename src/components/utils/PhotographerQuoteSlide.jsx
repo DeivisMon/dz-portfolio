@@ -58,7 +58,7 @@ export default function PhotographerQuoteSlide() {
     setTimeout(() => {
       setIndex((prev) => (prev + 1) % QUOTES.length);
       setVisible(true);
-    }, 220);
+    }, 350);
   }, []);
 
   useEffect(() => {
@@ -108,7 +108,7 @@ export default function PhotographerQuoteSlide() {
           </span>
           <span
             aria-hidden="true"
-            className="quote-font absolute -bottom-10 right-2 text-[5rem] text-[#c9962f] opacity-[0.20] select-none"
+            className="quote-font absolute -bottom-13 right-2 text-[5rem] text-[#c9962f] opacity-[0.20] select-none"
           >
             &ldquo;
           </span>

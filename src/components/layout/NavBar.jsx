@@ -306,12 +306,6 @@ export default function NavBar() {
       <div
         className={`navbar fixed transition-[z-index] ${isTransitioning ? "z-[2000]" : "z-[500]"}`}
       >
-        {/* Marquee — unchanged, fixed as before */}
-        <Marquee
-          items={MARQUEE_ITEMS}
-          className="fixed hidden xl:block left-0 top-8 xl:top-40 pt-[1px]"
-        />
-
         {/* Clock — fixed independently */}
         <Motion.span
           {...Animations(dateVariants)}
@@ -373,12 +367,13 @@ export default function NavBar() {
           </div>
         </div>
       </div>
+
       {/* Hamburger — restored to its own fixed positioning, original size */}
       <div
         ref={magneticRef}
         onMouseMove={handleMagneticMove}
         onMouseLeave={resetMagnetic}
-        className={`cursor-trigger fixed right-0 -top-2 md:top-12 w-14 h-14 xl:w-54 xl:h-48 flex items-center justify-center mix-blend-difference isolate ${
+        className={`fixed right-0 -top-2 md:top-12 w-14 h-14 xl:w-54 xl:h-48 flex items-center justify-center mix-blend-difference isolate ${
           isTransitioning ? "z-[5]" : "z-[1000]"
         }`}
       >
@@ -390,12 +385,18 @@ export default function NavBar() {
         />
       </div>
 
+      {/* Marquee — unchanged, fixed as before */}
+      <Marquee
+        items={MARQUEE_ITEMS}
+        className="fixed hidden xl:block left-0 top-8 xl:top-40 pt-[1px]"
+      />
+
       {/* Fullscreen menu overlay */}
       <AnimatePresence>
         {isMenuOpen && (
           <Motion.div
             {...Animations(overlayVariants)}
-            className="fixed w-full h-[100dvh] flex items-center justify-center bg-black/90 backdrop-blur-xl z-[999]"
+            className="fixed top-0 w-full h-[100dvh] flex items-center justify-center bg-black/90 backdrop-blur-xl z-[999]"
           >
             <nav
               className={` h-[100dvh] w-full flex flex-col items-center justify-center ${
@@ -409,7 +410,7 @@ export default function NavBar() {
                   {...Animations(navLinkVariants)}
                 >
                   <Link
-                    className={`text-3xl md:text-3xl lg:text-5xl xl:text-[124px] uppercase tracking-[5px] md:tracking-[20px] ${
+                    className={`cursor-trigger text-3xl md:text-3xl lg:text-5xl xl:text-[124px] uppercase tracking-[5px] md:tracking-[20px] ${
                       isActive(item.path)
                         ? "italic text-accent"
                         : "text-muted opacity-80"

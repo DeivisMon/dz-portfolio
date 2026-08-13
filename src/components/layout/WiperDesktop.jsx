@@ -1,48 +1,45 @@
-import { useRef, useEffect, useLayoutEffect } from "react";
-import gsap from "gsap";
+import { useRef, useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { usePageTransition } from "../../context/TransitionContext";
+import { customEases } from "../helpers/CustomEasingFn";
+
+const getViewportHeight = () => {
+  if (typeof window === "undefined") return 0; // SSR guard
+  return window.visualViewport?.height || window.innerHeight;
+};
 
 export default function WiperDesktop() {
   const wipeRef = useRef(null);
   const { setIsTransitioning } = usePageTransition();
-
-  const getViewportHeight = () => {
-    const vv = window.visualViewport;
-    return vv?.height || window.innerHeight;
-  };
-
-  useLayoutEffect(() => {
-    const height = getViewportHeight();
-
-    Object.assign(wipeRef.current.style, {
-      position: "fixed",
-      left: "0",
-      top: "188px",
-      width: "100vw",
-      height: `${height}px`,
-      zIndex: "1000",
-      transformOrigin: "top",
-      pointerEvents: "none",
-      willChange: "transform",
-      opacity: "1",
-    });
-  }, []);
+  const [height] = useState(() => getViewportHeight());
 
   useEffect(() => {
     setIsTransitioning(true);
-
-    gsap.set(wipeRef.current, { scaleY: 1, opacity: 1 });
-
-    gsap.to(wipeRef.current, {
-      scaleY: 0,
-      delay: 0.675,
-      transformOrigin: "bottom",
-      opacity: 1,
-      duration: 1,
-      ease: "expo.in",
-      onComplete: () => setIsTransitioning(false),
-    });
   }, [setIsTransitioning]);
 
-  return <div ref={wipeRef} className="bg-bckg" />;
+  return (
+    <motion.div
+      ref={wipeRef}
+      className="bg-bckg"
+      style={{
+        position: "fixed",
+        left: 0,
+        top: 0,
+        width: "100vw",
+        height: `${height}px`,
+        zIndex: 1000,
+        pointerEvents: "none",
+        willChange: "transform",
+        transformOrigin: "bottom",
+      }}
+      initial={{ scaleY: 1, opacity: 1 }}
+      animate={{ scaleY: 0, opacity: 1 }}
+      transition={{
+        delay: 0.75,
+        duration: 1,
+        ease: customEases.pageTransition,
+      }}
+      onAnimationComplete={() => setIsTransitioning(false)}
+    />
+  );
 }

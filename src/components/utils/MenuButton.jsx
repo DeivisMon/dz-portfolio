@@ -10,7 +10,7 @@ const MenuBtn = ({ isMenuOpen, toggleMenu, springX, springY }) => {
 
   return (
     <Motion.div
-      className={`
+      className={`cursor-trigger 
         group fixed top-2 right-4 md:top-12 md:right-8 z-[2]
         w-[90px] h-11 md:w-40 md:h-20
         ${isMenuOpen ? "w-10 md:w-[60px]" : "w-[90px] md:w-40"}

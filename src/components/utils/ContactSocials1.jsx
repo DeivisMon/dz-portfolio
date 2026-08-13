@@ -219,7 +219,7 @@ export default function ContactSocials() {
                 href={row.copyable ? undefined : row.href}
                 target={row.external ? "_blank" : undefined}
                 rel={row.external ? "noopener noreferrer" : undefined}
-                className="flex w-full flex-col justify-center md:flex-row items-center md:items-center gap-0 lg:gap-4 px-0 lg:px-4 py-0 lg:py-8 group-hover:translate-y-[2px] group-hover:translate-x-[-16px] md:group-hover:bg-[rgba(166,124,82,0.25)] transition-all duration-400 no-underline"
+                className="flex w-full flex-col justify-center md:flex-row items-center md:items-center gap-0 lg:gap-4 px-0 lg:px-4 py-0 lg:py-8 group-hover:translate-y-[2px] group-hover:translate-x-[-16px] md:group-hover:bg-muted/25 transition-all duration-400 no-underline"
                 onClick={
                   row.copyable
                     ? (e) => {
