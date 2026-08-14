@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 
-// One triangle's shape + animation parameters
-function makeTriangle(seed) {
-  // Simple deterministic pseudo-random based on seed so triangles
+// One shape's parameters + animation
+function makeShape(seed) {
+  // Simple deterministic pseudo-random based on seed so shapes
   // stay stable across re-renders but still look varied.
   const rand = (n) => {
     const x = Math.sin(seed * 999 + n * 137.5) * 10000;
@@ -11,7 +11,8 @@ function makeTriangle(seed) {
 
   const cx = rand(1) * 100; // center x %
   const cy = rand(2) * 100; // center y %
-  const size = 18 + rand(3) * 34; // triangle "radius" in vw-ish units
+  const width = 14 + rand(3) * 20; // rect width, in vw-ish units
+  const height = 24 + rand(3.5) * 30; // rect height, in vw-ish units
   const rotation = rand(4) * 360;
   const opacity = 0.03 + rand(5) * 0.09;
   const duration = 22 + rand(6) * 26; // seconds, slow drift
@@ -23,7 +24,8 @@ function makeTriangle(seed) {
   return {
     cx,
     cy,
-    size,
+    width,
+    height,
     rotation,
     opacity,
     duration,
@@ -34,25 +36,38 @@ function makeTriangle(seed) {
   };
 }
 
-const TRIANGLE_COUNT = 22;
+const SHAPE_COUNT = 22;
+const SKEW = 0.15; // 15% skew
+
+// A rectangle skewed 15% along the top/bottom edges, like a slanted
+// parallelogram: /____/
+//               /   /
+//              /  /
+//              ----
+function skewedRectPoints(skew = SKEW) {
+  const offset = skew * 100; // skew as % of the 100x100 viewBox
+  return `${offset},0 100,0 ${100 - offset},100 0,100`;
+}
 
 export default function MovingBackground({
   className = "",
-  triangleCount = TRIANGLE_COUNT,
+  shapeCount = SHAPE_COUNT,
 }) {
-  const triangles = useMemo(
-    () => Array.from({ length: triangleCount }, (_, i) => makeTriangle(i + 1)),
+  const shapes = useMemo(
+    () => Array.from({ length: shapeCount }, (_, i) => makeShape(i + 1)),
     [],
   );
+
+  const points = useMemo(() => skewedRectPoints(), []);
 
   return (
     <div
       className={`absolute inset-0 overflow-hidden bg-gradient-to-b from-neutral-800 via-neutral-900 to-black ${className}`}
       aria-hidden="true"
     >
-      {/* subtle static overlay triangles for depth (non-animated large shapes) */}
+      {/* subtle static gradient overlay for depth */}
       <svg
-        className="absolute inset-0 h-full w-full opacity-40 border-t-16 border-black"
+        className="absolute inset-0 h-full w-full opacity-40"
         preserveAspectRatio="none"
       >
         <defs>
@@ -65,36 +80,37 @@ export default function MovingBackground({
         <rect width="100%" height="100%" fill="url(#bgFade)" />
       </svg>
 
-      {/* floating low-poly triangles */}
-      {triangles.map((t, i) => (
+      {/* floating skewed rectangles */}
+      {shapes.map((s, i) => (
         <div
           key={i}
           className="absolute will-change-transform"
           style={{
-            left: `${t.cx}%`,
-            top: `${t.cy}%`,
-            animation: `drift-${i} ${t.duration}s ease-in-out ${t.delay}s infinite`,
+            left: `${s.cx}%`,
+            top: `${s.cy}%`,
+            animation: `drift-${i} ${s.duration}s ease-in-out ${s.delay}s infinite`,
           }}
         >
           <svg
-            width={t.size * 8}
-            height={t.size * 8}
+            width={s.width * 8}
+            height={s.height * 8}
             viewBox="0 0 100 100"
+            preserveAspectRatio="none"
             style={{
-              transform: `translate(-50%, -50%) rotate(${t.rotation}deg)`,
-              opacity: t.opacity,
+              transform: `translate(-50%, -50%) rotate(${s.rotation}deg)`,
+              opacity: s.opacity,
             }}
           >
             <polygon
-              points="50,3 97,97 3,97"
-              fill={`rgb(${t.shade}, ${t.shade}, ${t.shade})`}
+              points={points}
+              fill={`rgb(${s.shade}, ${s.shade}, ${s.shade})`}
             />
           </svg>
 
           <style>{`
             @keyframes drift-${i} {
               0%   { transform: translate(0, 0) rotate(0deg); }
-              50%  { transform: translate(${t.driftX}vw, ${t.driftY}vh) rotate(${
+              50%  { transform: translate(${s.driftX}vw, ${s.driftY}vh) rotate(${
                 (i % 2 === 0 ? 1 : -1) * 6
               }deg); }
               100% { transform: translate(0, 0) rotate(0deg); }
