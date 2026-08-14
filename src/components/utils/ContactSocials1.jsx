@@ -213,7 +213,7 @@ export default function ContactSocials() {
     ? "text-[clamp(0.5rem,0.8vw,1rem)]"
     : "text-[clamp(0.6rem,1vw,2.5rem)]";
 
-  const labelTracking = isCompact ? "tracking-[1px]" : "tracking-[0.2em]";
+  const labelTracking = isCompact ? "tracking-[2px]" : "tracking-[0.2em]";
 
   return (
     <Motion.div

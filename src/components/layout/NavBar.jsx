@@ -407,7 +407,7 @@ export default function NavBar() {
         {isMenuOpen && (
           <Motion.div
             {...Animations(overlayVariants)}
-            className="fixed top-0 w-full h-[100dvh] flex items-start justify-center bg-black/90 backdrop-blur-xl z-[999]"
+            className="fixed top-0 w-full h-[100dvh] flex items-start justify-center bg-black/95 backdrop-blur-xl z-[999]"
           >
             <nav
               className={` h-[100dvh] w-full flex flex-col items-center ${responsive.isCompactHeight ? "justify-start mt-12" : "justify-center"}  ${
@@ -438,7 +438,7 @@ export default function NavBar() {
               ))}
             </nav>
 
-            <div className="fixed left-0 bottom-8 flex justify-center w-full">
+            <div className="fixed left-0 bottom-2 flex justify-center w-full">
               <Socials />
             </div>
 
