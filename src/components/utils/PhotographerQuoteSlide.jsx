@@ -94,7 +94,7 @@ export default function PhotographerQuoteSlide() {
 
   return (
     <div className="w-full flex items-center justify-center mix-blend-difference">
-      <div className="relative md:w-[10rem] lg:w-[12rem] xl:w-[28rem] 2xl:w-[38rem] ">
+      <div className="relative w-[clamp(200px,35vw,700px)] shrink-0">
         <div
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
@@ -113,13 +113,22 @@ export default function PhotographerQuoteSlide() {
             &ldquo;
           </span>
           <div
-            className={`relative flex-1 flex items-center transition-all duration-300 ease-out ${
-              visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
-            }`}
+            className={`
+    relative flex-1 flex items-center justify-center
+    transition-all duration-300 ease-out
+    ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"}
+  `}
           >
             <p
-              className="quote-font italic text-muted px-2 text-2xl md:text-xl xl:text-[2xl] truncate
-                xl:whitespace-normal"
+              className="
+      quote-font italic text-muted px-2
+      w-full
+      text-center
+      text-[clamp(0.72rem,1vw,1.1rem)]
+      leading-tight
+      line-clamp-2
+      xl:line-clamp-none
+    "
             >
               {quote.text}
             </p>
@@ -140,17 +149,22 @@ export default function PhotographerQuoteSlide() {
         </div>
 
         <div className="flex items-center justify-between text-[10px] tracking-[0.2em] text-[#d8cfb8] uppercase -mt-5 px-1">
-          <span>
+          <span className="shrink-0">
             {frameNo} / {total}
           </span>
+
           <div
-            className={`relative flex items-center justify-end transition-all duration-300 ease-out ${
-              visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
-            }`}
+            className={`
+      relative flex items-center justify-end
+      w-[70%] min-w-0
+      transition-all duration-300 ease-out
+      ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"}
+    `}
           >
-            <div className="text-right">
+            <div className="text-right w-full min-w-0">
               <div className="h-px w-full bg-[#3a342c]" />
-              <span className="text-xs sm:text-sm tracking-[0.15em] uppercase text-[#d8cfb8]">
+
+              <span className="block truncate text-xs sm:text-sm tracking-[0.15em] uppercase text-[#d8cfb8]">
                 &mdash; {quote.author}
               </span>
             </div>

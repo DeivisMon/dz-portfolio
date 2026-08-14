@@ -329,7 +329,7 @@ export default function NavBar() {
           >
             <div
               className={`logo ${
-                responsive.isCompactHeight
+                responsive.isResponsive
                   ? "text-[2.5rem]"
                   : "text-[clamp(2.5rem,10vw+0.5rem,12.5rem)]"
               }`}
@@ -383,7 +383,7 @@ export default function NavBar() {
         ref={magneticRef}
         onMouseMove={handleMagneticMove}
         onMouseLeave={resetMagnetic}
-        className={`fixed right-0 -top-2 md:-top-2 w-14 h-14 xl:w-54 xl:h-48 flex items-center justify-center mix-blend-difference isolate ${
+        className={`fixed right-0 -top-2 md:-top-6 w-14 h-14 xl:w-54 xl:h-48 flex items-center justify-center mix-blend-difference isolate ${
           isTransitioning ? "z-[5]" : "z-[1000]"
         }`}
       >
@@ -407,10 +407,10 @@ export default function NavBar() {
         {isMenuOpen && (
           <Motion.div
             {...Animations(overlayVariants)}
-            className="fixed top-0 w-full h-[100dvh] flex items-center justify-center bg-black/90 backdrop-blur-xl z-[999]"
+            className="fixed top-0 w-full h-[100dvh] flex items-start justify-center bg-black/90 backdrop-blur-xl z-[999]"
           >
             <nav
-              className={` h-[100dvh] w-full flex flex-col items-center justify-center ${
+              className={` h-[100dvh] w-full flex flex-col items-center ${responsive.isCompactHeight ? "justify-start mt-12" : "justify-center"}  ${
                 responsive.isLandscape ? "gap-4" : "gap-8"
               } `}
             >

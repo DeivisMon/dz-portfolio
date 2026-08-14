@@ -48,7 +48,7 @@ export default function Frame() {
           mixBlendMode: "difference",
         }}
       />
-      <span className="absolute left-[6px] bottom-[4px] px-2 text-[12px] md:text-[16px] text-muted border-b border-muted/50 whitespace-nowrap mix-blend-difference z-[100] ">
+      <span className="absolute left-[6px] bottom-[4px] px-2 text-[11px] xl:text-[16px] text-muted border-b border-muted/50 whitespace-nowrap mix-blend-difference z-[100] ">
         Žvinklys. &copy; {new Date().getFullYear()}
       </span>
       {/* <span className="absolute right-[13px] top-[6px] text-[24px] px-4 text-muted uppercase border-t border-muted/50 whitespace-nowrap mix-blend-difference z-[100] ">

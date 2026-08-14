@@ -36,6 +36,8 @@
   --color-header: #efe3d3;
   --color-accent: #a67c52;
   --color-border: #443a33;
+
+  --breakpoint-tablet: 1366px;
 }
 
 /* hide scrollbar for all browsers */

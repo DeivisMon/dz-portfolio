@@ -440,7 +440,10 @@ export default function IndexComponent() {
   }, [isVerticalMobile, isHorizontalMobile, randomImages]);
 
   return (
-    <div className="slider bg-bckg/70" ref={sliderRef}>
+    <div
+      className="slider h-[calc(100dvh-58px)] mt-[58px] xl:h-[calc(100dvh-160px)] xl:mt-[160px] bg-bckg/70"
+      ref={sliderRef}
+    >
       <Frame />
       <div className="slide-track"></div>
     </div>

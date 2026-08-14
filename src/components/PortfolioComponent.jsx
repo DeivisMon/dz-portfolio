@@ -732,7 +732,7 @@ export default function PortfolioComponent() {
 
   return (
     <div
-      className={`relative w-[100vw] h-[calc(100dvh-58px)] mt-[58px] xl:h-[calc(100dvh-160px)] xl:mt-[160px] overflow-hidden shadow-xl bg-bckg/70 `}
+      className={`relative w-[100vw] h-[calc(100dvh-58px)] mt-[58px] tablet:h-[calc(100dvh-160px)] tablet:mt-[160px] overflow-hidden shadow-xl bg-bckg/70 `}
     >
       <Frame />
       {/* Desktop Filters */}

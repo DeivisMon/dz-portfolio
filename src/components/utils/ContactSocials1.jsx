@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion as Motion } from "framer-motion";
-// import { useResponsive } from "../../hooks/useResponsive";
+import { useResponsive } from "../../hooks/useResponsive";
 
 const containerVariants = {
   hidden: { y: 65, opacity: 0 },
@@ -14,7 +14,11 @@ const containerVariants = {
       delayChildren: 1.5,
     },
   },
-  exit: { y: -15, opacity: 0, transition: { duration: 0.25 } },
+  exit: {
+    y: -15,
+    opacity: 0,
+    transition: { duration: 0.25 },
+  },
 };
 
 const itemVariants = {
@@ -29,7 +33,7 @@ const itemVariants = {
 const rows = [
   {
     id: "email",
-    labelKey: "El. paštas",
+    labelKey: "El.paštas",
     value: "zvinklys@zvinklys.com",
     data: "copy",
     icon: (
@@ -176,7 +180,9 @@ const CheckIcon = () => (
 export default function ContactSocials() {
   const [copied, setCopied] = useState(false);
   const [hoveredRow, setHoveredRow] = useState(null);
-  // const responsive = useResponsive();
+
+  const responsive = useResponsive();
+  const isCompact = responsive.isMobile || responsive.isTablet;
 
   const copy = async () => {
     try {
@@ -188,22 +194,61 @@ export default function ContactSocials() {
     }
   };
 
+  const containerWidth = isCompact ? "w-6/7" : "w-3/4";
+  const headingMargin = isCompact ? "mb-2" : "mb-6";
+  const headingSize = isCompact
+    ? "text-[clamp(1.1rem,2vw,2rem)]"
+    : "text-[clamp(1.1rem,2vw,4rem)]";
+  const headingBottomMargin = isCompact ? "mb-2" : "mb-4";
+
+  const rowsLayout = isCompact ? "flex-row gap-4" : "flex-col gap-1";
+
+  const rowBorder = isCompact ? "" : "border-t border-border/50";
+
+  const linkLayout = isCompact
+    ? "flex-col items-center gap-0 px-0 py-0"
+    : "flex-row items-center gap-4 px-4 py-6";
+
+  const labelSize = isCompact
+    ? "text-[clamp(0.5rem,0.8vw,1rem)]"
+    : "text-[clamp(0.6rem,1vw,2.5rem)]";
+
+  const labelTracking = isCompact ? "tracking-[1px]" : "tracking-[0.2em]";
+
   return (
     <Motion.div
       variants={containerVariants}
       initial="hidden"
       animate="show"
-      className="flex flex-col items-center justify-center w-6/7 lg:w-3/4 h-full"
+      className={`
+        flex flex-col items-center justify-center
+        ${containerWidth}
+        h-full
+      `}
     >
       {/* Heading */}
-      <Motion.div variants={itemVariants} className="mb-2 md:mb-6">
-        <h2 className="font-thin tracking-[0.3em] text-header text-[clamp(1.1rem,3vw,4rem)] mb-2 md:mb-4 text-center">
+      <Motion.div variants={itemVariants} className={headingMargin}>
+        <h2
+          className={`
+            font-thin tracking-[0.3em]
+            text-header
+            ${headingSize}
+            ${headingBottomMargin}
+            text-center
+          `}
+        >
           Susisiekime
         </h2>
       </Motion.div>
 
       {/* Rows */}
-      <div className="flex flex-row justify-center gap-4 md:gap-1 md:flex-col w-full">
+      <div
+        className={`
+          flex justify-center
+          ${rowsLayout}
+          w-full
+        `}
+      >
         {rows.map((row) => {
           const isHovered = hoveredRow === row.id;
           const isCopied = copied && row.id === "email";
@@ -212,7 +257,10 @@ export default function ContactSocials() {
             <Motion.div
               key={row.id}
               variants={itemVariants}
-              className="flex cursor-trigger group relative md:border-t md:border-border/50"
+              className={`
+                flex cursor-trigger group relative
+                ${rowBorder}
+              `}
               data-cursor-type={row.data}
               onMouseEnter={() => setHoveredRow(row.id)}
               onMouseLeave={() => setHoveredRow(null)}
@@ -222,7 +270,14 @@ export default function ContactSocials() {
                 href={row.copyable ? undefined : row.href}
                 target={row.external ? "_blank" : undefined}
                 rel={row.external ? "noopener noreferrer" : undefined}
-                className="flex w-full flex-col justify-center md:flex-row items-center md:items-center gap-0 lg:gap-4 px-0 lg:px-4 py-0 lg:py-8 group-hover:translate-y-[2px] group-hover:translate-x-[-16px] md:group-hover:bg-muted/25 transition-all duration-400 no-underline"
+                className={`
+                  flex w-full justify-center
+                  ${linkLayout}
+                  group-hover:translate-y-[2px]
+                  group-hover:translate-x-[-16px]
+                  transition-all duration-400
+                  no-underline
+                `}
                 onClick={
                   row.copyable
                     ? (e) => {
@@ -232,9 +287,18 @@ export default function ContactSocials() {
                     : undefined
                 }
               >
-                {/* Icon circle */}
+                {/* Icon */}
                 <div
-                  className="flex-shrink-0 w-10 h-10 2xl:w-20 2xl:h-20 rounded-full my-4 flex items-center justify-center group-hover:bg-muted/20 group-hover:scale-115  transition-all duration-400"
+                  className="
+                    flex-shrink-0
+                    w-10 h-10
+                    rounded-full
+                    my-4
+                    flex items-center justify-center
+                    group-hover:bg-muted/20
+                    group-hover:scale-115
+                    transition-all duration-400
+                  "
                   style={{
                     border: "0.5px solid",
                     borderColor: isHovered
@@ -247,9 +311,16 @@ export default function ContactSocials() {
                 </div>
 
                 {/* Label + Value */}
-                <div className="flex flex-col flex-1 ml-0 lg:ml-0 min-w-0">
+                <div className="flex flex-col flex-1 min-w-0">
                   <span
-                    className="text-[clamp(0.72rem,1vw,2.5rem)] tracking-[2px] md:tracking-[0.2em] uppercase font-thin transition-colors duration-200"
+                    className={`
+                      ${labelSize}
+                      tracking-[2px]
+                      ${labelTracking}
+                      uppercase
+                      font-thin
+                      transition-colors duration-200
+                    `}
                     style={{
                       color: isHovered
                         ? "rgba(166,124,82,0.8)"
@@ -258,49 +329,71 @@ export default function ContactSocials() {
                   >
                     {row.labelKey}
                   </span>
-                  <span
-                    className="hidden md:inline-block text-[clamp(0.72rem,1vw,2.5rem)] lg:text-base tracking-[0.05em] font-thin truncate transition-colors duration-200"
-                    style={{
-                      color: isHovered
-                        ? "rgba(255,255,255,0.9)"
-                        : "rgba(255,255,255,0.55)",
-                    }}
-                  >
-                    {row.value}
-                  </span>
-                </div>
 
-                {/* Right action icon */}
-                <div
-                  className="hidden md:flex 2xl:h-30 2xl:w-30 flex-shrink-0 transition-all duration-400"
-                  style={{
-                    color: isHovered ? "#A67C52" : "rgba(255,255,255,0.2)",
-                    transform: isHovered
-                      ? "translate(2px, -2px)"
-                      : "translate(0,0)",
-                  }}
-                >
-                  {row.copyable ? (
-                    isCopied ? (
-                      <CheckIcon />
-                    ) : (
-                      <CopyIcon />
-                    )
-                  ) : (
-                    <ArrowIcon />
+                  {/* Value only on desktop */}
+                  {!isCompact && (
+                    <span
+                      className="
+                        inline-block
+                        text-[clamp(0.72rem,1vw,2.5rem)]
+                        lg:text-base
+                        tracking-[0.05em]
+                        font-thin
+                        truncate
+                        transition-colors duration-200
+                      "
+                      style={{
+                        color: isHovered
+                          ? "rgba(255,255,255,0.9)"
+                          : "rgba(255,255,255,0.55)",
+                      }}
+                    >
+                      {row.value}
+                    </span>
                   )}
                 </div>
+
+                {/* Right action icon — desktop only */}
+                {!isCompact && (
+                  <div
+                    className="
+                      flex-shrink-0
+                      transition-all duration-400
+                    "
+                    style={{
+                      color: isHovered ? "#A67C52" : "rgba(255,255,255,0.2)",
+                      transform: isHovered
+                        ? "translate(2px, -2px)"
+                        : "translate(0,0)",
+                    }}
+                  >
+                    {row.copyable ? (
+                      isCopied ? (
+                        <CheckIcon />
+                      ) : (
+                        <CopyIcon />
+                      )
+                    ) : (
+                      <ArrowIcon />
+                    )}
+                  </div>
+                )}
               </a>
 
               {/* Bottom divider */}
-              <div
-                className="absolute bottom-0 left-3 right-3 h-px transition-opacity duration-200"
-                style={{
-                  background:
-                    "linear-gradient(to right, transparent, rgba(166,124,82,0.3), transparent)",
-                  opacity: isHovered ? 1 : 0,
-                }}
-              />
+              {!isCompact && (
+                <div
+                  className="
+                    absolute bottom-0 left-3 right-3 h-px
+                    transition-opacity duration-200
+                  "
+                  style={{
+                    background:
+                      "linear-gradient(to right, transparent, rgba(166,124,82,0.3), transparent)",
+                    opacity: isHovered ? 1 : 0,
+                  }}
+                />
+              )}
             </Motion.div>
           );
         })}
