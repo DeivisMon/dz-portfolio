@@ -52,7 +52,7 @@ export default function MovingBackground({
     >
       {/* subtle static overlay triangles for depth (non-animated large shapes) */}
       <svg
-        className="absolute inset-0 h-full w-full opacity-40"
+        className="absolute inset-0 h-full w-full opacity-40 border-t-16 border-black"
         preserveAspectRatio="none"
       >
         <defs>

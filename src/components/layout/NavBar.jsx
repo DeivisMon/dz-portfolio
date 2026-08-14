@@ -10,12 +10,14 @@ import AnimatedText from "../utils/AnimatedText";
 import Socials from "../utils/Socials";
 import Marquee from "../utils/Marquee";
 import MovingBackground from "../utils/MovingBackgound";
+import HoverLines from "../utils/HoverLines";
 import { useResponsive } from "../../hooks/useResponsive";
 import { usePageTransition } from "../../context/TransitionContext";
 import ClockWithCity from "../utils/ClockWithCity";
 import PhotographerQuoteSlide from "../utils/PhotographerQuoteSlide";
 import MenuBtn from "../utils/MenuButton";
 import { ViewfinderFrame } from "../utils/ViewFinder";
+import MenuOverlayLines from "../utils/MenuOverlayLines";
 
 // Timing constants — keep these in sync with the transition objects below.
 // handleNavClick uses them to delay navigation until the overlay has
@@ -189,29 +191,29 @@ export default function NavBar() {
         {/* Clock — fixed */}
         <Motion.span
           {...Animations(dateVariants)}
-          className="fixed hidden xl:block right-4 top-[-2px] text-[15px] text-muted/50 uppercase whitespace-nowrap mix-blend-difference"
+          className="fixed hidden xl:block right-4 top-[-2px] text-[15px] text-muted/50 uppercase whitespace-nowrap"
         >
           <ClockWithCity />
         </Motion.span>
 
         {/* Shared row: logo left, quote right */}
-        <div className="fixed top-0 left-0 w-full xl:h-[188px] flex justify-between items-center pointer-events-none">
+        <div className="fixed top-0 left-0 w-full xl:h-[188px] flex justify-between items-center pointer-events-none ">
           {/* LEFT — logo */}
           <div
-            className={`pointer-events-auto mix-blend-difference transition-[z-index]
+            className={`pointer-events-auto transition-[z-index]
           pt-1 xl:pt-0 mt-0 xl:mt-8 pl-2 xl:pl-6
           max-w-[65vw] overflow-hidden flex flex-2 xl:flex-1
           ${isTransitioning ? "z-[2000]" : "z-[500]"}`}
           >
             <div
-              className={`logo ${
+              className={`logo relative z-[10] ${
                 responsive.isResponsive
                   ? "text-[2.5rem]"
                   : "text-[clamp(2.5rem,10vw+0.5rem,12.5rem)]"
               }`}
             >
               <Link
-                className="flex transition-all duration-500 ease-in-out"
+                className="flex transition-all duration-500 ease-in-out select-none"
                 to="/"
                 onClick={() => handleNavClick("/")}
               >
@@ -231,11 +233,11 @@ export default function NavBar() {
 
             <Motion.div
               {...Animations(upperLineVariants)}
-              className={`fixed ${responsive.isResponsive ? "top-1" : "top-4"}  left-0 w-full h-[1px] bg-muted/30 origin-left`}
+              className={`fixed ${responsive.isResponsive ? "top-1" : "top-4"}  left-0 w-full h-[1px] bg-muted/30 origin-left z-1`}
             />
             <Motion.div
               {...Animations(lowerLineVariants)}
-              className={`fixed ${responsive.isResponsive ? "top-14" : "top-40"}  left-0 w-full h-[1px] bg-muted/30 origin-right`}
+              className={`fixed ${responsive.isResponsive ? "top-14" : "top-40"}  left-0 w-full h-[1px] bg-muted/30 origin-right z-1`}
             />
           </div>
 
@@ -281,11 +283,12 @@ export default function NavBar() {
           <>
             <Motion.div
               {...Animations(overlayVariants)}
-              className="fixed top-0 w-full h-[100dvh] flex items-start bg-black/97 justify-center backdrop-blur-2xl z-[999]"
+              className="fixed top-0 w-full h-[100dvh] flex items-start bg-black/90 justify-center backdrop-blur-2xl z-[999] "
             >
               {/* <MovingBackground triangleCount={16} /> */}
+
               <div className="fixed flex justify-center items-center w-full h-full pointer-events-none">
-                <ViewfinderFrame
+                {/* <ViewfinderFrame
                   className="w-[100%] h-[100%]"
                   iso={400}
                   aperture="1.8"
@@ -294,13 +297,14 @@ export default function NavBar() {
                   battery={77}
                   // focused
                   recording
-                ></ViewfinderFrame>
+                ></ViewfinderFrame> */}
               </div>
               <nav
                 className={` h-[100dvh] w-full ml-4 flex flex-col items-center ${responsive.isCompactHeight ? "justify-start mt-12" : "justify-center"}  ${
                   responsive.isLandscape ? "gap-4" : "gap-8"
                 } `}
               >
+                <MenuOverlayLines />
                 {NAV_ITEMS.map((item, i) => {
                   const isDesktop =
                     !responsive.isMobile && !responsive.isTablet;
@@ -316,9 +320,10 @@ export default function NavBar() {
                         hoveredItem,
                       }}
                       {...Animations(navLinkVariants)}
+                      className="overflow-hidden"
                     >
                       <Link
-                        className={`cursor-trigger text-3xl md:text-3xl lg:text-5xl xl:text-[124px] uppercase tracking-[5px] md:tracking-[20px] transition-colors duration-300 ${
+                        className={`cursor-trigger text-3xl group/button md:text-3xl lg:text-5xl xl:text-[124px] uppercase tracking-[5px] md:tracking-[20px] transition-colors duration-300  ${
                           isActive(item.path)
                             ? "text-accent"
                             : "text-muted opacity-80"
@@ -345,6 +350,7 @@ export default function NavBar() {
                               : "blur(2px)",
                         }}
                       >
+                        <HoverLines />
                         {item.label}
                       </Link>
                     </Motion.div>

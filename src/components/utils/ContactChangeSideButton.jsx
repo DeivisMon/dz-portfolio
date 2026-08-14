@@ -55,7 +55,7 @@ export default function ContactChangeSideButton({
       </div>
 
       {/* Text Container with Slide Animation */}
-      <div className="relative z-10 w-full h-full flex items-center text-accent justify-center overflow-hidden">
+      <div className="relative z-10 w-full h-full flex items-center text-text justify-center overflow-hidden">
         {/* Current Text - Slides Down */}
         <span
           className="absolute font-bold transition-all duration-500 ease-in-out"

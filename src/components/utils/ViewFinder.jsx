@@ -106,7 +106,7 @@ export function ViewfinderFrame({
 
         {/* recording indicator, top-left */}
         {recording && (
-          <div className="absolute top-3 left-10 flex items-center gap-1.5 text-[10px] tracking-[0.15em]">
+          <div className="absolute top-2 left-4 flex items-center gap-1.5 text-[10px] tracking-[0.15em]">
             <span
               className={`h-2 w-2 rounded-full bg-red-500 transition-opacity duration-150 ${
                 blink ? "opacity-100" : "opacity-20"
@@ -117,13 +117,13 @@ export function ViewfinderFrame({
         )}
 
         {/* battery, top-right */}
-        <div className="absolute top-3 right-9 flex items-center gap-1 text-[10px] tracking-[0.1em]">
+        <div className="absolute top-2 right-4 flex items-center gap-1 text-[10px] tracking-[0.1em]">
           <BatteryMedium className="h-3.5 w-3.5" />
           {battery}%
         </div>
 
         {/* exposure readout, bottom-left */}
-        <div className="absolute bottom-3 left-10 flex items-center gap-2.5 text-[10px] tracking-[0.1em]">
+        <div className="absolute bottom-2 left-4 flex items-center gap-2.5 text-[10px] tracking-[0.1em]">
           <span>ISO {iso}</span>
           <span className="flex items-center gap-0.5">
             <Aperture className="h-3 w-3" />
@@ -133,7 +133,7 @@ export function ViewfinderFrame({
         </div>
 
         {/* frame counter, bottom-right */}
-        <div className="absolute bottom-3 right-10 text-[10px] tracking-[0.1em]">
+        <div className="absolute bottom-2 right-4 text-[10px] tracking-[0.1em]">
           {String(frameCount).padStart(4, "0")}
         </div>
       </div>

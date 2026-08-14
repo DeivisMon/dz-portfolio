@@ -164,16 +164,16 @@ const FilterButton = ({ filter, isActive, onClick, index }) => {
   return (
     <div
       ref={buttonRef}
-      className={`cursor-trigger relative h-full cursor-pointer pr-2 pointer-events-auto tracking-[2em]`}
+      className={`cursor-trigger group/button relative h-full cursor-pointer pr-2 pointer-events-auto tracking-[2em]`}
       style={{ height: "6.51vw" }} // was 125px
       onClick={onClick}
     >
       <span
-        className={`absolute w-full bottom-[22.4%] border border-muted/50 origin-left transition-all duration-300 ease-in ${
+        className={`absolute w-full bottom-[22.4%] border border-muted/50 origin-left transition-all duration-300 ease-in  ${
           isActive ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"
         }`}
       ></span>
-      <h1 ref={h1Ref} className={`inline-block uppercase `}>
+      <h1 ref={h1Ref} className={`inline-block uppercase`}>
         {renderTitle(filter.label)}
       </h1>
       <p

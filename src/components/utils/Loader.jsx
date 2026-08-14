@@ -319,8 +319,8 @@ export default function Loader({ onComplete }) {
         <div className="relative flex items-center justify-center">
           <span></span>
           <svg
-            width="200"
-            height="200"
+            width="400"
+            height="400"
             viewBox="0 0 100 100"
             className="absolute -z-10 animate-spin"
           >
@@ -330,16 +330,16 @@ export default function Loader({ onComplete }) {
               cy="50"
               r={radius}
               fill="none"
-              stroke="#fff"
-              strokeWidth="1.4"
+              stroke="#ffffff80"
+              strokeWidth="0.5"
               strokeLinecap="round"
               strokeDasharray={circumference}
               strokeDashoffset={circumference}
             />
           </svg>
           {/* <svg
-            width="225"
-            height="225"
+            width="425"
+            height="425"
             viewBox="0 0 100 100"
             className="absolute -z-10 rotate-180 animate-ping"
           >
@@ -349,16 +349,16 @@ export default function Loader({ onComplete }) {
               cy="50"
               r={radius}
               fill="none"
-              stroke="#fff"
-              strokeWidth="1.4"
+              stroke="#ffffff80"
+              strokeWidth="0.5"
               strokeLinecap="round"
               strokeDasharray={circumference}
               strokeDashoffset={circumference}
             />
           </svg> */}
           <svg
-            width="250"
-            height="250"
+            width="450"
+            height="450"
             viewBox="0 0 100 100"
             className="absolute -z-10 rotate-270 animate-spin"
           >
@@ -368,16 +368,16 @@ export default function Loader({ onComplete }) {
               cy="50"
               r={radius}
               fill="none"
-              stroke="#fff"
-              strokeWidth="1.4"
+              stroke="#ffffff80"
+              strokeWidth="0.5"
               strokeLinecap="round"
               strokeDasharray={circumference}
               strokeDashoffset={circumference}
             />
           </svg>
           {/* <svg
-            width="200"
-            height="200"
+            width="400"
+            height="400"
             viewBox="0 0 100 100"
             className="absolute -z-10 rotate-90 animate-ping"
           >
@@ -387,16 +387,16 @@ export default function Loader({ onComplete }) {
               cy="50"
               r={radius}
               fill="none"
-              stroke="#fff"
-              strokeWidth="1.4"
+              stroke="#ffffff80"
+              strokeWidth="0.5"
               strokeLinecap="round"
               strokeDasharray={circumference}
               strokeDashoffset={circumference}
             />
           </svg> */}
           <svg
-            width="300"
-            height="300"
+            width="500"
+            height="500"
             viewBox="0 0 100 100"
             className="absolute -z-10 rotate-270 animate-spin"
           >
@@ -406,8 +406,8 @@ export default function Loader({ onComplete }) {
               cy="50"
               r={radius}
               fill="none"
-              stroke="#fff"
-              strokeWidth="1.4"
+              stroke="#ffffff80"
+              strokeWidth="0.5"
               strokeLinecap="round"
               strokeDasharray={circumference}
               strokeDashoffset={circumference}

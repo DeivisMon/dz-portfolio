@@ -82,6 +82,7 @@ const rows = [
     labelKey: "Facebook",
     value: "facebook.com/zvinklys",
     data: "link",
+    class: "select-none",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -105,6 +106,7 @@ const rows = [
     labelKey: "Instagram",
     value: "@zvinklys",
     data: "link",
+    class: "select-none",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -266,7 +268,7 @@ export default function ContactSocials() {
               onMouseLeave={() => setHoveredRow(null)}
               onClick={row.copyable ? copy : undefined}
             >
-              <a
+              <div
                 href={row.copyable ? undefined : row.href}
                 target={row.external ? "_blank" : undefined}
                 rel={row.external ? "noopener noreferrer" : undefined}
@@ -277,6 +279,7 @@ export default function ContactSocials() {
                   group-hover:translate-x-[-16px]
                   transition-all duration-400
                   no-underline
+                  ${row.class}
                 `}
                 onClick={
                   row.copyable
@@ -378,7 +381,7 @@ export default function ContactSocials() {
                     )}
                   </div>
                 )}
-              </a>
+              </div>
 
               {/* Bottom divider */}
               {!isCompact && (
