@@ -7,13 +7,14 @@ import {
   useSpring,
 } from "framer-motion";
 import AnimatedText from "../utils/AnimatedText";
-import SocialIcons from "../utils/SocialIcons";
 import Socials from "../utils/Socials";
+import Marquee from "../utils/Marquee";
 import { useResponsive } from "../../hooks/useResponsive";
 import { usePageTransition } from "../../context/TransitionContext";
 import ClockWithCity from "../utils/ClockWithCity";
 import PhotographerQuoteSlide from "../utils/PhotographerQuoteSlide";
 import MenuBtn from "../utils/MenuButton";
+import { ViewfinderFrame } from "../utils/ViewFinder";
 
 // Timing constants — keep these in sync with the transition objects below.
 // handleNavClick uses them to delay navigation until the overlay has
@@ -129,122 +130,6 @@ const lowerLineVariants = {
     scaleX: 1,
     transition: { duration: 1.25, delay: 1.75, ease: [0.82, 1, 0.36, 1] },
   },
-};
-
-const Marquee = ({
-  items,
-  textColor = "text-header",
-  speed = 50,
-  textSize = "text-xs xl:text-xl",
-  className = "",
-}) => {
-  const firstGroupRef = useRef(null);
-  const [groupWidth, setGroupWidth] = useState(0);
-
-  useEffect(() => {
-    const measure = () => {
-      if (firstGroupRef.current) {
-        setGroupWidth(firstGroupRef.current.offsetWidth);
-      }
-    };
-
-    measure();
-
-    const resizeObserver = new ResizeObserver(measure);
-
-    if (firstGroupRef.current) {
-      resizeObserver.observe(firstGroupRef.current);
-    }
-
-    window.addEventListener("resize", measure);
-
-    return () => {
-      resizeObserver.disconnect();
-      window.removeEventListener("resize", measure);
-    };
-  }, [items]);
-
-  const renderItems = (groupRef = null) => (
-    <div
-      ref={groupRef}
-      className="flex shrink-0 items-center bg-surface whitespace-nowrap"
-      aria-hidden={groupRef ? undefined : true}
-    >
-      {items.map((item, i) => (
-        <span
-          key={`${item}-${i}`}
-          className={`
-            inline-flex
-            shrink-0
-            items-center
-            ${textColor}
-            ${textSize}
-            uppercase
-            tracking-widest
-            opacity-70
-          `}
-        >
-          {item}
-
-          <span className="mx-4 xl:mx-8 opacity-85">•</span>
-        </span>
-      ))}
-    </div>
-  );
-
-  return (
-    <Motion.div
-      initial={{ opacity: 0, x: -100 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{
-        duration: 0.8,
-        delay: 0.75,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      className={`
-        relative
-        w-full
-        overflow-hidden
-        select-none
-        pointer-events-none
-        ${className}
-      `}
-      style={{
-        isolation: "isolate",
-      }}
-    >
-      <div
-        className="flex"
-        style={{
-          transform: `translate3d(
-            ${groupWidth ? 0 : 0}px,
-            0,
-            0
-          )`,
-          animation:
-            groupWidth > 0
-              ? `marquee-scroll ${groupWidth / speed}s linear infinite`
-              : "none",
-          willChange: "transform",
-        }}
-      >
-        {renderItems(firstGroupRef)}
-        {renderItems()}
-      </div>
-
-      <style>{`
-        @keyframes marquee-scroll {
-          from {
-            transform: translate3d(0, 0, 0);
-          }
-
-          to {
-            transform: translate3d(-${groupWidth}px, 0, 0);
-          }
-        }
-      `}</style>
-    </Motion.div>
-  );
 };
 
 export default function NavBar() {
@@ -409,12 +294,25 @@ export default function NavBar() {
             {...Animations(overlayVariants)}
             className="fixed top-0 w-full h-[100dvh] flex items-start justify-center bg-black/95 backdrop-blur-xl z-[999]"
           >
+            <div className="fixed flex justify-center items-center w-full h-full pointer-events-none">
+              <ViewfinderFrame
+                className="w-1/2 h-2/3"
+                iso={400}
+                aperture="1.8"
+                shutter="1/250"
+                frameCount={42}
+                battery={78}
+                focused
+                recording
+              ></ViewfinderFrame>
+            </div>
             <nav
               className={` h-[100dvh] w-full flex flex-col items-center ${responsive.isCompactHeight ? "justify-start mt-12" : "justify-center"}  ${
                 responsive.isLandscape ? "gap-4" : "gap-8"
               } `}
             >
               {NAV_ITEMS.map((item, i) => {
+                const isDesktop = !responsive.isMobile && !responsive.isTablet;
                 const isHovered = hoveredItem === item.path;
 
                 return (
@@ -423,7 +321,10 @@ export default function NavBar() {
                     custom={i}
                     {...Animations(navLinkVariants)}
                     animate={{
-                      opacity: hoveredItem === null || isHovered ? 1 : 0.2,
+                      opacity:
+                        !isDesktop || hoveredItem === null || isHovered
+                          ? 1
+                          : 0.2,
                     }}
                     transition={{
                       duration: 0.3,
@@ -437,15 +338,23 @@ export default function NavBar() {
                           : "text-muted opacity-80"
                       }`}
                       to={item.path}
-                      onMouseEnter={() => setHoveredItem(item.path)}
-                      onMouseLeave={() => setHoveredItem(null)}
+                      onMouseEnter={() => {
+                        if (isDesktop) {
+                          setHoveredItem(item.path);
+                        }
+                      }}
+                      onMouseLeave={() => {
+                        if (isDesktop) {
+                          setHoveredItem(null);
+                        }
+                      }}
                       onClick={(e) => {
                         e.preventDefault();
                         handleNavClick(item.path);
                       }}
                       style={{
                         filter:
-                          hoveredItem === null || isHovered
+                          !isDesktop || hoveredItem === null || isHovered
                             ? "blur(0px)"
                             : "blur(2px)",
                       }}
