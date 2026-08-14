@@ -40,6 +40,7 @@ const MenuBtn = ({ isMenuOpen, toggleMenu, springX, springY, isLocked }) => {
         transition-[width] duration-500
         ease-[cubic-bezier(0.075,0.82,0.165,1)]
         will-change-transform
+        cursor-trigger
       `}
       onClick={isLocked ? undefined : toggleMenu}
       style={isCompact ? undefined : { x: springX, y: springY }}

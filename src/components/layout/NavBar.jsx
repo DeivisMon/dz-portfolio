@@ -252,10 +252,10 @@ export default function NavBar() {
   const navigate = useNavigate();
   const responsive = useResponsive();
   const magneticRef = useRef(null);
-  const now = new Date();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isNavigatingAway, setIsNavigatingAway] = useState(false);
   const { isTransitioning, setIsTransitioning } = usePageTransition();
+  const [hoveredItem, setHoveredItem] = useState(null);
 
   const isActive = (path) => location.pathname === path;
 
@@ -414,28 +414,47 @@ export default function NavBar() {
                 responsive.isLandscape ? "gap-4" : "gap-8"
               } `}
             >
-              {NAV_ITEMS.map((item, i) => (
-                <Motion.div
-                  key={item.path}
-                  custom={i}
-                  {...Animations(navLinkVariants)}
-                >
-                  <Link
-                    className={`cursor-trigger text-3xl md:text-3xl lg:text-5xl xl:text-[124px] uppercase tracking-[5px] md:tracking-[20px] ${
-                      isActive(item.path)
-                        ? "italic text-accent"
-                        : "text-muted opacity-80"
-                    }`}
-                    to={item.path}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleNavClick(item.path);
+              {NAV_ITEMS.map((item, i) => {
+                const isHovered = hoveredItem === item.path;
+
+                return (
+                  <Motion.div
+                    key={item.path}
+                    custom={i}
+                    {...Animations(navLinkVariants)}
+                    animate={{
+                      opacity: hoveredItem === null || isHovered ? 1 : 0.2,
+                    }}
+                    transition={{
+                      duration: 0.3,
+                      ease: "easeOut",
                     }}
                   >
-                    {item.label}
-                  </Link>
-                </Motion.div>
-              ))}
+                    <Link
+                      className={`cursor-trigger text-3xl md:text-3xl lg:text-5xl xl:text-[124px] uppercase tracking-[5px] md:tracking-[20px] transition-colors duration-300 ${
+                        isActive(item.path)
+                          ? "text-accent"
+                          : "text-muted opacity-80"
+                      }`}
+                      to={item.path}
+                      onMouseEnter={() => setHoveredItem(item.path)}
+                      onMouseLeave={() => setHoveredItem(null)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleNavClick(item.path);
+                      }}
+                      style={{
+                        filter:
+                          hoveredItem === null || isHovered
+                            ? "blur(0px)"
+                            : "blur(2px)",
+                      }}
+                    >
+                      {item.label}
+                    </Link>
+                  </Motion.div>
+                );
+              })}
             </nav>
 
             <div className="fixed left-0 bottom-2 flex justify-center w-full">
