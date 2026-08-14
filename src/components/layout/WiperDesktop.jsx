@@ -38,6 +38,6 @@ export default function WiperDesktop() {
         ease: [0.65, 0, 0.35, 1],
       }}
       onAnimationComplete={() => setIsTransitioning(false)}
-    />
+    ></motion.div>
   );
 }

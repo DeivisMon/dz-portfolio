@@ -9,6 +9,7 @@ import {
 import AnimatedText from "../utils/AnimatedText";
 import Socials from "../utils/Socials";
 import Marquee from "../utils/Marquee";
+import MovingBackground from "../utils/MovingBackgound";
 import { useResponsive } from "../../hooks/useResponsive";
 import { usePageTransition } from "../../context/TransitionContext";
 import ClockWithCity from "../utils/ClockWithCity";
@@ -28,27 +29,6 @@ const NAV_ITEMS = [
   { path: "/", label: "Pradžia" },
   { path: "/portfolio", label: "Galerija" },
   { path: "/kontaktai", label: "Info" },
-];
-
-const MARQUEE_ITEMS = [
-  "Fotosesijos",
-  "Renginiai",
-  "Sporto varžybos",
-  "Komercinė fotografija",
-  "Kraštovaizdžiai",
-  "Portretai",
-  "Vestuvės",
-  "Architektūra",
-  "Gamta",
-  "Fotosesijos",
-  "Renginiai",
-  "Sporto varžybos",
-  "Komercinė fotografija",
-  "Kraštovaizdžiai",
-  "Portretai",
-  "Vestuvės",
-  "Architektūra",
-  "Gamta",
 ];
 
 // Animation variants
@@ -77,22 +57,33 @@ const overlayVariants = {
 };
 
 const navLinkVariants = {
-  initial: { y: -50, opacity: 0 },
-  animate: (i) => ({
+  initial: {
+    y: -50,
+    opacity: 0,
+  },
+
+  animate: ({ i, isDesktop, isHovered, hoveredItem }) => ({
     y: 0,
-    opacity: 1,
+    opacity: !isDesktop || hoveredItem === null || isHovered ? 1 : 0.2,
     transition: {
-      duration: 0.5,
-      delay: 0.6 + i * 0.1,
-      ease: [0.22, 1, 0.36, 1],
+      y: {
+        duration: 0.75,
+        delay: 0.6 + i * 0.1,
+        ease: [0.22, 1, 0.36, 1],
+      },
+      opacity: {
+        duration: 0.3,
+        ease: "easeOut",
+      },
     },
   }),
-  exit: (i) => ({
+
+  exit: ({ i }) => ({
     y: 50,
     opacity: 0,
     transition: {
       duration: 0.25,
-      delay: 0.3 - i * 0.1,
+      delay: (NAV_ITEMS.length - 1 - i) * 0.05,
       ease: [0.22, 1, 0.36, 1],
     },
   }),
@@ -191,11 +182,11 @@ export default function NavBar() {
 
   return (
     <>
-      {/* Top bar: marquee + date only — logo removed from here */}
+      {/* Navbar*/}
       <div
         className={`navbar fixed transition-[z-index] ${isTransitioning ? "z-[2000]" : "z-[500]"}`}
       >
-        {/* Clock — fixed independently */}
+        {/* Clock — fixed */}
         <Motion.span
           {...Animations(dateVariants)}
           className="fixed hidden xl:block right-4 top-[-2px] text-[15px] text-muted/50 uppercase whitespace-nowrap mix-blend-difference"
@@ -203,9 +194,9 @@ export default function NavBar() {
           <ClockWithCity />
         </Motion.span>
 
-        {/* Shared row: logo left, quote right — hamburger removed from here */}
+        {/* Shared row: logo left, quote right */}
         <div className="fixed top-0 left-0 w-full xl:h-[188px] flex justify-between items-center pointer-events-none">
-          {/* LEFT — logo (unchanged) */}
+          {/* LEFT — logo */}
           <div
             className={`pointer-events-auto mix-blend-difference transition-[z-index]
           pt-1 xl:pt-0 mt-0 xl:mt-8 pl-2 xl:pl-6
@@ -263,7 +254,7 @@ export default function NavBar() {
         </div>
       </div>
 
-      {/* Hamburger — restored to its own fixed positioning, original size */}
+      {/* Menu */}
       <div
         ref={magneticRef}
         onMouseMove={handleMagneticMove}
@@ -281,97 +272,92 @@ export default function NavBar() {
         />
       </div>
 
-      {/* Marquee — unchanged, fixed as before */}
-      <Marquee
-        items={MARQUEE_ITEMS}
-        className="fixed hidden xl:block left-0 top-8 xl:top-40 pt-[1px]"
-      />
+      {/* Marquee */}
+      <Marquee className="fixed hidden xl:block left-0 top-8 xl:top-40 pt-[1px]" />
 
       {/* Fullscreen menu overlay */}
       <AnimatePresence>
         {isMenuOpen && (
-          <Motion.div
-            {...Animations(overlayVariants)}
-            className="fixed top-0 w-full h-[100dvh] flex items-start justify-center bg-black/95 backdrop-blur-xl z-[999]"
-          >
-            <div className="fixed flex justify-center items-center w-full h-full pointer-events-none">
-              <ViewfinderFrame
-                className="w-1/2 h-2/3"
-                iso={400}
-                aperture="1.8"
-                shutter="1/250"
-                frameCount={42}
-                battery={78}
-                focused
-                recording
-              ></ViewfinderFrame>
-            </div>
-            <nav
-              className={` h-[100dvh] w-full flex flex-col items-center ${responsive.isCompactHeight ? "justify-start mt-12" : "justify-center"}  ${
-                responsive.isLandscape ? "gap-4" : "gap-8"
-              } `}
+          <>
+            <Motion.div
+              {...Animations(overlayVariants)}
+              className="fixed top-0 w-full h-[100dvh] flex items-start bg-black/97 justify-center backdrop-blur-2xl z-[999]"
             >
-              {NAV_ITEMS.map((item, i) => {
-                const isDesktop = !responsive.isMobile && !responsive.isTablet;
-                const isHovered = hoveredItem === item.path;
+              {/* <MovingBackground triangleCount={16} /> */}
+              <div className="fixed flex justify-center items-center w-full h-full pointer-events-none">
+                <ViewfinderFrame
+                  className="w-[100%] h-[100%]"
+                  iso={400}
+                  aperture="1.8"
+                  shutter="1/250"
+                  frameCount={42}
+                  battery={77}
+                  // focused
+                  recording
+                ></ViewfinderFrame>
+              </div>
+              <nav
+                className={` h-[100dvh] w-full ml-4 flex flex-col items-center ${responsive.isCompactHeight ? "justify-start mt-12" : "justify-center"}  ${
+                  responsive.isLandscape ? "gap-4" : "gap-8"
+                } `}
+              >
+                {NAV_ITEMS.map((item, i) => {
+                  const isDesktop =
+                    !responsive.isMobile && !responsive.isTablet;
+                  const isHovered = hoveredItem === item.path;
 
-                return (
-                  <Motion.div
-                    key={item.path}
-                    custom={i}
-                    {...Animations(navLinkVariants)}
-                    animate={{
-                      opacity:
-                        !isDesktop || hoveredItem === null || isHovered
-                          ? 1
-                          : 0.2,
-                    }}
-                    transition={{
-                      duration: 0.3,
-                      ease: "easeOut",
-                    }}
-                  >
-                    <Link
-                      className={`cursor-trigger text-3xl md:text-3xl lg:text-5xl xl:text-[124px] uppercase tracking-[5px] md:tracking-[20px] transition-colors duration-300 ${
-                        isActive(item.path)
-                          ? "text-accent"
-                          : "text-muted opacity-80"
-                      }`}
-                      to={item.path}
-                      onMouseEnter={() => {
-                        if (isDesktop) {
-                          setHoveredItem(item.path);
-                        }
+                  return (
+                    <Motion.div
+                      key={item.path}
+                      custom={{
+                        i,
+                        isDesktop,
+                        isHovered,
+                        hoveredItem,
                       }}
-                      onMouseLeave={() => {
-                        if (isDesktop) {
-                          setHoveredItem(null);
-                        }
-                      }}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleNavClick(item.path);
-                      }}
-                      style={{
-                        filter:
-                          !isDesktop || hoveredItem === null || isHovered
-                            ? "blur(0px)"
-                            : "blur(2px)",
-                      }}
+                      {...Animations(navLinkVariants)}
                     >
-                      {item.label}
-                    </Link>
-                  </Motion.div>
-                );
-              })}
-            </nav>
+                      <Link
+                        className={`cursor-trigger text-3xl md:text-3xl lg:text-5xl xl:text-[124px] uppercase tracking-[5px] md:tracking-[20px] transition-colors duration-300 ${
+                          isActive(item.path)
+                            ? "text-accent"
+                            : "text-muted opacity-80"
+                        }`}
+                        to={item.path}
+                        onMouseEnter={() => {
+                          if (isDesktop) {
+                            setHoveredItem(item.path);
+                          }
+                        }}
+                        onMouseLeave={() => {
+                          if (isDesktop) {
+                            setHoveredItem(null);
+                          }
+                        }}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleNavClick(item.path);
+                        }}
+                        style={{
+                          filter:
+                            !isDesktop || hoveredItem === null || isHovered
+                              ? "blur(0px)"
+                              : "blur(2px)",
+                        }}
+                      >
+                        {item.label}
+                      </Link>
+                    </Motion.div>
+                  );
+                })}
+              </nav>
 
-            <div className="fixed left-0 bottom-2 flex justify-center w-full">
-              <Socials />
-            </div>
+              <div className="fixed left-0 bottom-2 flex justify-center w-full">
+                <Socials />
+              </div>
 
-            {/* Decorative background logo */}
-            {/* <div className="logo hidden xl:block absolute opacity-20 left-0 -bottom-50 text-[24px] xl:text-[460px] pointer-events-none">
+              {/* Decorative background logo */}
+              {/* <div className="logo hidden xl:block absolute opacity-20 left-0 -bottom-50 text-[24px] xl:text-[460px] pointer-events-none">
               <Link
                 className="flex w-full justify-center transition-all duration-500 ease-in-out"
                 to="/"
@@ -394,7 +380,8 @@ export default function NavBar() {
                 />
               </Link>
             </div> */}
-          </Motion.div>
+            </Motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

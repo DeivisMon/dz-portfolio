@@ -34,6 +34,8 @@ const CursorElement = ({
   size,
   filled = false,
   scaleOnEnter = 1,
+  scaleOnClick = 0.8,
+  isClicking = false,
   opacityOnEnter = 1,
   amount = 0.2,
   isHovered,
@@ -62,14 +64,17 @@ const CursorElement = ({
   // Handle hover state changes
   useEffect(() => {
     const styles = renderedStyles.current;
-    if (isHovered) {
+
+    if (isClicking) {
+      styles.scale.current = scaleOnClick;
+    } else if (isHovered) {
       styles.scale.current = scaleOnEnter;
-      styles.opacity.current = opacityOnEnter;
     } else {
       styles.scale.current = 1;
-      styles.opacity.current = 1;
     }
-  }, [isHovered, scaleOnEnter, opacityOnEnter]);
+
+    styles.opacity.current = isHovered ? opacityOnEnter : 1;
+  }, [isHovered, isClicking, scaleOnEnter, opacityOnEnter, scaleOnClick]);
 
   // Animation loop
   const animate = useCallback(() => {
@@ -171,7 +176,7 @@ const CursorElement = ({
             className="flex items-center justify-center mix-blend-difference"
           >
             {IconComp ? (
-              <IconComp size={size * 0.5} color="white" />
+              <IconComp size={size * 0.35} color="white" />
             ) : (
               <span className="text-white text-[10px] font-medium tracking-wide select-none whitespace-nowrap">
                 {iconType}
@@ -204,7 +209,23 @@ const CustomCursor = ({ triggerSelector = ".cursor-trigger" }) => {
   const [showCursor, setShowCursor] = useState(false);
   const [isOutside, setIsOutside] = useState(false);
   const { isTransitioning } = usePageTransition();
+  const [isClicking, setIsClicking] = useState(false);
   const pollRef = useRef(null);
+
+  useEffect(() => {
+    const handleMouseDown = () => setIsClicking(true);
+    const handleMouseUp = () => setIsClicking(false);
+
+    window.addEventListener("mousedown", handleMouseDown);
+    window.addEventListener("mouseup", handleMouseUp);
+    window.addEventListener("blur", handleMouseUp);
+
+    return () => {
+      window.removeEventListener("mousedown", handleMouseDown);
+      window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("blur", handleMouseUp);
+    };
+  }, []);
 
   useEffect(() => {
     const handleMouseOut = (e) => {
@@ -412,7 +433,9 @@ const CustomCursor = ({ triggerSelector = ".cursor-trigger" }) => {
       <CursorElement
         size={24}
         filled={true}
-        scaleOnEnter={2.5}
+        scaleOnEnter={3.75}
+        scaleOnClick={3.25}
+        isClicking={isClicking}
         opacityOnEnter={1}
         amount={0.2}
         isHovered={isHovered}
@@ -424,7 +447,9 @@ const CustomCursor = ({ triggerSelector = ".cursor-trigger" }) => {
       <CursorElement
         size={54}
         filled={true}
-        scaleOnEnter={1.25}
+        scaleOnEnter={1.75}
+        scaleOnClick={1}
+        isClicking={isClicking}
         opacityOnEnter={1}
         amount={0.15}
         isHovered={isHovered}
@@ -437,7 +462,9 @@ const CustomCursor = ({ triggerSelector = ".cursor-trigger" }) => {
       <CursorElement
         size={56}
         filled={true}
-        scaleOnEnter={1.25}
+        scaleOnEnter={1.75}
+        scaleOnClick={1.5}
+        isClicking={isClicking}
         opacityOnEnter={1}
         amount={0.125}
         isHovered={isHovered}

@@ -29,8 +29,8 @@ export default function DesktopPageTransitions({ children }) {
     exit: {
       scaleX: 0.95,
       transition: {
-        duration: 0.65,
-        delay: 0.35,
+        duration: 0.75,
+        delay: 0.25,
         ease: [0.65, 0, 0.35, 1],
       },
     },

@@ -1,16 +1,36 @@
 import { useEffect, useRef, useState } from "react";
 import { motion as Motion } from "framer-motion";
 
+const MARQUEE_ITEMS = [
+  "Fotosesijos",
+  "Renginiai",
+  "Sporto varžybos",
+  "Komercinė fotografija",
+  "Kraštovaizdžiai",
+  "Portretai",
+  "Vestuvės",
+  "Architektūra",
+  "Gamta",
+  "Fotosesijos",
+  "Renginiai",
+  "Sporto varžybos",
+  "Komercinė fotografija",
+  "Kraštovaizdžiai",
+  "Portretai",
+  "Vestuvės",
+  "Architektūra",
+  "Gamta",
+];
 
 export default function Marquee({
-  items,
   textColor = "text-header",
   speed = 50,
   textSize = "text-xs xl:text-xl",
   className = "",
-})  {
+}) {
   const firstGroupRef = useRef(null);
   const [groupWidth, setGroupWidth] = useState(0);
+  const items = MARQUEE_ITEMS;
 
   useEffect(() => {
     const measure = () => {
@@ -116,4 +136,4 @@ export default function Marquee({
       `}</style>
     </Motion.div>
   );
-};
+}

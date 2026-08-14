@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import gsap from "gsap";
 
@@ -23,9 +23,9 @@ export default function TextTransition() {
       case "/kontaktai":
       case "/apie-mane":
       case "/portfolio":
-        return "text-[0.75rem] md:text-[2rem] xl:text-[3rem]";
+        return "text-[0.75rem] md:text-[2rem] xl:text-[4rem]";
       default:
-        return "text-[1rem] md:text-[2rem] xl:text-[3rem]";
+        return "text-[1rem] md:text-[2rem] xl:text-[4rem]";
     }
   };
 
@@ -38,15 +38,15 @@ export default function TextTransition() {
         opacity: 0,
       },
       {
-        duration: 2.25,
-        delay: 0.6,
+        duration: 1.5,
+        // delay: 2.6,
         ease: "expo.inOut",
         keyframes: {
           scale: [6, 5, 4, 3, 5],
           y: [-10, -5, 0, 0, 0, 0, 0, 0, 0, 0],
           opacity: [0, 1, 1, 0.5, 0.25, 0.125, 0.0625, 0.03125, 0],
         },
-      }
+      },
     );
 
     gsap.fromTo(
@@ -57,15 +57,15 @@ export default function TextTransition() {
         opacity: 0,
       },
       {
-        duration: 2.25,
-        delay: 0.675,
+        duration: 1.75,
+        // delay: 2.675,
         ease: "expo.inOut",
         keyframes: {
           scale: [6, 5, 4, 3, 5],
           y: [10, 5, 0, 0, 0, 0, 0, 0, 0, 0],
           opacity: [0, 1, 1, 0.5, 0.25, 0.0625, 0.03125, 0],
         },
-      }
+      },
     );
   }, [location.pathname]);
 
@@ -73,8 +73,8 @@ export default function TextTransition() {
     <div>
       <p
         ref={text1Ref}
-        className={`fixed z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${getFontSize(
-          location.pathname
+        className={`fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${getFontSize(
+          location.pathname,
         )} uppercase font-bold text-shadow-lg text-text mix-blend-difference`}
       >
         {getLabel(location.pathname)}
@@ -82,7 +82,7 @@ export default function TextTransition() {
       <p
         ref={text2Ref}
         className={`fixed z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${getFontSize(
-          location.pathname
+          location.pathname,
         )} uppercase font-bold text-shadow-lg text-muted mix-blend-difference blur-[0.5px]`}
       >
         {getLabel(location.pathname)}

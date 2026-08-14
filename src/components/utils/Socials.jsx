@@ -41,7 +41,7 @@ export default function Socials() {
       initial="hidden"
       animate="show"
       exit="exit"
-      className="social-icons relative border-b border-muted/50 px-2 text-muted flex gap-4 pb-1 mix-blend-difference"
+      className="social-icons relative px-2 text-muted flex gap-4 pb-1 mix-blend-difference"
     >
       {icons.map(({ id, label }) => (
         <div

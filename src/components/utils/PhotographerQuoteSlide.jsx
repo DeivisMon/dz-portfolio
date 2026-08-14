@@ -114,7 +114,7 @@ export default function PhotographerQuoteSlide() {
           </span>
           <div
             className={`
-    relative flex-1 flex items-center justify-center
+    relative flex-1 flex items-center justify-start ml-4
     transition-all duration-300 ease-out
     ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"}
   `}
@@ -123,7 +123,6 @@ export default function PhotographerQuoteSlide() {
               className="
       quote-font italic text-muted px-2
       w-full
-      text-center
       text-[clamp(0.72rem,1vw,1.1rem)]
       leading-tight
       line-clamp-2

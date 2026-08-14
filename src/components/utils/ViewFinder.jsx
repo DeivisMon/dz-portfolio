@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Aperture, BatteryMedium } from "lucide-react";
+import { motion as Motion } from "framer-motion";
 
 /**
  * ViewfinderFrame
@@ -13,6 +14,31 @@ import { Aperture, BatteryMedium } from "lucide-react";
  *     <img src="..." className="h-full w-full object-cover" />
  *   </ViewfinderFrame>
  */
+const Animations = (variants) => ({
+  initial: "initial",
+  animate: "animate",
+  exit: "exit",
+  variants,
+});
+
+const overlayVariants = {
+  initial: { scale: 0.25, opacity: 0 },
+  animate: {
+    scale: 1,
+    opacity: 1,
+    transition: { duration: 0.5, delay: 0.5, ease: [0.87, 0, 0.13, 1] },
+  },
+  exit: {
+    scale: 0.25,
+    opacity: 0,
+    transition: {
+      duration: 0.5,
+      delay: 0.25,
+      ease: [0.53, 0.2, 0.17, 1],
+    },
+  },
+};
+
 export function ViewfinderFrame({
   children,
   className = "",
@@ -34,11 +60,14 @@ export function ViewfinderFrame({
   }, [recording]);
 
   return (
-    <div className={`relative overflow-hidden ${className}`}>
+    <Motion.div
+      {...Animations(overlayVariants)}
+      className={`relative overflow-hidden ${className}`}
+    >
       {/* the actual scene/content being viewed */}
       <div className="absolute inset-0 mx-auto my-auto">{children}</div>
 
-      {/* ---- HUD overlay, never intercepts clicks ---- */}
+      {/* ---- HUD overlay ---- */}
       <div className="pointer-events-none absolute inset-0 select-none font-mono text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.9)]">
         {/* rule of thirds grid */}
         {/* {showGrid && (
@@ -51,10 +80,12 @@ export function ViewfinderFrame({
         )} */}
 
         {/* AF corner brackets */}
-        <div className="absolute top-3 left-3 h-5 w-5 border-t-2 border-l-2 border-white/80" />
-        <div className="absolute top-3 right-3 h-5 w-5 border-t-2 border-r-2 border-white/80" />
-        <div className="absolute bottom-3 left-3 h-5 w-5 border-b-2 border-l-2 border-white/80" />
-        <div className="absolute bottom-3 right-3 h-5 w-5 border-b-2 border-r-2 border-white/80" />
+        <div className="absolute top-1 inset-x-0 mx-auto w-[clamp(64px,20vw,336px)] border-t-1 border-l-1 border-muted/50" />
+        <div className="absolute top-1 left-1 h-5 w-16 border-t-1 border-l-1 border-muted/50" />
+        <div className="absolute top-1 right-1 h-5 w-16 border-t-1 border-r-1 border-muted/50" />
+        <div className="absolute bottom-1 left-1 h-5 w-16 border-b-1 border-l-1 border-muted/50" />
+        <div className="absolute bottom-1 right-1 h-5 w-16 border-b-1 border-r-1 border-muted/50" />
+        <div className="absolute bottom-1 inset-x-0 mx-auto w-[clamp(64px,20vw,336px)] border-b-1 border-r-1 border-muted/50" />
 
         {/* center focus reticle — turns green when focus is confirmed */}
         {/* <div
@@ -86,7 +117,7 @@ export function ViewfinderFrame({
         )}
 
         {/* battery, top-right */}
-        <div className="absolute top-3 right-10 flex items-center gap-1 text-[10px] tracking-[0.1em]">
+        <div className="absolute top-3 right-9 flex items-center gap-1 text-[10px] tracking-[0.1em]">
           <BatteryMedium className="h-3.5 w-3.5" />
           {battery}%
         </div>
@@ -106,7 +137,7 @@ export function ViewfinderFrame({
           {String(frameCount).padStart(4, "0")}
         </div>
       </div>
-    </div>
+    </Motion.div>
   );
 }
 

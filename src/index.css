@@ -129,10 +129,10 @@ body {
 } */
 
 .logo {
-  /* font-family: "SF Old Republic", sans-serif; */
-  font-weight: 100;
+  font-family: "SF Old Republic", sans-serif;
+  /* font-weight: 100; */
   /* font-family: "Cinzel", serif; */
-  font-family: "amoera", sans-serif;
+  /* font-family: "amoera", sans-serif; */
   /* font-family: "Cormorant Garamond", serif; */
 }
 

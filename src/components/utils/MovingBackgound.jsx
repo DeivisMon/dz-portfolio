@@ -36,9 +36,12 @@ function makeTriangle(seed) {
 
 const TRIANGLE_COUNT = 22;
 
-export default function MovingBackground({ className = "" }) {
+export default function MovingBackground({
+  className = "",
+  triangleCount = TRIANGLE_COUNT,
+}) {
   const triangles = useMemo(
-    () => Array.from({ length: TRIANGLE_COUNT }, (_, i) => makeTriangle(i + 1)),
+    () => Array.from({ length: triangleCount }, (_, i) => makeTriangle(i + 1)),
     [],
   );
 
