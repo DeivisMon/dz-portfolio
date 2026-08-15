@@ -38,6 +38,17 @@
   --color-border: #443a33;
 
   --breakpoint-tablet: 1366px;
+  --animate-wiggle: wiggle 2s ease-in-out infinite;
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.25);
+  }
 }
 
 /* hide scrollbar for all browsers */

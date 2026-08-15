@@ -186,7 +186,7 @@ export default function NavBar() {
     <>
       {/* Navbar*/}
       <div
-        className={`navbar fixed transition-[z-index] ${isTransitioning ? "z-[2000]" : "z-[500]"}`}
+        className={`navbar fixed transition-[z-index] ${isTransitioning ? "z-[2000]" : "z-[500]"} mix-blend-difference `}
       >
         {/* Clock — fixed */}
         <Motion.span
@@ -197,29 +197,32 @@ export default function NavBar() {
         </Motion.span>
 
         {/* Shared row: logo left, quote right */}
-        <div className="fixed top-0 left-0 w-full xl:h-[188px] flex justify-between items-center pointer-events-none ">
+        <div className="fixed bottom-1 left-0 w-full xl:h-[188px] flex justify-between items-center pointer-events-none ">
           {/* LEFT — logo */}
           <div
             className={`pointer-events-auto transition-[z-index]
-          pt-1 xl:pt-0 mt-0 xl:mt-8 pl-2 xl:pl-6
+          pt-1 xl:pt-0 mt-0 xl:mt-8 pl-2 xl:pl-5
           max-w-[65vw] overflow-hidden flex flex-2 xl:flex-1
           ${isTransitioning ? "z-[2000]" : "z-[500]"}`}
           >
             <div
-              className={`logo relative z-[10] ${
+              className={`logo relative z-[10] 
+                text-transparent
+                        [-webkit-text-stroke:clamp(1px,0.12vw,3px)_white]
+              ${
                 responsive.isResponsive
                   ? "text-[2.5rem]"
                   : "text-[clamp(2.5rem,10vw+0.5rem,12.5rem)]"
               }`}
             >
               <Link
-                className="flex transition-all duration-500 ease-in-out select-none"
+                className="flex transition-all duration-500 ease-in-out select-none "
                 to="/"
                 onClick={() => handleNavClick("/")}
               >
                 <AnimatedText
                   text="Žvinklys"
-                  textColor="text-header"
+                  textColor=""
                   duration={0.75}
                   delay={0.5}
                   delayChildren={1.25}
@@ -235,33 +238,33 @@ export default function NavBar() {
               {...Animations(upperLineVariants)}
               className={`fixed ${responsive.isResponsive ? "top-1" : "top-4"}  left-0 w-full h-[1px] bg-muted/30 origin-left z-1`}
             />
-            <Motion.div
+            {/* <Motion.div
               {...Animations(lowerLineVariants)}
               className={`fixed ${responsive.isResponsive ? "top-14" : "top-40"}  left-0 w-full h-[1px] bg-muted/30 origin-right z-1`}
-            />
-          </div>
-
-          {/* RIGHT — quote only now */}
-          <div className="pointer-events-auto flex flex-1 flex-col items-start pr-2 xl:pr-6">
-            <Motion.span
-              {...Animations(dateVariants)}
-              className="hidden xl:block text-[18px] xl:text-[64px] text-header mix-blend-difference"
-            >
-              <PhotographerQuoteSlide
-                textColor="text-header"
-                textSize="text-[18px] xl:text-[64px]"
-              />
-            </Motion.span>
+            /> */}
           </div>
         </div>
       </div>
+
+      {/* RIGHT — quote only now */}
+      {/* <div className="fixed inset-0 mx-auto pointer-events-auto flex flex-1 flex-col items-center pr-2 xl:pr-6">
+        <Motion.span
+          {...Animations(dateVariants)}
+          className="hidden xl:block text-[18px] xl:text-[64px] text-header mix-blend-difference"
+        >
+          <PhotographerQuoteSlide
+            textColor="text-header"
+            textSize="text-[18px] xl:text-[64px]"
+          />
+        </Motion.span>
+      </div> */}
 
       {/* Menu */}
       <div
         ref={magneticRef}
         onMouseMove={handleMagneticMove}
         onMouseLeave={resetMagnetic}
-        className={`fixed right-0 -top-2 md:-top-6 w-14 h-14 xl:w-54 xl:h-48 flex items-center justify-center mix-blend-difference isolate ${
+        className={`fixed right-0 -top-2 md:-top-6 w-14 h-14 xl:w-54 xl:h-48 flex items-center justify-center isolate ${
           isTransitioning ? "z-[5]" : "z-[1000]"
         }`}
       >
@@ -275,7 +278,7 @@ export default function NavBar() {
       </div>
 
       {/* Marquee */}
-      <Marquee className="fixed hidden xl:block left-0 top-8 xl:top-40 pt-[1px]" />
+      <Marquee className="fixed hidden xl:block left-0 top-8 xl:top-4 pt-[1px]" />
 
       {/* Fullscreen menu overlay */}
       <AnimatePresence>

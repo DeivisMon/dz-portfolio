@@ -4,6 +4,7 @@ import AboutMeComponent from "./utils/AboutMeComponent";
 import ContactSocials from "./utils/ContactSocials1";
 import ContactChangeSideButton from "./utils/ContactChangeSideButton";
 import Frame from "./utils/Frame";
+import { IoTriangleSharp } from "react-icons/io5";
 
 export default function InfoComponent() {
   // true = About Me visible (default), photo slides over Socials
@@ -66,7 +67,7 @@ export default function InfoComponent() {
 
   return (
     <div
-      className={`relative w-[100vw] h-[calc(100dvh-58px)] mt-[58px] xl:h-[calc(100dvh-160px)] xl:mt-[160px] overflow-hidden shadow-xl bg-bckg/70`}
+      className={`relative w-[100vw] h-[calc(100dvh-58px)] mt-[58px] xl:h-[calc(100dvh-18px)] xl:mt-[18px] overflow-hidden shadow-xl bg-bckg/70`}
     >
       <Frame />
 
@@ -100,7 +101,12 @@ export default function InfoComponent() {
           top: 0,
           left: 0,
         }}
-      />
+        onClick={toggleView}
+      >
+        <span className="absolute -left-3 top-1/2 transform  -translate-y-1/2 rotate-90  z-12 animate-wiggle">
+          <IoTriangleSharp size={100} />
+        </span>
+      </div>
 
       {/* ChangeSideButton — toggles the left pane between About Me and Socials */}
       <div
@@ -110,7 +116,7 @@ export default function InfoComponent() {
             : "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
         }`}
       >
-        <ContactChangeSideButton
+        {/* <ContactChangeSideButton
           onClick={toggleView}
           buttonRef={buttonRef}
           buttonTransform={buttonTransform}
@@ -136,7 +142,7 @@ export default function InfoComponent() {
               "Susisiek"
             )
           }
-        />
+        /> */}
       </div>
     </div>
   );

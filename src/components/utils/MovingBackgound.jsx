@@ -36,8 +36,8 @@ function makeShape(seed) {
   };
 }
 
-const SHAPE_COUNT = 22;
-const SKEW = 0.15; // 15% skew
+const SHAPE_COUNT = 18;
+const SKEW = 0.75; // 15% skew
 
 // A rectangle skewed 15% along the top/bottom edges, like a slanted
 // parallelogram: /____/
@@ -92,7 +92,7 @@ export default function MovingBackground({
           }}
         >
           <svg
-            width={s.width * 8}
+            width={s.width * 28}
             height={s.height * 8}
             viewBox="0 0 100 100"
             preserveAspectRatio="none"

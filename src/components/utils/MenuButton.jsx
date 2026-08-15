@@ -36,7 +36,7 @@ const MenuBtn = ({ isMenuOpen, toggleMenu, springX, springY, isLocked }) => {
         ${buttonPosition}
         ${buttonWidth}
         rounded-[8em] origin-center cursor-pointer
-        bg-transparent
+        bg-bckg
         transition-[width] duration-500
         ease-[cubic-bezier(0.075,0.82,0.165,1)]
         will-change-transform
@@ -49,7 +49,7 @@ const MenuBtn = ({ isMenuOpen, toggleMenu, springX, springY, isLocked }) => {
       <div
         className={`
           absolute inset-0 rounded-[8em]
-          shadow-xs shadow-accent/35
+          shadow-xs shadow-accent/55
           transition-opacity duration-500
           ease-[cubic-bezier(0.075,0.82,0.165,1)]
           ${isMenuOpen ? "opacity-0" : "opacity-100"}
