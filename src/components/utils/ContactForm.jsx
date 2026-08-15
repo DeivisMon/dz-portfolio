@@ -78,7 +78,7 @@ export default function ContactForm() {
         setIsFlipped(false);
         setFormData({ name: "", email: "", phone: "", message: "" });
         setCooldown(false);
-      }, 60000);
+      }, 600000);
     } catch (err) {
       showError(err.message || "Klaida siunčiant žinutę. Bandykite dar kartą.");
     } finally {
@@ -92,11 +92,11 @@ export default function ContactForm() {
 
   return (
     <div
-      className="relative w-full lg:w-3/4 h-full"
+      className={`relative w-full lg:w-9/10 flex flex-col items-center ${responsive.isResponsive || responsive.isCompactHeight ? "justify-center " : ""} text-text`}
       style={{ perspective: "1000px" }}
     >
       <div
-        className="h-full transition-transform duration-700"
+        className="w-full transition-transform duration-700 mt-0 lg:mt-36"
         style={{
           transformStyle: "preserve-3d",
           transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
@@ -104,114 +104,203 @@ export default function ContactForm() {
       >
         {/* Front Side - Form */}
         <div
-          className="absolute inset-0 flex items-center justify-center"
           style={{
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
           }}
         >
-          <div className="relative flex flex-col gap-2 lg:gap-4 w-full">
-            <h2 className="text-md lg:text-2xl font-thin tracking-[0.3em] text-center mb-0 lg:mb-2 text-header">
+          <div className="relative flex flex-col justify-center gap-2 lg:gap-4 w-full">
+            <h2
+              className={`
+          font-thin p-0 tracking-[0.3em] text-header text-[clamp(1.1rem,2vw,4rem)] ${responsive.isCompactHeight ? "mb-2" : "mb-4"}
+        `}
+            >
               Parašyk man
             </h2>
 
-            <div className="input-container">
-              <input
-                className="p-1 md:pt-2 border-b border-white/10 text-muted text-[14px] lg:text-[20px]"
-                id="input"
-                type="text"
-                required
-                value={formData.name}
-                onChange={(e) => handleInputChange("name", e.target.value)}
-              />
-              <label
-                htmlFor="input"
-                className="label text-[12px] lg:text-[18px]"
-              >
-                Vardas
-              </label>
-              <div className="underline"></div>
-            </div>
+            {responsive.isDesktop ? (
+              <>
+                <div className="input-container">
+                  <input
+                    className="p-1 md:pt-2 border-b border-white/10 text-muted text-[14px] lg:text-[20px]"
+                    id="input"
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => handleInputChange("name", e.target.value)}
+                  />
+                  <label
+                    htmlFor="input"
+                    className="label text-[12px] lg:text-[18px]"
+                  >
+                    Vardas
+                  </label>
+                  <div className="underline"></div>
+                </div>
 
-            <div className="input-container mb-1">
-              <input
-                className="p-1 md:pt-2 border-b border-white/10 text-muted text-[14px] lg:text-[20px]"
-                id="input"
-                type="email"
-                required
-                value={formData.email}
-                onChange={(e) => handleInputChange("email", e.target.value)}
-              />
-              <label
-                htmlFor="input"
-                className="label text-[12px] lg:text-[18px]"
-              >
-                El.paštas
-              </label>
-              <div className="underline"></div>
-            </div>
+                <div className="input-container mb-1">
+                  <input
+                    className="p-1 md:pt-2 border-b border-white/10 text-muted text-[14px] lg:text-[20px]"
+                    id="input"
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) => handleInputChange("email", e.target.value)}
+                  />
+                  <label
+                    htmlFor="input"
+                    className="label text-[12px] lg:text-[18px]"
+                  >
+                    El.paštas
+                  </label>
+                  <div className="underline"></div>
+                </div>
 
-            <div className="input-container mb-1">
-              <input
-                className="p-1 md:pt-2 border-b border-white/10 text-muted text-[14px] lg:text-[20px]"
-                id="input"
-                type="tel"
-                required
-                value={formData.phone}
-                onChange={(e) => handleInputChange("phone", e.target.value)}
-              />
-              <label
-                htmlFor="input"
-                className="label text-[12px] lg:text-[18px]"
-              >
-                Telefonas
-              </label>
-              <div className="underline"></div>
-            </div>
+                <div className="input-container mb-1">
+                  <input
+                    className="p-1 md:pt-2 border-b border-white/10 text-muted text-[14px] lg:text-[20px]"
+                    id="input"
+                    type="tel"
+                    required
+                    value={formData.phone}
+                    onChange={(e) => handleInputChange("phone", e.target.value)}
+                  />
+                  <label
+                    htmlFor="input"
+                    className="label text-[12px] lg:text-[18px]"
+                  >
+                    Telefonas
+                  </label>
+                  <div className="underline"></div>
+                </div>
 
-            <div className="textarea-container mt-3">
-              <textarea
-                className="p-1 md:pt-2 border-b border-white/10 text-muted text-[14px] lg:text-[20px] resize-none"
-                id="textarea-message"
-                type="text"
-                required
-                rows={responsive.isShortScreen ? "1" : "2"}
-                value={formData.message}
-                onChange={(e) => handleInputChange("message", e.target.value)}
-              />
-              <label
-                htmlFor="textarea-message"
-                className="label text-[12px] lg:text-[18px]"
-              >
-                Tavo Žinutė
-              </label>
-              <div className="underline"></div>
-            </div>
+                <div className="textarea-container mt-3">
+                  <textarea
+                    className="p-1 md:pt-2 border-b border-white/10 text-muted text-[14px] lg:text-[20px] resize-none"
+                    id="textarea-message"
+                    type="text"
+                    required
+                    rows={responsive.isShortScreen ? "1" : "2"}
+                    value={formData.message}
+                    onChange={(e) =>
+                      handleInputChange("message", e.target.value)
+                    }
+                  />
+                  <label
+                    htmlFor="textarea-message"
+                    className="label text-[12px] lg:text-[18px]"
+                  >
+                    Tavo Žinutė
+                  </label>
+                  <div className="underline"></div>
+                </div>
 
-            {error && (
-              <p className="absolute bottom-12 left-0 right-0 text-red-400 text-sm text-center tracking-wide">
-                {error}
-              </p>
+                {error && (
+                  <p className="absolute bottom-12 left-0 right-0 text-red-400 text-sm text-center tracking-wide">
+                    {error}
+                  </p>
+                )}
+
+                <div className="w-full flex justify-end">
+                  <button
+                    className="cta-btn mt-0 border border-border text-text font-bold flex items-center justify-center p-2 hover:text-accent transition duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed mix-blend-difference"
+                    type="button"
+                    onClick={handleSend}
+                    disabled={isLoading || cooldown}
+                  >
+                    {isLoading
+                      ? "Siunčiama..."
+                      : cooldown
+                        ? "Palaukite prieš siunčiant vėl."
+                        : "Siusk žinutę"}
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div>
+                <div className="flex gap-1">
+                  <div className="w-full">
+                    <input
+                      className="p-1 w-full md:pt-2 border-b border-white/10 text-muted text-[14px] lg:text-[20px] outline-none"
+                      id="input"
+                      type="text"
+                      placeholder="Vardas"
+                      required
+                      value={formData.name}
+                      onChange={(e) =>
+                        handleInputChange("name", e.target.value)
+                      }
+                    />
+                  </div>
+                  <div className="w-full mb-1">
+                    <input
+                      className="p-1 w-full md:pt-2 border-b border-white/10 text-muted text-[14px] lg:text-[20px] outline-none"
+                      id="input"
+                      type="tel"
+                      placeholder="Telefonas"
+                      required
+                      value={formData.phone}
+                      onChange={(e) =>
+                        handleInputChange("phone", e.target.value)
+                      }
+                    />
+                  </div>
+                </div>
+
+                <div className="w-full mb-1">
+                  <input
+                    className="p-1 w-full md:pt-2 border-b border-white/10 text-muted text-[14px] lg:text-[20px] outline-none"
+                    id="input"
+                    type="email"
+                    placeholder="El.paštas"
+                    required
+                    value={formData.email}
+                    onChange={(e) => handleInputChange("email", e.target.value)}
+                  />
+                </div>
+
+                <div className="w-full mt-3">
+                  <textarea
+                    className="p-1 w-full md:pt-2 border-b border-white/10 text-muted text-[14px] lg:text-[20px] resize-none outline-none"
+                    id="textarea-message"
+                    type="text"
+                    placeholder="Tavo Žinutė"
+                    required
+                    rows={responsive.isShortScreen ? "1" : "2"}
+                    value={formData.message}
+                    onChange={(e) =>
+                      handleInputChange("message", e.target.value)
+                    }
+                  />
+                </div>
+
+                {error && (
+                  <p className="absolute bottom-12 left-0 right-0 text-red-400 text-sm text-center tracking-wide">
+                    {error}
+                  </p>
+                )}
+                <div className="w-full flex justify-end">
+                  <button
+                    className="cta-btn mt-0 border border-border text-text font-bold flex items-center justify-center p-1 disabled:opacity-50 disabled:cursor-not-allowed mix-blend-difference"
+                    type="button"
+                    onClick={handleSend}
+                    disabled={isLoading || cooldown}
+                  >
+                    {isLoading
+                      ? "Siunčiama..."
+                      : cooldown
+                        ? "Palaukite prieš siunčiant vėl."
+                        : "Siusk žinutę"}
+                  </button>
+                </div>
+              </div>
             )}
-
-            <button
-              className="cta-btn mt-2 lg:mt-4 border border-border text-text font-bold flex items-center justify-center py-2 md:py-4 hover:text-accent transition duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed mix-blend-difference"
-              type="button"
-              onClick={handleSend}
-              disabled={isLoading || cooldown}
-            >
-              {isLoading
-                ? "Siunčiama..."
-                : cooldown
-                  ? "Palaukite prieš siunčiant vėl."
-                  : "Siusk žinutę"}
-            </button>
           </div>
         </div>
 
         {/* Back Side - Success Message */}
         <div
-          className="absolute inset-0 text-text flex flex-col items-center justify-center"
+          className="fixed inset-0 mx-auto text-text flex flex-col items-center justify-center"
           style={{
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",

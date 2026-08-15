@@ -13,7 +13,7 @@
   outline: none;
 }
 
-.input-container .label {
+.label {
   position: absolute;
   top: 10px;
   left: 0;
@@ -63,15 +63,13 @@
   outline: none;
 }
 
-.textarea-container .label {
+.label {
   position: absolute;
   top: 10px;
   left: 0;
   color: #333;
   transition: all 0.25s ease;
   pointer-events: none;
-  /* background-color: #c47425; */
-  /* font-size: 18px; */
 }
 
 .textarea-container #textarea-message:focus ~ .label,

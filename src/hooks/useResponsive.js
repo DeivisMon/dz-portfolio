@@ -54,5 +54,6 @@ export function useResponsive() {
     isTabletPortrait: isTablet && isPortrait,
     isTabletLandscape: isTablet && isLandscape,
     isResponsive: isMobile || isTablet,
+    isResponsivePortait: (isTablet && isPortrait) || (isMobile && isPortrait),
   };
 }

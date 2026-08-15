@@ -5,6 +5,7 @@ import ContactSocials from "./utils/ContactSocials1";
 import ContactChangeSideButton from "./utils/ContactChangeSideButton";
 import Frame from "./utils/Frame";
 import { IoTriangleSharp } from "react-icons/io5";
+import ContactForm from "./utils/ContactForm";
 
 export default function InfoComponent() {
   // true = About Me visible (default), photo slides over Socials
@@ -79,14 +80,14 @@ export default function InfoComponent() {
       >
         {/* About Me Section (LEFT / TOP) */}
         <div
-          className={`absolute ${isVerticalLayout ? "top-0 left-0 w-full h-1/2" : "left-0 top-0 w-1/2 h-full"} flex justify-center items-center px-8 z-10 sm:px-8 lg:px-24`}
+          className={`absolute ${isVerticalLayout ? "top-0 left-0 w-full h-1/2" : "left-0 top-0 w-1/2 h-full"} flex justify-center px-8 z-10 sm:px-8 lg:px-24`}
         >
-          <AboutMeComponent />
+          <ContactForm />
         </div>
 
         {/* Socials Section (RIGHT / BOTTOM) */}
         <div
-          className={`absolute ${isVerticalLayout ? "bottom-0 left-0 w-full h-1/2" : "right-0 top-0 w-1/2 h-full"} flex justify-center px-2 z-10 px-0 sm:px-12 lg:px-18`}
+          className={`absolute ${isVerticalLayout ? "bottom-0 left-0 w-full h-1/2" : "right-0 top-0 w-1/2 h-full"} flex justify-center px-8 z-10 sm:px-8 lg:px-24`}
         >
           <ContactSocials />
         </div>

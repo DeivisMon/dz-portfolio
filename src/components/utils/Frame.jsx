@@ -48,6 +48,19 @@ export default function Frame() {
           mixBlendMode: "difference",
         }}
       />
+      <div
+        style={{
+          position: "absolute",
+          bottom: "4px",
+          left: "6px",
+          zIndex: 100,
+          width: "2rem",
+          height: "1px",
+          background: "#c9a84c",
+          opacity: 0.5,
+          mixBlendMode: "difference",
+        }}
+      />
       <span className="absolute right-[6px] bottom-[4px] px-2 text-[11px] xl:text-[16px] text-muted border-b border-muted/50 whitespace-nowrap mix-blend-difference z-[100] ">
         Žvinklys. &copy; {new Date().getFullYear()}
       </span>

@@ -18,7 +18,7 @@ export default function AboutMeComponent() {
   });
 
   return (
-    <div className="relative w-full h-full flex flex-col items-center justify-center text-text">
+    <div className="relative w-full h-full flex flex-col items-center justify-start text-text mt-54">
       {/* h1 */}
       <h1
         style={fadeUp(0.62)}

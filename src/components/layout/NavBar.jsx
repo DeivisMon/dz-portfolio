@@ -214,6 +214,7 @@ export default function NavBar() {
                 <AnimatedText
                   text="Žvinklys"
                   textColor="text-header"
+                  className=""
                   duration={0.75}
                   delay={0.5}
                   delayChildren={1.25}
@@ -305,8 +306,7 @@ export default function NavBar() {
               >
                 <MenuOverlayLines />
                 {NAV_ITEMS.map((item, i) => {
-                  const isDesktop =
-                    !responsive.isMobile && !responsive.isTablet;
+                  const isDesktop = responsive.isDesktop;
                   const isHovered = hoveredItem === item.path;
 
                   return (
@@ -322,7 +322,7 @@ export default function NavBar() {
                       className="overflow-hidden"
                     >
                       <Link
-                        className={`cursor-trigger text-3xl group/button md:text-3xl lg:text-5xl xl:text-[124px] uppercase tracking-[5px] md:tracking-[20px] transition-colors duration-300  ${
+                        className={`cursor-trigger text-3xl group/button md:text-3xl lg:text-5xl xl:text-[124px] uppercase tracking-[5px] md:tracking-[20px] transition-all duration-500  ${
                           isActive(item.path)
                             ? "text-accent"
                             : "text-muted opacity-80"

@@ -60,6 +60,7 @@ const rows = [
     labelKey: "Telefonas",
     value: "+370 624 84565",
     data: "link",
+    class: "select-text",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -196,20 +197,20 @@ export default function ContactSocials() {
     }
   };
 
-  const containerWidth = isCompact ? "w-6/7" : "w-3/4";
+  const containerWidth = isCompact ? "w-full" : "w-9/10";
   const headingMargin = isCompact ? "mb-2" : "mb-6";
   const headingSize = isCompact
     ? "text-[clamp(1.1rem,2vw,2rem)]"
     : "text-[clamp(1.1rem,2vw,4rem)]";
   const headingBottomMargin = isCompact ? "mb-2" : "mb-4";
 
-  const rowsLayout = isCompact ? "flex-row gap-4" : "flex-col gap-1";
+  const rowsLayout = isCompact ? "flex-row justify-between" : "flex-col gap-8";
 
   const rowBorder = isCompact ? "" : "border-t border-border/50";
 
   const linkLayout = isCompact
-    ? "flex-col items-center gap-0 px-0 py-0"
-    : "flex-row items-center gap-4 px-4 py-6";
+    ? "flex flex-col items-center gap-0 px-0 py-0"
+    : "flex flex-row items-center justify-center gap-4 px-4 py-2";
 
   const labelSize = isCompact
     ? "text-[clamp(0.5rem,0.8vw,1rem)]"
@@ -223,20 +224,22 @@ export default function ContactSocials() {
       initial="hidden"
       animate="show"
       className={`
-        flex flex-col items-center justify-center
+        relative h-full flex flex-col items-center text-text ${responsive.isResponsive || responsive.isCompactHeight ? "justify-center " : ""}
         ${containerWidth}
-        h-full
       `}
     >
       {/* Heading */}
-      <Motion.div variants={itemVariants} className={headingMargin}>
+      <Motion.div
+        variants={itemVariants}
+        className={`${headingMargin} relative flex flex-col justify-center gap-0 lg:gap-4 w-full mt-0 lg:mt-36 `}
+      >
         <h2
           className={`
             font-thin tracking-[0.3em]
             text-header
             ${headingSize}
             ${headingBottomMargin}
-            text-center
+            text-left
           `}
         >
           Susisiekime
@@ -246,7 +249,7 @@ export default function ContactSocials() {
       {/* Rows */}
       <div
         className={`
-          flex justify-center
+          flex
           ${rowsLayout}
           w-full
         `}
@@ -260,7 +263,7 @@ export default function ContactSocials() {
               key={row.id}
               variants={itemVariants}
               className={`
-                flex cursor-trigger group relative
+                 w-full cursor-trigger group relative
                 ${rowBorder}
               `}
               data-cursor-type={row.data}
@@ -268,12 +271,11 @@ export default function ContactSocials() {
               onMouseLeave={() => setHoveredRow(null)}
               onClick={row.copyable ? copy : undefined}
             >
-              <div
+              <a
                 href={row.copyable ? undefined : row.href}
                 target={row.external ? "_blank" : undefined}
                 rel={row.external ? "noopener noreferrer" : undefined}
                 className={`
-                  flex w-full justify-center
                   ${linkLayout}
                   group-hover:translate-y-[2px]
                   group-hover:translate-x-[-16px]
@@ -381,7 +383,7 @@ export default function ContactSocials() {
                     )}
                   </div>
                 )}
-              </div>
+              </a>
 
               {/* Bottom divider */}
               {!isCompact && (
