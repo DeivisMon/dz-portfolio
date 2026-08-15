@@ -17,13 +17,13 @@ export default function IndexComponent() {
       SCROLL_SPEED: 1.75,
       LERP_FACTOR: 0.05,
       MAX_VELOCITY: 150,
-      SNAP_THRESHOLD: 0.5,
-      SNAP_DELAY: 100,
+      SNAP_THRESHOLD: 0.25,
+      SNAP_DELAY: 10,
       IMAGE_SCALE: 1.25,
       PARALLAX_MULTIPLIER: -0.085,
       AUTO_SCROLL_SPEED: 0.6,
       AUTO_SCROLL_DELAY: 2000,
-      USER_IDLE_DELAY: 800,
+      USER_IDLE_DELAY: 100,
       get VISIBILITY_BUFFER() {
         return Math.max(
           (window.innerWidth / 2 + 255) *
@@ -441,7 +441,7 @@ export default function IndexComponent() {
 
   return (
     <div
-      className="slider h-[calc(100dvh-58px)] mt-[58px] xl:h-[calc(100dvh-18px)] xl:mt-[18px] bg-bckg/70"
+      className="slider h-[calc(100dvh)] xl:h-[calc(100dvh-18px)] xl:mt-[18px] bg-bckg/70"
       ref={sliderRef}
     >
       <Frame />

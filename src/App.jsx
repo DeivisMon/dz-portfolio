@@ -47,14 +47,14 @@ export default function App() {
               {/* <div className="fixed right-0 top-0 flex w-full h-[56px] bg-bckg/35 z-[1]"></div> */}
               <NavBar />
               <AnimatePresence mode="wait">
-                <MobilePageTransition key={location.pathname}>
+                <DesktopPageTransitions key={location.pathname}>
                   <Routes location={location} key={location.pathname}>
                     <Route path="/" element={<Index />} />
                     <Route path="/portfolio" element={<Portfolio />} />
                     <Route path="/kontaktai" element={<Contact />} />
                     <Route path="/apie-mane" element={<AboutMe />} />
                   </Routes>
-                </MobilePageTransition>
+                </DesktopPageTransitions>
               </AnimatePresence>
             </>
           )}

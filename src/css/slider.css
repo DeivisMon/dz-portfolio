@@ -69,7 +69,7 @@
 @media (max-height: 500px) and (orientation: landscape) {
   .slide {
     width: 180px !important;
-    height: 84dvh !important;
+    height: 100dvh !important;
     margin: 0 2.5px;
   }
 }

@@ -189,21 +189,21 @@ export default function NavBar() {
         className={`navbar fixed transition-[z-index] ${isTransitioning ? "z-[2000]" : "z-[500]"} mix-blend-exclusion`}
       >
         {/* Shared row: logo left, quote right */}
-        <div className="fixed bottom-1 left-0 w-full xl:h-[188px] flex justify-between items-center pointer-events-none ">
+        <div className="fixed -bottom-4 left-0 w-full xl:h-[175px] flex justify-between items-center pointer-events-none ">
           {/* LEFT — logo */}
           <div
             className={`pointer-events-auto transition-[z-index]
-          pt-1 xl:pt-0 mt-0 xl:mt-8 pl-2 xl:pl-5
+          pt-1 xl:pt-0 mt-0  pl-2 xl:pl-5
           max-w-[65vw] overflow-hidden flex flex-2 xl:flex-1
           ${isTransitioning ? "z-[2000]" : "z-[500]"}`}
           >
             <div
               className={`logo relative z-[10] 
-                [-webkit-text-stroke:2px_white]
+                
               ${
                 responsive.isResponsive
                   ? "text-[2.5rem]"
-                  : "text-[clamp(2.5rem,10vw+0.5rem,12.5rem)]"
+                  : "text-[clamp(2.5rem,10vw+0.5rem,11.5rem)]"
               }`}
             >
               <Link
@@ -227,7 +227,7 @@ export default function NavBar() {
 
             <Motion.div
               {...Animations(upperLineVariants)}
-              className={`fixed ${responsive.isResponsive ? "top-1" : "top-5"}  left-0 w-full h-[1px] bg-muted/30 origin-left z-1`}
+              className={`fixed ${responsive.isResponsive ? "top-1 hidden" : "top-5 block"}  left-0 w-full h-[1px] bg-muted/30 origin-left z-1`}
             />
             {/* <Motion.div
               {...Animations(lowerLineVariants)}
@@ -262,9 +262,7 @@ export default function NavBar() {
         ref={magneticRef}
         onMouseMove={handleMagneticMove}
         onMouseLeave={resetMagnetic}
-        className={`fixed right-0 -top-4 md:-top-8 w-14 h-14 xl:w-54 xl:h-48 flex items-center justify-center isolate ${
-          isTransitioning ? "z-[5]" : "z-[1000]"
-        }`}
+        className={`fixed right-0 -top-4 md:-top-8 w-14 h-14 xl:w-54 xl:h-48 flex items-center justify-center isolate z-1000`}
       >
         <MenuBtn
           isMenuOpen={isMenuOpen}
@@ -276,7 +274,7 @@ export default function NavBar() {
       </div>
 
       {/* Marquee */}
-      <Marquee className="fixed hidden xl:block left-0 top-8 xl:top-5 pt-[1px]" />
+      <Marquee className="fixed hidden xl:block left-0 top-8 xl:top-5 pt-[1px] z-[999]" />
 
       {/* Fullscreen menu overlay */}
       <AnimatePresence>

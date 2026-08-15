@@ -17,7 +17,7 @@ const MenuBtn = ({ isMenuOpen, toggleMenu, springX, springY, isLocked }) => {
       : "w-40";
 
   const buttonPosition = isCompact
-    ? "top-2 right-4 h-11"
+    ? "top-4 right-3 h-11"
     : "top-16 right-8 h-20";
 
   const menuTextPosition = isCompact ? "right-11" : "right-[90px]";
@@ -36,7 +36,7 @@ const MenuBtn = ({ isMenuOpen, toggleMenu, springX, springY, isLocked }) => {
         ${buttonPosition}
         ${buttonWidth}
         rounded-[8em] origin-center cursor-pointer
-        bg-bckg
+        bg-bckg/75
         transition-[width] duration-500
         ease-[cubic-bezier(0.075,0.82,0.165,1)]
         will-change-transform

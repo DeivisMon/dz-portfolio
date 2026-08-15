@@ -67,7 +67,7 @@ export default function InfoComponent() {
 
   return (
     <div
-      className={`relative w-[100vw] h-[calc(100dvh-58px)] mt-[58px] xl:h-[calc(100dvh-18px)] xl:mt-[18px] overflow-hidden shadow-xl bg-bckg/70`}
+      className={`relative w-[100vw] h-[calc(100dvh)] xl:h-[calc(100dvh-18px)] xl:mt-[18px] overflow-hidden shadow-xl bg-bckg/70`}
     >
       <Frame />
 
@@ -103,8 +103,8 @@ export default function InfoComponent() {
         }}
         onClick={toggleView}
       >
-        <span className="absolute -left-3 top-1/2 transform  -translate-y-1/2 rotate-90  z-12 animate-wiggle">
-          <IoTriangleSharp size={100} />
+        <span className="absolute -left-3 top-1/2 transform  -translate-y-1/2 rotate-90  z-12">
+          <IoTriangleSharp size={40} />
         </span>
       </div>
 

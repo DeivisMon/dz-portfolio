@@ -33,7 +33,7 @@ export default function Frame() {
   return (
     <Motion.div
       // {...Animate(frame)}
-      className={`film-frame h-[calc(100dvh-66px)] xl:h-[calc(100dvh-54px)] mix-blend-difference`}
+      className={`film-frame h-[calc(100dvh-8px)] xl:h-[calc(100dvh-54px)] mix-blend-difference`}
     >
       <div
         style={{
@@ -48,7 +48,7 @@ export default function Frame() {
           mixBlendMode: "difference",
         }}
       />
-      <span className="absolute left-[6px] bottom-[4px] px-2 text-[11px] xl:text-[16px] text-muted border-b border-muted/50 whitespace-nowrap mix-blend-difference z-[100] ">
+      <span className="absolute right-[6px] bottom-[4px] px-2 text-[11px] xl:text-[16px] text-muted border-b border-muted/50 whitespace-nowrap mix-blend-difference z-[100] ">
         Žvinklys. &copy; {new Date().getFullYear()}
       </span>
       {/* <span className="absolute right-[13px] top-[6px] text-[24px] px-4 text-muted uppercase border-t border-muted/50 whitespace-nowrap mix-blend-difference z-[100] ">
@@ -77,7 +77,7 @@ export default function Frame() {
           />
         ))}
       </div>
-      <div className="absolute right-1 bottom-1 md:right-2 md:bottom-2 z-[100] flex flex-col items-center mix-blend-difference">
+      {/* <div className="absolute right-1 bottom-1 md:right-2 md:bottom-2 z-[100] flex flex-col items-center mix-blend-difference">
         {Array.from({
           length: responsive.isMobile || responsive.isTablet ? 4 : 12,
         }).map((_, i) => (
@@ -86,7 +86,7 @@ export default function Frame() {
             className={`filmstrip-dot ${[2, 5, 9, 13, 16].includes(i) ? "lit" : ""}`}
           />
         ))}
-      </div>
+      </div> */}
     </Motion.div>
   );
 }

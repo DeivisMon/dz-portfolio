@@ -15,11 +15,11 @@ export default function DesktopPageTransitions({ children }) {
 
   const slide = {
     initial: { y: "100vh", scaleX: 0.85 },
-    animate: { y: "100vh", scaleX: 0.85 },
+    animate: { y: "100vh", scaleX: 1 },
     exit: {
       y: 0,
       scaleX: 1,
-      transition: { duration: 1, ease: [0.65, 0, 0.35, 1] },
+      transition: { duration: 1, delay: 0.15, ease: [0.65, 0, 0.35, 1] },
     },
   };
 
@@ -27,7 +27,8 @@ export default function DesktopPageTransitions({ children }) {
     initial: { y: 0 },
     animate: { y: 0 },
     exit: {
-      scaleX: 0.95,
+      y: "-50vh",
+      // scale: 0.95,
       transition: {
         duration: 0.75,
         delay: 0.25,

@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { motion as Motion, AnimatePresence } from "framer-motion";
-import { useDeviceType } from "../../hooks/useDeviceType";
+import { useResponsive } from "../../hooks/useResponsive";
 
 export default function ScrollTop({ lenis, onScrollTop, suppressRef }) {
   const [visible, setVisible] = useState(false);
   const suppressed = useRef(false);
-  const { isMobile } = useDeviceType();
+  const responsive = useResponsive();
 
   useEffect(() => {
     if (!lenis) return;
@@ -37,7 +37,7 @@ export default function ScrollTop({ lenis, onScrollTop, suppressRef }) {
     <AnimatePresence>
       {visible && (
         <div
-          className={`fixed ${isMobile ? "bottom-2 right-2" : "bottom-8 right-8"}  z-[1] mix-blend-difference animate-pulse cursor-trigger rotate-180`}
+          className={`fixed ${responsive.isResponsive ? "bottom-10 right-2" : "bottom-16 right-8"}  z-[1] mix-blend-difference animate-pulse cursor-trigger rotate-180`}
           data-cursor-type="up"
           onClick={toTop}
         >

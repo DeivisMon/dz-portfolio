@@ -376,7 +376,7 @@ export default function PortfolioComponent() {
       ref={containerRef}
       className={`${
         responsive.isResponsive ? "w-full" : "w-3/4"
-      } mb-32 h-max flex gap-1 transition-all duration-300 ${
+      } mb-34 h-max flex gap-1 transition-all duration-300 ${
         columnLayout === 1 ? "flex-col " : ""
       }`}
     >
@@ -732,14 +732,14 @@ export default function PortfolioComponent() {
 
   return (
     <div
-      className={`relative w-[100vw] h-[calc(100dvh-58px)] mt-[58px] tablet:h-[calc(100dvh-18px)] tablet:mt-[18px] overflow-hidden shadow-xl bg-bckg/70 `}
+      className={`relative w-[100vw] h-[calc(100dvh)] tablet:h-[calc(100dvh-18px)] tablet:mt-[18px] overflow-hidden shadow-xl bg-bckg/70 `}
     >
       <Frame />
       {/* Desktop Filters */}
       <div
         className={`${
           responsive.isMobile || responsive.isTablet ? "hidden" : "flex"
-        } fixed right-[-0.5rem] z-[990] xl:h-[calc(100dvh-188px)] w-1/3 flex-col justify-center items-end mix-blend-difference pointer-events-none`}
+        } fixed right-[-0.5rem] z-[990] xl:h-[calc(100dvh)] w-1/3 pb-48 flex-col justify-end items-end mix-blend-difference pointer-events-none`}
       >
         {filters.map((filter, index) => (
           <FilterButton
