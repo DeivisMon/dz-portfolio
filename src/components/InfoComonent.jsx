@@ -94,7 +94,7 @@ export default function InfoComponent() {
 
       {/* Sliding Image Overlay - Controlled by ContactChangeSideButton */}
       <div
-        className={`absolute transition-transform duration-500 ease-out z-10 ${isVerticalLayout ? "h-1/2 w-full" : "w-1/2 h-full"} bg-cover bg-center bg-no-repeat`}
+        className={`cursor-trigger absolute transition-transform duration-500 ease-out z-10 ${isVerticalLayout ? "h-1/2 w-full" : "w-1/2 h-full"} bg-cover bg-center bg-no-repeat`}
         style={{
           backgroundImage: `url('${import.meta.env.BASE_URL}images/contact.jpg')`,
           transform: getImageTransform(),

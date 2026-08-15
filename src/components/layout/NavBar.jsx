@@ -186,16 +186,8 @@ export default function NavBar() {
     <>
       {/* Navbar*/}
       <div
-        className={`navbar fixed transition-[z-index] ${isTransitioning ? "z-[2000]" : "z-[500]"} mix-blend-difference `}
+        className={`navbar fixed transition-[z-index] ${isTransitioning ? "z-[2000]" : "z-[500]"} mix-blend-exclusion`}
       >
-        {/* Clock — fixed */}
-        <Motion.span
-          {...Animations(dateVariants)}
-          className="fixed hidden xl:block right-4 top-[-2px] text-[15px] text-muted/50 uppercase whitespace-nowrap"
-        >
-          <ClockWithCity />
-        </Motion.span>
-
         {/* Shared row: logo left, quote right */}
         <div className="fixed bottom-1 left-0 w-full xl:h-[188px] flex justify-between items-center pointer-events-none ">
           {/* LEFT — logo */}
@@ -207,8 +199,7 @@ export default function NavBar() {
           >
             <div
               className={`logo relative z-[10] 
-                text-transparent
-                        [-webkit-text-stroke:clamp(1px,0.12vw,3px)_white]
+                [-webkit-text-stroke:2px_white]
               ${
                 responsive.isResponsive
                   ? "text-[2.5rem]"
@@ -222,7 +213,7 @@ export default function NavBar() {
               >
                 <AnimatedText
                   text="Žvinklys"
-                  textColor=""
+                  textColor="text-header"
                   duration={0.75}
                   delay={0.5}
                   delayChildren={1.25}
@@ -236,7 +227,7 @@ export default function NavBar() {
 
             <Motion.div
               {...Animations(upperLineVariants)}
-              className={`fixed ${responsive.isResponsive ? "top-1" : "top-4"}  left-0 w-full h-[1px] bg-muted/30 origin-left z-1`}
+              className={`fixed ${responsive.isResponsive ? "top-1" : "top-5"}  left-0 w-full h-[1px] bg-muted/30 origin-left z-1`}
             />
             {/* <Motion.div
               {...Animations(lowerLineVariants)}
@@ -245,6 +236,13 @@ export default function NavBar() {
           </div>
         </div>
       </div>
+      {/* Clock — fixed */}
+      <Motion.span
+        {...Animations(dateVariants)}
+        className="fixed hidden xl:block right-4 top-0 text-[15px] text-muted/50 uppercase whitespace-nowrap"
+      >
+        <ClockWithCity />
+      </Motion.span>
 
       {/* RIGHT — quote only now */}
       {/* <div className="fixed inset-0 mx-auto pointer-events-auto flex flex-1 flex-col items-center pr-2 xl:pr-6">
@@ -264,7 +262,7 @@ export default function NavBar() {
         ref={magneticRef}
         onMouseMove={handleMagneticMove}
         onMouseLeave={resetMagnetic}
-        className={`fixed right-0 -top-2 md:-top-6 w-14 h-14 xl:w-54 xl:h-48 flex items-center justify-center isolate ${
+        className={`fixed right-0 -top-4 md:-top-8 w-14 h-14 xl:w-54 xl:h-48 flex items-center justify-center isolate ${
           isTransitioning ? "z-[5]" : "z-[1000]"
         }`}
       >
@@ -278,7 +276,7 @@ export default function NavBar() {
       </div>
 
       {/* Marquee */}
-      <Marquee className="fixed hidden xl:block left-0 top-8 xl:top-4 pt-[1px]" />
+      <Marquee className="fixed hidden xl:block left-0 top-8 xl:top-5 pt-[1px]" />
 
       {/* Fullscreen menu overlay */}
       <AnimatePresence>

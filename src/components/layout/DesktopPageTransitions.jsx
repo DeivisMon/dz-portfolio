@@ -14,8 +14,8 @@ export default function DesktopPageTransitions({ children }) {
   };
 
   const slide = {
-    initial: { y: "100vh", scaleX: 0.75 },
-    animate: { y: "100vh", scaleX: 0.75 },
+    initial: { y: "100vh", scaleX: 0.85 },
+    animate: { y: "100vh", scaleX: 0.85 },
     exit: {
       y: 0,
       scaleX: 1,
