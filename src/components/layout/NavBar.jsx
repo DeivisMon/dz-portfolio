@@ -30,7 +30,7 @@ const MAGNETIC_STRENGTH = 0.3;
 const NAV_ITEMS = [
   { path: "/", label: "Pradžia" },
   { path: "/portfolio", label: "Galerija" },
-  { path: "/kontaktai", label: "Info" },
+  { path: "/kontaktai", label: "Kontaktai" },
 ];
 
 // Animation variants
@@ -186,7 +186,7 @@ export default function NavBar() {
     <>
       {/* Navbar*/}
       <div
-        className={`navbar fixed transition-[z-index] ${isTransitioning ? "z-[2000]" : "z-[500]"} mix-blend-exclusion`}
+        className={`navbar fixed transition-[z-index] ${isTransitioning ? "z-[2000]" : "z-[501]"} mix-blend-exclusion`}
       >
         {/* Shared row: logo left, quote right */}
         <div className="fixed -bottom-4 left-0 w-full xl:h-[175px] flex justify-between items-center pointer-events-none ">
@@ -194,7 +194,7 @@ export default function NavBar() {
           <div
             className={`pointer-events-auto transition-[z-index]
           pt-1 xl:pt-0 mt-0  pl-2 xl:pl-5
-          max-w-[65vw] overflow-hidden flex flex-2 xl:flex-1
+          max-w-[66vw] overflow-hidden flex flex-2 xl:flex-1
           ${isTransitioning ? "z-[2000]" : "z-[500]"}`}
           >
             <div
@@ -202,15 +202,11 @@ export default function NavBar() {
                 
               ${
                 responsive.isResponsive
-                  ? "text-[2.5rem]"
-                  : "text-[clamp(2.5rem,10vw+0.5rem,11.5rem)]"
+                  ? "text-[3rem]"
+                  : "text-[clamp(2.5rem,11vw+0.5rem,12.5rem)]"
               }`}
             >
-              <Link
-                className="flex transition-all duration-500 ease-in-out select-none "
-                to="/"
-                onClick={() => handleNavClick("/")}
-              >
+              <div className="flex group/button relative transition-all duration-500 ease-in-out select-none ">
                 <AnimatedText
                   text="Žvinklys"
                   textColor="text-header"
@@ -223,7 +219,8 @@ export default function NavBar() {
                   textShadow="text-shadow-lg/40"
                   letterSpacing="px-[clamp(1px,0.35vw,8px)]"
                 />
-              </Link>
+                <HoverLines translateXminus={-57} translateXplus={57} />
+              </div>
             </div>
 
             <Motion.div
@@ -319,7 +316,7 @@ export default function NavBar() {
                         hoveredItem,
                       }}
                       {...Animations(navLinkVariants)}
-                      className="overflow-hidden"
+                      className="overflow-hidden select-none"
                     >
                       <Link
                         className={`cursor-trigger text-3xl group/button md:text-3xl lg:text-5xl xl:text-[124px] uppercase tracking-[5px] md:tracking-[20px] transition-all duration-500  ${
@@ -349,7 +346,7 @@ export default function NavBar() {
                               : "blur(2px)",
                         }}
                       >
-                        <HoverLines />
+                        <HoverLines translateXminus={-70} translateXplus={70} />
                         {item.label}
                       </Link>
                     </Motion.div>

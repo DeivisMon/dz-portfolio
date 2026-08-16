@@ -7,7 +7,7 @@ import {
   useLayoutEffect,
 } from "react";
 import gsap from "gsap";
-import { motion as Motion } from "framer-motion";
+import { motion as Motion, AnimatePresence } from "framer-motion";
 import Lenis from "lenis";
 import {
   TfiLayoutWidthFull,
@@ -194,6 +194,7 @@ export default function PortfolioComponent() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [layoutMenuOpen, setLayoutMenuOpen] = useState(false);
   const [columnLayout, setColumnLayout] = useState(3);
+  const [mobileControlsVisible, setMobileControlsVisible] = useState(true);
   const responsive = useResponsive();
 
   // Refs
@@ -210,6 +211,13 @@ export default function PortfolioComponent() {
   const suppressScrollTop = useRef(false);
   const containerRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState(0);
+  const leftOverlayRef = useRef(null);
+  const rightOverlayRef = useRef(null);
+  const helper1OverlayRef = useRef(null);
+  const helper2OverlayRef = useRef(null);
+  const lastScrollTopRef = useRef(0);
+  const scrollStartRef = useRef(null);
+  const controlsVisibleRef = useRef(true);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -218,6 +226,51 @@ export default function PortfolioComponent() {
     });
     ro.observe(containerRef.current);
     return () => ro.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const container = itemsRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const currentScrollTop = container.scrollTop;
+      const lastScrollTop = lastScrollTopRef.current;
+
+      const delta = currentScrollTop - lastScrollTop;
+
+      // Scrolling down
+      if (delta > 0) {
+        if (scrollStartRef.current === null) {
+          scrollStartRef.current = currentScrollTop;
+        }
+
+        const distance = currentScrollTop - scrollStartRef.current;
+
+        if (distance >= 100 && controlsVisibleRef.current) {
+          controlsVisibleRef.current = false;
+          setMobileControlsVisible(false);
+        }
+      }
+
+      // Scrolling up
+      else if (delta < 0) {
+        if (!controlsVisibleRef.current) {
+          controlsVisibleRef.current = true;
+          setMobileControlsVisible(true);
+          scrollStartRef.current = null;
+        }
+      }
+
+      lastScrollTopRef.current = currentScrollTop;
+    };
+
+    container.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    return () => {
+      container.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   // Touch swipe state for lightbox
@@ -259,7 +312,7 @@ export default function PortfolioComponent() {
     };
   }, []);
 
-  useClickOutside([menuWrapperRef], () => {
+  useClickOutside([menuWrapperRef, mobileMenuRef], () => {
     if (mobileMenuOpen) {
       animateFilterMenuOut(() => setMobileMenuOpen(false));
     }
@@ -342,18 +395,16 @@ export default function PortfolioComponent() {
 
       const itemElement = (
         <div
-          key={`${item.img}-${i}`}
-          className="cursor-pointer"
+          key={item.img}
+          className="cursor-pointer my-1"
           onClick={() => openLightbox(item.img, i)}
         >
-          <div className="w-full group overflow-hidden m-1">
+          <div className="w-full group overflow-hidden">
             <Motion.img
               // {...Animations(imgVariants)}
               src={item.img}
               alt={item.title}
-              loading="lazy"
               decoding="async"
-              fetchPriority="low"
               className="cursor-trigger w-full h-auto object-cover transition-all duration-300 ease-in group-hover:blur-[1px] md:group-hover:scale-105"
               style={{ display: "block" }}
               data-cursor-type="expand"
@@ -376,7 +427,7 @@ export default function PortfolioComponent() {
       ref={containerRef}
       className={`${
         responsive.isResponsive ? "w-full" : "w-3/4"
-      } mb-34 h-max flex gap-1 transition-all duration-300 ${
+      }  h-max flex gap-1 transition-all duration-300  ${
         columnLayout === 1 ? "flex-col " : ""
       }`}
     >
@@ -521,6 +572,75 @@ export default function PortfolioComponent() {
     if (!lightboxImage) hasAnimatedIn.current = false;
   }, [lightboxImage]);
 
+  // Transition Overlays
+
+  useLayoutEffect(() => {
+    gsap.set(leftOverlayRef.current, { xPercent: -130, skewX: -13 });
+    gsap.set(rightOverlayRef.current, { xPercent: 130, skewX: -13 });
+    gsap.set(helper1OverlayRef.current, { xPercent: -130, skewX: -13 });
+    gsap.set(helper2OverlayRef.current, { xPercent: 130, skewX: -13 });
+  }, []);
+
+  const showTransitionOverlays = useCallback((onComplete) => {
+    gsap.killTweensOf([
+      leftOverlayRef.current,
+      rightOverlayRef.current,
+      helper1OverlayRef.current,
+      helper2OverlayRef.current,
+    ]);
+    const tl = gsap.timeline({ onComplete });
+    tl.to(
+      leftOverlayRef.current,
+      { xPercent: 74.5, duration: 0.75, ease: "power3.inOut" },
+      0.75,
+    )
+      .to(
+        rightOverlayRef.current,
+        { xPercent: -74.5, duration: 0.75, ease: "power3.inOut" },
+        0.75,
+      )
+      .to(
+        helper1OverlayRef.current,
+        { xPercent: 130, duration: 0.75, ease: "power3.inOut" },
+        1,
+      )
+      .to(
+        helper2OverlayRef.current,
+        { xPercent: -130, duration: 0.75, ease: "power3.inOut" },
+        1,
+      );
+  }, []);
+
+  const hideTransitionOverlays = useCallback(() => {
+    gsap.killTweensOf([
+      leftOverlayRef.current,
+      rightOverlayRef.current,
+      helper1OverlayRef.current,
+      helper2OverlayRef.current,
+    ]);
+    const tl = gsap.timeline();
+    tl.to(
+      leftOverlayRef.current,
+      { xPercent: -130, duration: 0.95, ease: "power3.inOut" },
+      0.25,
+    )
+      .to(
+        rightOverlayRef.current,
+        { xPercent: 130, duration: 0.95, ease: "power3.inOut" },
+        0.25,
+      )
+      .to(
+        helper1OverlayRef.current,
+        { xPercent: -130, duration: 0.8, ease: "power3.inOut" },
+        0.15,
+      )
+      .to(
+        helper2OverlayRef.current,
+        { xPercent: 130, duration: 0.8, ease: "power3.inOut" },
+        0.15,
+      );
+  }, []);
+
   // Filter Menu
   useLayoutEffect(() => {
     if (mobileMenuOpen) {
@@ -529,7 +649,7 @@ export default function PortfolioComponent() {
       if (menuItems?.length) {
         gsap.killTweensOf(menuItems);
         gsap.set(menuItems, { y: -50, opacity: 0 });
-        gsap.set(menu, { x: 100, opacity: 0 });
+        gsap.set(menu, { x: -100, opacity: 0 });
         gsap.to(menuItems, {
           y: 0,
           opacity: 1,
@@ -554,7 +674,7 @@ export default function PortfolioComponent() {
       gsap.to(menuItems, {
         y: -50,
         opacity: 0,
-        duration: 0.25,
+        duration: 0.35,
         stagger: 0.04,
         ease: "power2.inOut",
         onComplete: () => {
@@ -567,21 +687,43 @@ export default function PortfolioComponent() {
     }
   }, []);
 
+  useLayoutEffect(() => {
+    const container = itemsRef.current;
+    if (!container) return;
+
+    gsap.set(container, { opacity: 0, y: 10 });
+
+    const imgs = Array.from(container.querySelectorAll("img")).slice(0, 16);
+    const ready = imgs.map((img) =>
+      img.complete
+        ? Promise.resolve()
+        : new Promise((resolve) => {
+            img.onload = resolve;
+            img.onerror = resolve;
+          }),
+    );
+
+    Promise.all(ready).then(() => {
+      gsap.to(container, {
+        opacity: 1,
+        y: 0,
+        delay: 0.45,
+        duration: 0.65,
+        ease: "power3.inOut",
+      });
+      hideTransitionOverlays();
+    });
+  }, [activeFilter, columnLayout, hideTransitionOverlays]);
+
   const handleFilterClick = useCallback(
     (filterId) => {
       if (filterId === activeFilter) return;
 
-      if (mobileMenuOpen) {
-        animateFilterMenuOut(() => setMobileMenuOpen(false));
-      }
+      const closeMenuAndSwap = () => {
+        showTransitionOverlays(() => {
+          setMobileMenuOpen(false);
+          setActiveFilter(filterId); // triggers shared useLayoutEffect
 
-      gsap.to(itemsRef.current, {
-        opacity: 0,
-        y: 10,
-        duration: 0.35,
-        ease: "power2.out",
-        onComplete: () => {
-          setActiveFilter(filterId);
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
               lenisRef.current?.scrollTo(0, { immediate: true });
@@ -590,19 +732,23 @@ export default function PortfolioComponent() {
                 suppressScrollTop.current = false;
               }, 600);
               lenisRef.current?.resize();
-
-              gsap.to(itemsRef.current, {
-                opacity: 1,
-                y: 0,
-                duration: 1,
-                ease: "power3.inOut",
-              });
             });
           });
-        },
-      });
+        });
+      };
+
+      if (mobileMenuOpen) {
+        animateFilterMenuOut(closeMenuAndSwap);
+      } else {
+        closeMenuAndSwap();
+      }
     },
-    [activeFilter, mobileMenuOpen, animateFilterMenuOut],
+    [
+      activeFilter,
+      mobileMenuOpen,
+      animateFilterMenuOut,
+      showTransitionOverlays,
+    ],
   );
 
   const openFilterMenu = useCallback(() => {
@@ -642,7 +788,7 @@ export default function PortfolioComponent() {
       gsap.to(icons, {
         x: -10,
         opacity: 0,
-        duration: 0.25,
+        duration: 0.35,
         stagger: 0.1,
         ease: "power2.in",
         onComplete: () => {
@@ -659,44 +805,36 @@ export default function PortfolioComponent() {
     (newColumns) => {
       if (newColumns === columnLayout) return;
 
-      const runLayoutChange = () => {
-        gsap.to(itemsRef.current, {
-          opacity: 0,
-          y: 10,
-          duration: 0.35,
-          onComplete: () => {
-            setColumnLayout(newColumns);
-            requestAnimationFrame(() => {
-              requestAnimationFrame(() => {
-                lenisRef.current?.scrollTo(0, { immediate: true });
-                suppressScrollTop.current = true;
-                setTimeout(() => {
-                  suppressScrollTop.current = false;
-                }, 600);
-                lenisRef.current?.resize();
+      const closeMenuAndSwap = () => {
+        showTransitionOverlays(() => {
+          setLayoutMenuOpen(false);
+          setColumnLayout(newColumns);
 
-                gsap.to(itemsRef.current, {
-                  opacity: 1,
-                  y: 0,
-                  duration: 1,
-                  ease: "power3.inOut",
-                });
-              });
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              lenisRef.current?.scrollTo(0, { immediate: true });
+              suppressScrollTop.current = true;
+              setTimeout(() => {
+                suppressScrollTop.current = false;
+              }, 600);
+              lenisRef.current?.resize();
             });
-          },
+          });
         });
       };
 
       if (layoutMenuOpen) {
-        animateLayoutMenuOut(() => {
-          setLayoutMenuOpen(false);
-          runLayoutChange();
-        });
+        animateLayoutMenuOut(closeMenuAndSwap);
       } else {
-        runLayoutChange();
+        closeMenuAndSwap();
       }
     },
-    [columnLayout, layoutMenuOpen, animateLayoutMenuOut],
+    [
+      columnLayout,
+      layoutMenuOpen,
+      animateLayoutMenuOut,
+      showTransitionOverlays,
+    ],
   );
 
   const openLayoutMenu = useCallback(() => {
@@ -732,14 +870,15 @@ export default function PortfolioComponent() {
 
   return (
     <div
-      className={`relative w-[100vw] h-[calc(100dvh)] tablet:h-[calc(100dvh-18px)] tablet:mt-[18px] overflow-hidden shadow-xl bg-bckg/70 `}
+      className={`relative w-[100vw] h-[calc(100dvh)] xl:h-[calc(100dvh-18px)] xl:mt-[18px] overflow-hidden shadow-xl bg-bckg/88 xl:bg-bckg/70 `}
     >
       <Frame />
+
       {/* Desktop Filters */}
       <div
         className={`${
           responsive.isMobile || responsive.isTablet ? "hidden" : "flex"
-        } fixed right-[-0.5rem] z-[990] xl:h-[calc(100dvh)] w-1/3 pb-48 flex-col justify-end items-end mix-blend-difference pointer-events-none`}
+        } fixed right-[-0.5rem] z-[990] xl:h-[calc(100dvh)] w-1/3 pb-48 flex-col justify-end items-end mix-blend-difference select-none pointer-events-none`}
       >
         {filters.map((filter, index) => (
           <FilterButton
@@ -751,16 +890,59 @@ export default function PortfolioComponent() {
           />
         ))}
       </div>
+      {/* Gallery */}
+      <div className="relative w-full h-full">
+        <div
+          ref={itemsRef}
+          className="w-full h-full mx-0 overflow-y-auto scrollable-container overflow-x-hidden pt-21 xl:pt-0"
+        >
+          <div ref={contentRef}>
+            {galleryContent}
+            <div className="h-12 xl:h-48" />
+          </div>
+        </div>
+
+        {/* Transition overlays */}
+        <div
+          ref={leftOverlayRef}
+          className="pointer-events-none fixed top-0 left-0 h-full w-2/3 bg-bckg z-[40]"
+        />
+        <div
+          ref={rightOverlayRef}
+          className="pointer-events-none fixed top-0 right-0 h-full w-2/3 bg-surface z-[40]"
+        />
+        <div
+          ref={helper1OverlayRef}
+          className="pointer-events-none fixed top-0 left-0 h-full w-2/3 bg-surface z-[41]"
+        />
+        <div
+          ref={helper2OverlayRef}
+          className="pointer-events-none fixed top-0 right-0 h-full w-2/3 bg-bckg z-[41]"
+        />
+      </div>
 
       {/* Mobile Controls */}
-      <div
+      <Motion.div
         ref={menuWrapperRef}
-        className={`${responsive.isMobile || responsive.isTablet ? "flex" : "hidden"} relative w-full z-[99] items-center justify-between bg-black px-6 pt-2`}
+        initial={false}
+        animate={{
+          y: mobileControlsVisible ? 0 : -80,
+          opacity: mobileControlsVisible ? 1 : 0,
+          pointerEvents: mobileControlsVisible ? "auto" : "none",
+        }}
+        transition={{
+          delay: 0.25,
+          duration: 1,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+        className={`${
+          responsive.isMobile || responsive.isTablet ? "flex" : "hidden"
+        } fixed top-0 left-0 z-[50] w-full flex-col bg-bckg items-start justify-between px-6 pt-2`}
       >
         {/* Layout */}
         <div
           onClick={openLayoutMenu}
-          className="flex items-center gap-1 bg-black cursor-pointer"
+          className="flex items-center h-9 gap-1 cursor-pointer border-b border-white/50"
         >
           <span className="text-white">Išdėstymas</span>
           {!layoutMenuOpen && (
@@ -786,7 +968,7 @@ export default function PortfolioComponent() {
                     e.stopPropagation();
                     handleLayoutChange(col);
                   }}
-                  className={`mobile-layout-item w-9 h-9 flex items-center justify-center transition-all ${
+                  className={`mobile-layout-item w-9 h-9 flex items-center justify-center transition-all ease 0.75s ${
                     columnLayout === col
                       ? "text-accent scale-110"
                       : "text-white/60"
@@ -804,35 +986,37 @@ export default function PortfolioComponent() {
         {/* Filter */}
         <div
           onClick={openFilterMenu}
-          className="flex items-center gap-1 bg-black cursor-pointer"
+          className="flex items-center gap-1 cursor-pointer"
         >
-          {!mobileMenuOpen && (
-            <Motion.div
-              key={activeFilter}
-              initial={{ opacity: 0, x: 10 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -10 }}
-              transition={{ duration: 0.15 }}
-              className="font-bold text-accent text-sm"
-            >
-              {filters.find((f) => f.id === activeFilter)?.label}
-            </Motion.div>
-          )}
-          <button className="px-2 py-2 text-white">Filtras</button>
+          <button className="pr-2 py-2 text-white">Filtras</button>
+          <AnimatePresence mode="wait">
+            {!mobileMenuOpen && (
+              <Motion.div
+                key={activeFilter}
+                initial={{ opacity: 0, x: 10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -10 }}
+                transition={{ duration: 0.15 }}
+                className="font-bold text-accent text-sm"
+              >
+                {filters.find((f) => f.id === activeFilter)?.label}
+              </Motion.div>
+            )}
+          </AnimatePresence>
         </div>
-      </div>
+      </Motion.div>
 
       {/* Mobile Filter Menu */}
       {mobileMenuOpen && (
         <div
           ref={mobileMenuRef}
-          className="fixed top-[84px] right-0 flex flex-col items-end w-[165px] bg-black z-30 py-2 overflow-hidden"
+          className="fixed top-[84px] left-0 flex flex-col items-end w-[165px] bg-bckg py-2 overflow-hidden z-[50]"
         >
           {filters.map((filter) => (
             <button
               key={filter.id}
               onClick={() => handleFilterClick(filter.id)}
-              className={`mobile-filter-item w-full text-right px-5 py-2.5 transition-all ${
+              className={`mobile-filter-item w-full text-left px-5 py-1.5 transition-all ${
                 activeFilter === filter.id ? "text-accent" : "text-white"
               }`}
             >
@@ -853,14 +1037,6 @@ export default function PortfolioComponent() {
           }}
         />
       )}
-
-      {/* Gallery */}
-      <div
-        ref={itemsRef}
-        className="w-full h-full mx-0 overflow-y-auto scrollable-container"
-      >
-        <div ref={contentRef}>{galleryContent}</div>
-      </div>
 
       {/* Lightbox */}
       {lightboxImage && (
@@ -892,7 +1068,7 @@ export default function PortfolioComponent() {
             ref={currentImageRef}
             src={lightboxImage}
             alt="Lightbox"
-            className="cursor-trigger max-w-[95vw] max-h-[100vh] w-auto h-auto object-contain relative"
+            className="cursor-trigger  max-w-[95vw] max-h-[100vh] w-auto h-auto object-contain relative"
             onClick={(e) => {
               e.stopPropagation();
               closeLightbox();
@@ -910,7 +1086,11 @@ export default function PortfolioComponent() {
           lenis={lenisRef.current}
           position="bottom"
           backgroundColor="bg-gray-700/50"
-          progressColor="bg-gradient-to-r from-white via-black to-white"
+          progressColor={
+            responsive.isMobilePortrait
+              ? "bg-gradient-to-b from-white via-black to-white"
+              : "bg-gradient-to-r from-white via-black to-white"
+          }
         />
       )}
       <ScrollTop

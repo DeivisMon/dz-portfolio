@@ -6,7 +6,7 @@ export default function PageSlideInTransition({ children }) {
 
   const containerVariants = {
     hidden: {
-      y: responsive.isMobile || responsive.isTablet ? 25 : 15,
+      y: responsive.isMobile || responsive.isTablet ? 25 : 25,
       opacity: 1,
     },
     show: {

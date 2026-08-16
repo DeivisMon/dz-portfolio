@@ -31,7 +31,7 @@ export default function DesktopPageTransitions({ children }) {
       // scale: 0.95,
       transition: {
         duration: 0.75,
-        delay: 0.25,
+        delay: 0.2,
         ease: [0.65, 0, 0.35, 1],
       },
     },

@@ -4,30 +4,30 @@ import gsap from "gsap";
 const base = import.meta.env.BASE_URL;
 
 const images = {
-  img1: `${base}images/loader/loader-01.webp`,
-  img2: `${base}images/loader/loader-02.webp`,
-  img3: `${base}images/loader/loader-03.webp`,
-  img4: `${base}images/loader/loader-04.webp`,
+  img9: `${base}images/loader/loader-01.webp`,
+  img8: `${base}images/loader/loader-02.webp`,
+  img7: `${base}images/loader/loader-03.webp`,
+  img6: `${base}images/loader/loader-04.webp`,
   img5: `${base}images/loader/loader-05.webp`,
-  img6: `${base}images/loader/loader-06.webp`,
-  img7: `${base}images/loader/loader-07.webp`,
-  img8: `${base}images/loader/loader-08.webp`,
-  img9: `${base}images/loader/loader-09.webp`,
-  img10: `${base}images/loader/loader-10.webp`,
-  img11: `${base}images/loader/loader-11.webp`,
-  img12: `${base}images/loader/loader-12.webp`,
-  img13: `${base}images/loader/loader-13.webp`,
-  img14: `${base}images/loader/loader-14.webp`,
-  img15: `${base}images/loader/loader-15.webp`,
-  img16: `${base}images/loader/loader-16.webp`,
-  img17: `${base}images/loader/loader-17.webp`,
-  img18: `${base}images/loader/loader-18.webp`,
-  img19: `${base}images/loader/loader-19.webp`,
-  img20: `${base}images/loader/loader-20.webp`,
-  img21: `${base}images/loader/loader-21.webp`,
+  img4: `${base}images/loader/loader-06.webp`,
+  img3: `${base}images/loader/loader-07.webp`,
+  img2: `${base}images/loader/loader-08.webp`,
+  img1: `${base}images/loader/loader-09.webp`,
+  img19: `${base}images/loader/loader-10.webp`,
+  img18: `${base}images/loader/loader-11.webp`,
+  img17: `${base}images/loader/loader-12.webp`,
+  img16: `${base}images/loader/loader-13.webp`,
+  img15: `${base}images/loader/loader-14.webp`,
+  img14: `${base}images/loader/loader-15.webp`,
+  img13: `${base}images/loader/loader-16.webp`,
+  img12: `${base}images/loader/loader-17.webp`,
+  img11: `${base}images/loader/loader-18.webp`,
+  img10: `${base}images/loader/loader-19.webp`,
+  img24: `${base}images/loader/loader-20.webp`,
+  img23: `${base}images/loader/loader-21.webp`,
   img22: `${base}images/loader/loader-22.webp`,
-  img23: `${base}images/loader/loader-23.webp`,
-  img24: `${base}images/loader/loader-24.webp`,
+  img21: `${base}images/loader/loader-23.webp`,
+  img20: `${base}images/loader/loader-24.webp`,
 };
 
 const NUMBER_SEQUENCE = [0, 23, 48, 71, 100];
@@ -319,8 +319,8 @@ export default function Loader({ onComplete }) {
         <div className="relative flex items-center justify-center">
           <span></span>
           <svg
-            width="400"
-            height="400"
+            width="300"
+            height="300"
             viewBox="0 0 100 100"
             className="absolute -z-10 animate-spin"
           >
@@ -357,8 +357,8 @@ export default function Loader({ onComplete }) {
             />
           </svg> */}
           <svg
-            width="450"
-            height="450"
+            width="350"
+            height="350"
             viewBox="0 0 100 100"
             className="absolute -z-10 rotate-270 animate-spin"
           >
@@ -395,8 +395,8 @@ export default function Loader({ onComplete }) {
             />
           </svg> */}
           <svg
-            width="500"
-            height="500"
+            width="400"
+            height="400"
             viewBox="0 0 100 100"
             className="absolute -z-10 rotate-270 animate-spin"
           >

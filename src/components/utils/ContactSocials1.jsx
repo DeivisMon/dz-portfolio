@@ -231,7 +231,7 @@ export default function ContactSocials() {
       {/* Heading */}
       <Motion.div
         variants={itemVariants}
-        className={`${headingMargin} relative flex flex-col justify-center gap-0 lg:gap-4 w-full mt-0 lg:mt-36 `}
+        className={`${headingMargin} relative flex flex-col justify-center items-center gap-0 lg:gap-4 w-full mt-0 lg:mt-42 `}
       >
         <h2
           className={`

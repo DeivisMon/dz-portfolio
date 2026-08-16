@@ -96,7 +96,7 @@ export default function ContactForm() {
       style={{ perspective: "1000px" }}
     >
       <div
-        className="w-full transition-transform duration-700 mt-0 lg:mt-36"
+        className="w-full transition-transform duration-700 mt-0 lg:mt-42"
         style={{
           transformStyle: "preserve-3d",
           transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",

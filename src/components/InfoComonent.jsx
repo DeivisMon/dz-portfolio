@@ -10,7 +10,7 @@ import ContactForm from "./utils/ContactForm";
 export default function InfoComponent() {
   // true = About Me visible (default), photo slides over Socials
   // false = Socials visible, photo slides over About Me
-  const [showAbout, setShowAbout] = useState(true);
+  const [showContactForm, setShowContactForm] = useState(true);
   const [buttonTransform, setButtonTransform] = useState({ x: 0, y: 0 });
   const buttonRef = useRef(null);
   const responsive = useResponsive();
@@ -51,24 +51,24 @@ export default function InfoComponent() {
       !responsive.isTabletLandscape);
 
   // Image's "home" position (translate 0,0) sits over the LEFT/TOP slot
-  // (where About Me lives). To show About Me by default, the photo needs
+  // (where ContactForm Me lives). To show ContactForm Me by default, the photo needs
   // to start slid over to the RIGHT/BOTTOM slot (over Socials) instead.
   const getImageTransform = () => {
-    if (showAbout) {
+    if (showContactForm) {
       return isVerticalLayout ? "translateY(100%)" : "translateX(100%)";
     }
     return "translate(0, 0)";
   };
 
   const toggleView = () => {
-    setShowAbout((prev) => !prev);
+    setShowContactForm((prev) => !prev);
   };
 
-  const isAbout = showAbout;
+  const isContactForm = showContactForm;
 
   return (
     <div
-      className={`relative w-[100vw] h-[calc(100dvh)] xl:h-[calc(100dvh-18px)] xl:mt-[18px] overflow-hidden shadow-xl bg-bckg/70`}
+      className={`relative w-[100vw] h-[calc(100dvh)] xl:h-[calc(100dvh-18px)] xl:mt-[18px] overflow-hidden shadow-xl bg-bckg/88 xl:bg-bckg/70`}
     >
       <Frame />
 
@@ -78,7 +78,7 @@ export default function InfoComponent() {
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >
-        {/* About Me Section (LEFT / TOP) */}
+        {/* ContactForm Me Section (LEFT / TOP) */}
         <div
           className={`absolute ${isVerticalLayout ? "top-0 left-0 w-full h-1/2" : "left-0 top-0 w-1/2 h-full"} flex justify-center px-8 z-10 sm:px-8 lg:px-24`}
         >
@@ -104,12 +104,12 @@ export default function InfoComponent() {
         }}
         onClick={toggleView}
       >
-        <span className="absolute -left-3 top-1/2 transform  -translate-y-1/2 rotate-90  z-12">
+        {/* <span className="absolute -left-3 top-1/2 transform  -translate-y-1/2 rotate-90  z-12">
           <IoTriangleSharp size={40} />
-        </span>
+        </span> */}
       </div>
 
-      {/* ChangeSideButton — toggles the left pane between About Me and Socials */}
+      {/* ChangeSideButton — toggles the left pane between ContactForm Me and Socials */}
       <div
         className={`absolute z-30 ${
           isVerticalLayout
@@ -117,33 +117,13 @@ export default function InfoComponent() {
             : "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
         }`}
       >
-        {/* <ContactChangeSideButton
+        <ContactChangeSideButton
           onClick={toggleView}
           buttonRef={buttonRef}
           buttonTransform={buttonTransform}
-          currentText={
-            isAbout ? (
-              "Susisiek"
-            ) : (
-              <>
-                Apie
-                <br />
-                Mane
-              </>
-            )
-          }
-          nextText={
-            isAbout ? (
-              <>
-                Apie
-                <br />
-                Mane
-              </>
-            ) : (
-              "Susisiek"
-            )
-          }
-        /> */}
+          currentText={isContactForm ? "Susisiek" : <>Parašyk</>}
+          nextText={isContactForm ? <>Parašyk</> : "Susisiek"}
+        />
       </div>
     </div>
   );

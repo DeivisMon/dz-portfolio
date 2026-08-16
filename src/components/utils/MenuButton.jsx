@@ -17,7 +17,7 @@ const MenuBtn = ({ isMenuOpen, toggleMenu, springX, springY, isLocked }) => {
       : "w-40";
 
   const buttonPosition = isCompact
-    ? "top-4 right-3 h-11"
+    ? "top-6 right-3 h-11"
     : "top-16 right-8 h-20";
 
   const menuTextPosition = isCompact ? "right-11" : "right-[90px]";
