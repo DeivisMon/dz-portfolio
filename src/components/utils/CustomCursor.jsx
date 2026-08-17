@@ -458,7 +458,7 @@ const CustomCursor = ({ triggerSelector = ".cursor-trigger" }) => {
         iconType={iconType}
       />
 
-      {/* Larger cursor circle with icon */}
+      {/* Larger cursor circle */}
       <CursorElement
         size={56}
         filled={true}

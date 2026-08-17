@@ -95,14 +95,13 @@ export default function InfoComponent() {
 
       {/* Sliding Image Overlay - Controlled by ContactChangeSideButton */}
       <div
-        className={`cursor-trigger absolute transition-transform duration-500 ease-out z-10 ${isVerticalLayout ? "h-1/2 w-full" : "w-1/2 h-full"} bg-cover bg-center bg-no-repeat`}
+        className={`absolute transition-transform duration-500 ease-out z-10 ${isVerticalLayout ? "h-1/2 w-full" : "w-1/2 h-full"} bg-cover bg-center bg-no-repeat`}
         style={{
           backgroundImage: `url('${import.meta.env.BASE_URL}images/contact.jpg')`,
           transform: getImageTransform(),
           top: 0,
           left: 0,
         }}
-        onClick={toggleView}
       >
         {/* <span className="absolute -left-3 top-1/2 transform  -translate-y-1/2 rotate-90  z-12">
           <IoTriangleSharp size={40} />

@@ -195,6 +195,8 @@ export default function PortfolioComponent() {
   const [layoutMenuOpen, setLayoutMenuOpen] = useState(false);
   const [columnLayout, setColumnLayout] = useState(3);
   const [mobileControlsVisible, setMobileControlsVisible] = useState(true);
+  const [gallerySourceFilter, setGallerySourceFilter] = useState("all"); // drives filteredItems/columns
+  const [galleryColumnLayout, setGalleryColumnLayout] = useState(3);
   const responsive = useResponsive();
 
   // Refs
@@ -375,9 +377,9 @@ export default function PortfolioComponent() {
   }, [imageHeights]);
 
   const filteredItems = useMemo(() => {
-    if (activeFilter === "all") return items;
-    return items.filter((item) => item.tag.includes(activeFilter));
-  }, [activeFilter]);
+    if (gallerySourceFilter === "all") return items;
+    return items.filter((item) => item.tag.includes(gallerySourceFilter));
+  }, [gallerySourceFilter]);
 
   const columns = useMemo(() => {
     const cols = Array.from({ length: columnLayout }, () => []);
@@ -420,7 +422,7 @@ export default function PortfolioComponent() {
     });
 
     return cols;
-  }, [filteredItems, columnLayout, imageHeights, containerWidth]);
+  }, [filteredItems, galleryColumnLayout, imageHeights, containerWidth]);
 
   const galleryContent = (
     <div
@@ -428,16 +430,16 @@ export default function PortfolioComponent() {
       className={`${
         responsive.isResponsive ? "w-full" : "w-3/4"
       }  h-max flex gap-1 transition-all duration-300  ${
-        columnLayout === 1 ? "flex-col " : ""
+        galleryColumnLayout === 1 ? "flex-col " : ""
       }`}
     >
       {columns.map((column, index) => (
         <div
           key={index}
           className={`${
-            columnLayout === 1
+            galleryColumnLayout === 1
               ? "w-full"
-              : columnLayout === 2
+              : galleryColumnLayout === 2
                 ? "flex-1 min-w-0"
                 : "flex-1 min-w-0"
           }`}
@@ -592,22 +594,22 @@ export default function PortfolioComponent() {
     tl.to(
       leftOverlayRef.current,
       { xPercent: 74.5, duration: 0.75, ease: "power3.inOut" },
-      0.75,
+      0.025,
     )
       .to(
         rightOverlayRef.current,
         { xPercent: -74.5, duration: 0.75, ease: "power3.inOut" },
-        0.75,
+        0.025,
       )
       .to(
         helper1OverlayRef.current,
         { xPercent: 130, duration: 0.75, ease: "power3.inOut" },
-        1,
+        0,
       )
       .to(
         helper2OverlayRef.current,
         { xPercent: -130, duration: 0.75, ease: "power3.inOut" },
-        1,
+        0,
       );
   }, []);
 
@@ -693,7 +695,7 @@ export default function PortfolioComponent() {
 
     gsap.set(container, { opacity: 0, y: 10 });
 
-    const imgs = Array.from(container.querySelectorAll("img")).slice(0, 16);
+    const imgs = Array.from(container.querySelectorAll("img")).slice(0, 8);
     const ready = imgs.map((img) =>
       img.complete
         ? Promise.resolve()
@@ -707,22 +709,24 @@ export default function PortfolioComponent() {
       gsap.to(container, {
         opacity: 1,
         y: 0,
-        delay: 0.45,
-        duration: 0.65,
+        duration: 1.5,
         ease: "power3.inOut",
       });
-      hideTransitionOverlays();
     });
-  }, [activeFilter, columnLayout, hideTransitionOverlays]);
+  }, [gallerySourceFilter, galleryColumnLayout]);
 
   const handleFilterClick = useCallback(
     (filterId) => {
       if (filterId === activeFilter) return;
 
       const closeMenuAndSwap = () => {
+        // Label/menu updates immediately
+        setMobileMenuOpen(false);
+        setActiveFilter(filterId);
+
+        // Gallery content only swaps once the overlay has covered the screen
         showTransitionOverlays(() => {
-          setMobileMenuOpen(false);
-          setActiveFilter(filterId); // triggers shared useLayoutEffect
+          setGallerySourceFilter(filterId);
 
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
@@ -734,6 +738,7 @@ export default function PortfolioComponent() {
               lenisRef.current?.resize();
             });
           });
+          hideTransitionOverlays();
         });
       };
 
@@ -748,6 +753,7 @@ export default function PortfolioComponent() {
       mobileMenuOpen,
       animateFilterMenuOut,
       showTransitionOverlays,
+      hideTransitionOverlays,
     ],
   );
 
@@ -806,9 +812,11 @@ export default function PortfolioComponent() {
       if (newColumns === columnLayout) return;
 
       const closeMenuAndSwap = () => {
+        setLayoutMenuOpen(false);
+        setColumnLayout(newColumns); // icon highlight, immediate
+
         showTransitionOverlays(() => {
-          setLayoutMenuOpen(false);
-          setColumnLayout(newColumns);
+          setGalleryColumnLayout(newColumns); // actual grid re-layout, delayed
 
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
@@ -820,6 +828,7 @@ export default function PortfolioComponent() {
               lenisRef.current?.resize();
             });
           });
+          hideTransitionOverlays();
         });
       };
 
@@ -834,6 +843,7 @@ export default function PortfolioComponent() {
       layoutMenuOpen,
       animateLayoutMenuOut,
       showTransitionOverlays,
+      hideTransitionOverlays,
     ],
   );
 

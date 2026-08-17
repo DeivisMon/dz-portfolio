@@ -219,7 +219,7 @@ export default function NavBar() {
                   textShadow="text-shadow-lg/40"
                   letterSpacing="px-[clamp(1px,0.35vw,8px)]"
                 />
-                <HoverLines translateXminus={-57} translateXplus={57} />
+                {/* <HoverLines translateXminus={-57} translateXplus={57} /> */}
               </div>
             </div>
 
