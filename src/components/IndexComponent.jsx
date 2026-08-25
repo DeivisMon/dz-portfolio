@@ -445,7 +445,10 @@ export default function IndexComponent() {
       ref={sliderRef}
     >
       <Frame />
-      <div className="slide-track"></div>
+      <div
+        className="slide-track cursor-trigger"
+        data-cursor-type="scroll"
+      ></div>
     </div>
   );
 }

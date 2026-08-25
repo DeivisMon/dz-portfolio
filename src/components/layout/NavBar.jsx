@@ -189,7 +189,7 @@ export default function NavBar() {
         className={`navbar fixed transition-[z-index] ${isTransitioning ? "z-[2000]" : "z-[501]"} mix-blend-exclusion`}
       >
         {/* Shared row: logo left, quote right */}
-        <div className="fixed -bottom-4 left-0 w-full xl:h-[175px] flex justify-between items-center pointer-events-none ">
+        <div className="fixed -bottom-4 xl:-bottom-8 -left-3 w-full xl:h-[175px] flex justify-between items-center pointer-events-none ">
           {/* LEFT — logo */}
           <div
             className={`pointer-events-auto transition-[z-index]
@@ -203,10 +203,10 @@ export default function NavBar() {
               ${
                 responsive.isResponsive
                   ? "text-[3rem]"
-                  : "text-[clamp(2.5rem,11vw+0.5rem,12.5rem)]"
+                  : "text-[clamp(2.5rem,11vw+0.5rem,10.5rem)]"
               }`}
             >
-              <div className="flex group/button relative transition-all duration-500 ease-in-out select-none ">
+              <div className="flex group/button relative transition-all duration-500 ease-in-out select-none">
                 <AnimatedText
                   text="Žvinklys"
                   textColor="text-header"
@@ -215,7 +215,7 @@ export default function NavBar() {
                   delay={0.5}
                   delayChildren={1.25}
                   enableHover={false}
-                  scaleX="scale-x-152"
+                  scaleX="scale-x-142"
                   textShadow="text-shadow-lg/40"
                   letterSpacing="px-[clamp(1px,0.35vw,8px)]"
                 />
@@ -343,7 +343,7 @@ export default function NavBar() {
                           filter:
                             !isDesktop || hoveredItem === null || isHovered
                               ? "blur(0px)"
-                              : "blur(2px)",
+                              : "blur(4px)",
                         }}
                       >
                         <HoverLines translateXminus={-70} translateXplus={70} />

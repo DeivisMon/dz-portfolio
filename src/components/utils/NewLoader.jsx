@@ -30,8 +30,7 @@ export default function Loader({ images = defaultImages, onComplete }) {
       );
 
       const tl = gsap.timeline({
-        delay: 3.25,
-        onComplete: () => onComplete && onComplete(),
+        delay: 0.75,
       });
 
       // Progress bar
@@ -88,16 +87,18 @@ export default function Loader({ images = defaultImages, onComplete }) {
       tl.to(
         ".preloader-header",
         {
-          y: "-200%",
-          scale: 0.35,
+          scaleY: 0.35,
           duration: 1.75,
           opacity: 0,
           ease: "hop",
           onStart: () => {
             gsap.set(".preloader-header", { mixBlendMode: "difference" });
           },
+          onComplete: () => {
+            if (onComplete) onComplete();
+          },
         },
-        "-=0.5",
+        "<",
       );
 
       // Preloader curtain closes
@@ -108,29 +109,7 @@ export default function Loader({ images = defaultImages, onComplete }) {
           duration: 1.75,
           ease: "hop",
         },
-        "-=1",
-      );
-
-      tl.to(
-        ".header-row .line",
-        {
-          yPercent: 0,
-          duration: 1,
-          ease: "power4.out",
-          stagger: 0.1,
-        },
-        "-=0.75",
-      );
-
-      tl.to(
-        ".divider",
-        {
-          scaleX: 1,
-          duration: 1,
-          ease: "power4.out",
-          stagger: 0.1,
-        },
-        "<",
+        "-=0.15",
       );
     }, scopeRef);
 
@@ -139,7 +118,7 @@ export default function Loader({ images = defaultImages, onComplete }) {
 
   return (
     <div ref={scopeRef}>
-      <div className="preloader">
+      <div className="preloader fixed bg-bckg top-0 z-[2000]">
         <div className="progress-bar" />
 
         <div className="preloader-images">
@@ -151,13 +130,13 @@ export default function Loader({ images = defaultImages, onComplete }) {
         </div>
       </div>
 
-      <div className="preloader-header xl:text-[184px] mix-blend-difference text-header font-bold">
+      <div className="preloader-header logo xl:text-[184px] mix-blend-difference text-header font-bold">
         <AnimatedText
           text="Žvinklys"
           textColor="text-header"
           duration={0.75}
-          delay={0.5}
-          delayChildren={1.25}
+          delay={0.15}
+          delayChildren={0.5}
           enableHover={false}
           scaleX="scale-x-152"
           textShadow="text-shadow-lg/40"

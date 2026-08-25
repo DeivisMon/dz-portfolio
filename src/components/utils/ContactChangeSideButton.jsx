@@ -29,7 +29,7 @@ export default function ContactChangeSideButton({
       onClick={handleClick}
       onMouseEnter={() => setIsActive(true)}
       onMouseLeave={() => setIsActive(false)}
-      className="cursor-trigger cursor-pointer group relative w-16 h-16 xl:w-24 xl:h-24 rounded-full line-clamp-2 text-[10px] tracking-[1.5px] md:text-xs xl:text-[16px] font-bold flex items-center justify-center transition-all duration-500 ease-out overflow-hidden"
+      className="cursor-pointer group relative w-16 h-16 xl:w-24 xl:h-24 rounded-full line-clamp-2 text-[10px] tracking-[1.5px] md:text-xs xl:text-[16px] font-bold flex items-center justify-center transition-all duration-500 ease-out overflow-hidden"
       type="button"
       style={{
         transform: `translate(${buttonTransform.x}px, ${

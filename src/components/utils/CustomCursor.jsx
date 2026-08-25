@@ -11,6 +11,7 @@ import {
   FiChevronRight,
   FiCopy,
 } from "react-icons/fi";
+import { CgScrollH } from "react-icons/cg";
 
 const ICONS = {
   expand: FiMaximize2,
@@ -21,6 +22,7 @@ const ICONS = {
   prev: FiChevronLeft,
   next: FiChevronRight,
   copy: FiCopy,
+  scroll: CgScrollH,
 };
 
 // Lerp

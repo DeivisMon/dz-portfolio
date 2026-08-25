@@ -3,7 +3,7 @@
   width: 100vw;
   overflow: hidden;
   user-select: none;
-  z-index: 10;
+  z-index: 500;
 }
 
 .slide-track {

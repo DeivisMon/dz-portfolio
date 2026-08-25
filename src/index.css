@@ -38,6 +38,16 @@
   --color-accent: #a67c52;
   --color-border: #443a33;
 
+  /* --color-bckg: #222831; */
+  /* --color-darkie: #0f0d0b; */
+  /* --color-navbar: #1b1815; */
+  /* --color-surface: #393e46; */
+  /* --color-text: #948979; */
+  /* --color-muted: #a99988; */
+  /* --color-header: #efe3d3; */
+  /* --color-accent: #dfd0b8; */
+  /* --color-border: #443a33; */
+
   --breakpoint-tablet: 1366px;
   --animate-wiggle: wiggle 2s ease-in-out infinite;
 }
@@ -118,6 +128,18 @@ body {
   min-height: 100dvh;
 }
 
+.logo {
+  /* font-family: "SF Old Republic", sans-serif; */
+  /* font-weight: 100; */
+  /* font-family: "Cinzel", serif; */
+  /* font-family: "amoera", sans-serif; */
+  /* font-family: "Cormorant Garamond", serif; */
+  /* font-family: "Kaldera", sans-serif; */
+  font-family: "Kudryashev Display Sans", sans-serif;
+
+  text-transform: uppercase;
+}
+
 .quote-font {
   font-weight: 600;
 }
@@ -141,14 +163,6 @@ body {
   }
 } */
 
-.logo {
-  font-family: "SF Old Republic", sans-serif;
-  /* font-weight: 100; */
-  /* font-family: "Cinzel", serif; */
-  /* font-family: "amoera", sans-serif; */
-  /* font-family: "Cormorant Garamond", serif; */
-}
-
 .navbar-container {
   /* font-family: "Cinzel", serif; */
   /* font-family: "SF Old Republic", sans-serif; */
@@ -169,22 +183,6 @@ textarea {
   scrollbar-width: none;
 }
 
-/* .navbar::after {
-  content: "";
-  position: absolute;
-  z-index: 1000;
-  left: 0;
-  bottom: -144px;
-  width: 100%;
-  height: 1px;
-  margin: 0;
-  background: #a99988;
-  opacity: 0.5;
-  transform-origin: left;
-  animation: drawLine 2.75s ease forwards;
-  animation-delay: .5s;
-} */
-
 .mobile-filter-item {
   opacity: 0;
   transform: translateY(-50px);
@@ -193,60 +191,4 @@ textarea {
 .mobile-layout-item {
   opacity: 0;
   /* transform: translateX(-20px); */
-}
-
-@keyframes drawLine {
-  0% {
-    transform: scaleX(0);
-  }
-  25% {
-    transform: scaleX(0);
-  }
-  50% {
-    transform: scaleX(0);
-  }
-  75% {
-    transform: scaleX(0.5);
-  }
-  100% {
-    transform: scaleX(1);
-  }
-}
-
-.animated-underline {
-  opacity: 0;
-  animation: underline 0.5s ease forwards;
-  animation-delay: 1s;
-}
-
-@keyframes underline {
-  0% {
-    opacity: 0;
-  }
-  25% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0;
-  }
-  75% {
-    opacity: 50;
-  }
-  100% {
-    opacity: 100;
-  }
-}
-
-/* Vertical Mobile Styles */
-@media (max-width: 767px) and (orientation: portrait) {
-  .navbar::after {
-    top: 36px;
-  }
-}
-
-/* Horizontal Mobile Styles */
-@media (max-height: 500px) and (orientation: landscape) {
-  .navbar::after {
-    top: 36px;
-  }
 }

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import CustomEase from "gsap/CustomEase";
 
 const base = import.meta.env.BASE_URL;
 
@@ -77,7 +78,7 @@ export default function Loader({ onComplete }) {
     const circumference = 2 * Math.PI * radius;
 
     const tl = gsap.timeline({ delay: 0.3 });
-
+    CustomEase.create("hop", "0.9, 0, 0.1, 1");
     // =============
     // COUNTER + CIRCLE ANIMATION
     // =============

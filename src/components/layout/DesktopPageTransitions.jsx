@@ -19,7 +19,7 @@ export default function DesktopPageTransitions({ children }) {
     exit: {
       y: 0,
       scaleX: 1,
-      transition: { duration: 1, delay: 0.15, ease: [0.65, 0, 0.35, 1] },
+      transition: { duration: 0.75, delay: 0.175, ease: [0.65, 0, 0.35, 1] },
     },
   };
 
@@ -31,7 +31,7 @@ export default function DesktopPageTransitions({ children }) {
       // scale: 0.95,
       transition: {
         duration: 0.75,
-        delay: 0.2,
+        delay: 0.15,
         ease: [0.65, 0, 0.35, 1],
       },
     },

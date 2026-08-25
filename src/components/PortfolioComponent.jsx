@@ -9,17 +9,16 @@ import {
 import gsap from "gsap";
 import { motion as Motion, AnimatePresence } from "framer-motion";
 import Lenis from "lenis";
-import {
-  TfiLayoutWidthFull,
-  TfiLayoutColumn2,
-  TfiLayoutColumn3,
-} from "react-icons/tfi";
+import { TfiLayoutColumn2Alt, TfiLayoutColumn3Alt } from "react-icons/tfi";
+import { FaSquareFull } from "react-icons/fa";
 import { galleryData } from "../data/galleryData";
 import { useResponsive } from "../hooks/useResponsive";
 import { useClickOutside } from "../hooks/useClickOutside";
 import ScrollProgressBar from "./utils/ProgressBar";
 import ScrollTop from "./utils/ScrollTop";
 import Frame from "./utils/Frame";
+import HoverRevealImage from "./utils/HoverRevealImage";
+import HoverRevealImageCircle from "./utils/HoverRevealImageCircle";
 
 function shuffleArray(array) {
   const arr = [...array];
@@ -401,17 +400,16 @@ export default function PortfolioComponent() {
           className="cursor-pointer my-1"
           onClick={() => openLightbox(item.img, i)}
         >
-          <div className="w-full group overflow-hidden">
-            <Motion.img
-              // {...Animations(imgVariants)}
-              src={item.img}
-              alt={item.title}
-              decoding="async"
-              className="cursor-trigger w-full h-auto object-cover transition-all duration-300 ease-in group-hover:blur-[1px] md:group-hover:scale-105"
-              style={{ display: "block" }}
-              data-cursor-type="expand"
-            />
-          </div>
+          <HoverRevealImage
+            src={item.img}
+            height={height}
+            dataCursorType="expand"
+          />
+          {/* <HoverRevealImageCircle
+            src={item.img}
+            height={height}
+            dataCursorType="expand"
+          /> */}
         </div>
       );
 
@@ -593,22 +591,22 @@ export default function PortfolioComponent() {
     const tl = gsap.timeline({ onComplete });
     tl.to(
       leftOverlayRef.current,
-      { xPercent: 74.5, duration: 0.75, ease: "power3.inOut" },
-      0.025,
+      { xPercent: 74.5, duration: 1.25, ease: "power3.inOut" },
+      0.0425,
     )
       .to(
         rightOverlayRef.current,
-        { xPercent: -74.5, duration: 0.75, ease: "power3.inOut" },
-        0.025,
+        { xPercent: -74.5, duration: 1.25, ease: "power3.inOut" },
+        0.0425,
       )
       .to(
         helper1OverlayRef.current,
-        { xPercent: 130, duration: 0.75, ease: "power3.inOut" },
+        { xPercent: 130, duration: 1.25, ease: "power3.inOut" },
         0,
       )
       .to(
         helper2OverlayRef.current,
-        { xPercent: -130, duration: 0.75, ease: "power3.inOut" },
+        { xPercent: -130, duration: 1.25, ease: "power3.inOut" },
         0,
       );
   }, []);
@@ -963,9 +961,9 @@ export default function PortfolioComponent() {
               transition={{ duration: 0.15 }}
               className="w-8 h-8 flex items-center justify-center text-accent"
             >
-              {columnLayout === 1 && <TfiLayoutWidthFull />}
-              {columnLayout === 2 && <TfiLayoutColumn2 />}
-              {columnLayout === 3 && <TfiLayoutColumn3 />}
+              {columnLayout === 1 && <FaSquareFull />}
+              {columnLayout === 2 && <TfiLayoutColumn2Alt />}
+              {columnLayout === 3 && <TfiLayoutColumn3Alt />}
             </Motion.div>
           )}
           {layoutMenuOpen && (
@@ -984,9 +982,9 @@ export default function PortfolioComponent() {
                       : "text-white/60"
                   }`}
                 >
-                  {col === 1 && <TfiLayoutWidthFull />}
-                  {col === 2 && <TfiLayoutColumn2 />}
-                  {col === 3 && <TfiLayoutColumn3 />}
+                  {col === 1 && <FaSquareFull />}
+                  {col === 2 && <TfiLayoutColumn2Alt />}
+                  {col === 3 && <TfiLayoutColumn3Alt />}
                 </button>
               ))}
             </div>
