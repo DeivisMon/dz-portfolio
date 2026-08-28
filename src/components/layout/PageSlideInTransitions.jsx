@@ -14,7 +14,7 @@ export default function PageSlideInTransition({ children }) {
       opacity: 1,
       transition: {
         delay: 1.05,
-        duration: 0.85,
+        duration: 0.5,
         ease: [0.53, 0.2, 0.17, 1],
       },
     },

@@ -93,16 +93,16 @@ export default function PhotographerQuoteSlide() {
   const total = String(QUOTES.length).padStart(2, "0");
 
   return (
-    <div className="w-full flex items-center justify-center mix-blend-difference">
+    <div className="w-full flex items-center justify-start mix-blend-difference">
       <div className="relative w-[clamp(200px,35vw,700px)] shrink-0">
         <div
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
-          className="relative overflow-hidden h-[120px] flex flex-col items-between justify-center"
+          className="relative overflow-hidden h-[144px] flex flex-col items-between justify-center"
         >
           <span
             aria-hidden="true"
-            className="quote-font absolute -top-5 left-2 text-[5rem] text-[#c9962f] opacity-[0.20] select-none"
+            className="quote-font absolute top-1 left-2 text-[5rem] text-[#c9962f] opacity-[0.20] select-none"
           >
             &ldquo;
           </span>

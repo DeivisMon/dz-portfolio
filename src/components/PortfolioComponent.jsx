@@ -878,7 +878,7 @@ export default function PortfolioComponent() {
 
   return (
     <div
-      className={`relative w-[100vw] h-[calc(100dvh)] xl:h-[calc(100dvh-18px)] xl:mt-[18px] overflow-hidden shadow-xl bg-bckg/88 xl:bg-bckg/70 `}
+      className={`relative w-[100vw] h-[calc(100dvh)] xl:h-[calc(100dvh-148px)] xl:mt-[148px] overflow-hidden bg-bckg/88 xl:bg-bckg/70 `}
     >
       <Frame />
 
@@ -886,7 +886,7 @@ export default function PortfolioComponent() {
       <div
         className={`${
           responsive.isMobile || responsive.isTablet ? "hidden" : "flex"
-        } fixed right-[-0.5rem] z-[990] xl:h-[calc(100dvh)] w-1/3 pb-48 flex-col justify-end items-end mix-blend-difference select-none pointer-events-none`}
+        } fixed right-[-0.5rem] z-[990] xl:h-[calc(100dvh)] w-1/3 pt-24 flex-col justify-start items-end mix-blend-difference select-none pointer-events-none`}
       >
         {filters.map((filter, index) => (
           <FilterButton

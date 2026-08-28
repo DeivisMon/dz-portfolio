@@ -14,12 +14,12 @@ export default function DesktopPageTransitions({ children }) {
   };
 
   const slide = {
-    initial: { y: "100vh", scaleX: 0.85 },
-    animate: { y: "100vh", scaleX: 1 },
+    initial: { y: "100vh", scaleY: 1 },
+    animate: { y: "-100vh", scaleY: 0.85 },
     exit: {
       y: 0,
-      scaleX: 1,
-      transition: { duration: 0.75, delay: 0.175, ease: [0.65, 0, 0.35, 1] },
+      scaleY: 1,
+      transition: { duration: 0.65, delay: 0.2, ease: [0.65, 0, 0.35, 1] },
     },
   };
 
@@ -27,11 +27,12 @@ export default function DesktopPageTransitions({ children }) {
     initial: { y: 0 },
     animate: { y: 0 },
     exit: {
-      y: "-50vh",
-      // scale: 0.95,
+      y: "15vh",
+      scale: 1.05,
+      skewZ: 100,
       transition: {
-        duration: 0.75,
-        delay: 0.15,
+        duration: 0.5,
+        delay: 0.35,
         ease: [0.65, 0, 0.35, 1],
       },
     },

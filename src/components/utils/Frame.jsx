@@ -3,37 +3,34 @@ import { motion as Motion } from "framer-motion";
 
 export default function Frame() {
   const responsive = useResponsive();
-  const now = new Date();
-  const month = now.toLocaleDateString("lt-LT", { month: "long" });
-  const year = now.getFullYear().toString().slice(-2);
 
-  const Animate = (variants) => {
-    return {
-      initial: "initial",
-      animate: "animate",
-      exit: "exit",
-      variants,
-    };
-  };
+  // const Animate = (variants) => {
+  //   return {
+  //     initial: "initial",
+  //     animate: "animate",
+  //     exit: "exit",
+  //     variants,
+  //   };
+  // };
 
-  const frame = {
-    initial: { scale: 0.5, opacity: 0, y: 100 },
-    animate: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { duration: 0.75, delay: 1.75, ease: [0.11, 0, 0.5, 0] },
-    },
-    exit: {
-      opacity: 0,
-      transition: { duration: 0.25, delay: 0.25, ease: [-0.53, -0.4, 0.53, 1] },
-    },
-  };
+  // const frame = {
+  //   initial: { scale: 0.5, opacity: 0, y: 100 },
+  //   animate: {
+  //     opacity: 1,
+  //     y: 0,
+  //     scale: 1,
+  //     transition: { duration: 0.75, delay: 1.75, ease: [0.11, 0, 0.5, 0] },
+  //   },
+  //   exit: {
+  //     opacity: 0,
+  //     transition: { duration: 0.25, delay: 0.25, ease: [-0.53, -0.4, 0.53, 1] },
+  //   },
+  // };
 
   return (
     <Motion.div
       // {...Animate(frame)}
-      className={`film-frame h-[calc(100dvh-8px)] xl:h-[calc(100dvh-54px)] mix-blend-difference`}
+      className={`film-frame h-[calc(100dvh-8px)] xl:h-[calc(100dvh-184px)] mix-blend-difference`}
     >
       <div
         style={{

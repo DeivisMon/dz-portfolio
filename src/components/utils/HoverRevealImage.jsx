@@ -37,7 +37,7 @@ function HoverRevealImage({ src, height, onClick, dataCursorType, style }) {
       )
       .fromTo(
         bottomRef.current,
-        { scale: 1, filter: "brightness(400%) hue-rotate(-270deg)" },
+        { scale: 1, filter: "brightness(300%) hue-rotate(-190deg)" },
         { scale: 1.05, filter: "brightness(100%) hue-rotate(0deg)" },
         0,
       );

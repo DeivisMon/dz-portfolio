@@ -37,13 +37,8 @@ function makeShape(seed) {
 }
 
 const SHAPE_COUNT = 18;
-const SKEW = 0.75; // 15% skew
+const SKEW = 0.75;
 
-// A rectangle skewed 15% along the top/bottom edges, like a slanted
-// parallelogram: /____/
-//               /   /
-//              /  /
-//              ----
 function skewedRectPoints(skew = SKEW) {
   const offset = skew * 100; // skew as % of the 100x100 viewBox
   return `${offset},0 100,0 ${100 - offset},100 0,100`;
@@ -62,12 +57,13 @@ export default function MovingBackground({
 
   return (
     <div
-      className={`absolute inset-0 overflow-hidden bg-gradient-to-b from-neutral-800 via-neutral-900 to-black ${className}`}
+      className={`absolute inset-0 overflow-hidden bg-gradient-to-b from-surface via-neutral-900 to-black ${className}`}
       aria-hidden="true"
     >
+      <span className="absolute inset-0 bg-bckg"></span>
       {/* subtle static gradient overlay for depth */}
       <svg
-        className="absolute inset-0 h-full w-full opacity-40"
+        className="absolute inset-0 h-full w-full opacity-20"
         preserveAspectRatio="none"
       >
         <defs>

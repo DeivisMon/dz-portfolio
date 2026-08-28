@@ -9,22 +9,20 @@ import {
 import AnimatedText from "../utils/AnimatedText";
 import Socials from "../utils/Socials";
 import Marquee from "../utils/Marquee";
-import MovingBackground from "../utils/MovingBackgound";
 import HoverLines from "../utils/HoverLines";
 import { useResponsive } from "../../hooks/useResponsive";
 import { usePageTransition } from "../../context/TransitionContext";
 import ClockWithCity from "../utils/ClockWithCity";
 import PhotographerQuoteSlide from "../utils/PhotographerQuoteSlide";
 import MenuBtn from "../utils/MenuButton";
-import { ViewfinderFrame } from "../utils/ViewFinder";
 import MenuOverlayLines from "../utils/MenuOverlayLines";
 
 // Timing constants — keep these in sync with the transition objects below.
 // handleNavClick uses them to delay navigation until the overlay has
 // actually finished closing, avoiding a flash of the new route underneath
 // a still-animating menu.
-const NAV_EXIT_DELAY = 0.5; // seconds
-const NAV_EXIT_DURATION = 0.75; // seconds
+// const NAV_EXIT_DELAY = 0.5;
+const NAV_EXIT_DURATION = 0.75;
 const MAGNETIC_STRENGTH = 0.3;
 
 const NAV_ITEMS = [
@@ -139,11 +137,18 @@ export default function NavBar() {
 
   // Reset menu state whenever the route actually changes
   useEffect(() => {
-    setIsMenuOpen(false);
-    setIsNavigatingAway(false);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsMenuOpen((prev) => (prev ? false : prev));
+    setIsNavigatingAway((prev) => (prev ? false : prev));
   }, [location.pathname]);
 
-  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => {
+      const next = !prev;
+      if (next) setHoveredItem(null);
+      return next;
+    });
+  };
 
   const handleNavClick = (path) => {
     if (isNavigatingAway) return;
@@ -186,16 +191,16 @@ export default function NavBar() {
     <>
       {/* Navbar*/}
       <div
-        className={`navbar fixed transition-[z-index] ${isTransitioning ? "z-[2000]" : "z-[501]"} mix-blend-exclusion`}
+        className={`navbar fixed transition-[z-index] ${isTransitioning ? "z-[2000]" : "z-[501]"} w-full h-[148px]`}
       >
         {/* Shared row: logo left, quote right */}
-        <div className="fixed -bottom-4 xl:-bottom-8 -left-3 w-full xl:h-[175px] flex justify-between items-center pointer-events-none ">
+        <div className="fixed -top-4 xl:top-6 w-full xl:h-[148px] flex justify-between items-center pointer-events-none ">
           {/* LEFT — logo */}
           <div
             className={`pointer-events-auto transition-[z-index]
-          pt-1 xl:pt-0 mt-0  pl-2 xl:pl-5
+          pt-1 xl:pt-0 mt-0  pl-2
           max-w-[66vw] overflow-hidden flex flex-2 xl:flex-1
-          ${isTransitioning ? "z-[2000]" : "z-[500]"}`}
+          ${isTransitioning ? "z-[2000]" : "z-[500]"} `}
           >
             <div
               className={`logo relative z-[10] 
@@ -227,33 +232,34 @@ export default function NavBar() {
               {...Animations(upperLineVariants)}
               className={`fixed ${responsive.isResponsive ? "top-1 hidden" : "top-5 block"}  left-0 w-full h-[1px] bg-muted/30 origin-left z-1`}
             />
-            {/* <Motion.div
+            <Motion.div
               {...Animations(lowerLineVariants)}
-              className={`fixed ${responsive.isResponsive ? "top-14" : "top-40"}  left-0 w-full h-[1px] bg-muted/30 origin-right z-1`}
-            /> */}
+              className={`fixed ${responsive.isResponsive ? "top-14" : "top-[147px]"}  left-0 w-full h-[1px] bg-muted/30 origin-right z-1`}
+            />
           </div>
         </div>
       </div>
       {/* Clock — fixed */}
       <Motion.span
         {...Animations(dateVariants)}
-        className="fixed hidden xl:block right-4 top-0 text-[15px] text-muted/50 uppercase whitespace-nowrap"
+        className="fixed hidden xl:block right-4 top-0 text-[15px] text-muted/50 uppercase whitespace-nowrap z-1"
       >
         <ClockWithCity />
       </Motion.span>
 
       {/* RIGHT — quote only now */}
-      {/* <div className="fixed inset-0 mx-auto pointer-events-auto flex flex-1 flex-col items-center pr-2 xl:pr-6">
+      <div className="fixed h-[148px] w-full pointer-events-auto flex items-evenly">
+        <div className="flex-1"></div>
         <Motion.span
           {...Animations(dateVariants)}
-          className="hidden xl:block text-[18px] xl:text-[64px] text-header mix-blend-difference"
+          className="flex-1 hidden xl:block text-[18px] xl:text-[64px] text-header mix-blend-difference"
         >
           <PhotographerQuoteSlide
             textColor="text-header"
             textSize="text-[18px] xl:text-[64px]"
           />
         </Motion.span>
-      </div> */}
+      </div>
 
       {/* Menu */}
       <div
@@ -272,7 +278,7 @@ export default function NavBar() {
       </div>
 
       {/* Marquee */}
-      <Marquee className="fixed hidden xl:block left-0 top-8 xl:top-5 pt-[1px] z-[999]" />
+      <Marquee className="fixed hidden xl:block left-0 top-8 xl:top-37 z-[999]" />
 
       {/* Fullscreen menu overlay */}
       <AnimatePresence>
@@ -357,31 +363,6 @@ export default function NavBar() {
               <div className="fixed left-0 bottom-2 flex justify-center w-full">
                 <Socials />
               </div>
-
-              {/* Decorative background logo */}
-              {/* <div className="logo hidden xl:block absolute opacity-20 left-0 -bottom-50 text-[24px] xl:text-[460px] pointer-events-none">
-              <Link
-                className="flex w-full justify-center transition-all duration-500 ease-in-out"
-                to="/"
-                onClick={() => handleNavClick("/")}
-              >
-                <AnimatedText
-                  text="Žvinklys"
-                  textColor="text-header/10"
-                  duration={0.5}
-                  delay={0.75}
-                  delayChildren={0.5}
-                  enableHover={false}
-                  scaleX="scale-x-160"
-                  textShadow="text-shadow-lg/50"
-                  letterSpacing={
-                    responsive.isTablet || responsive.isMobile
-                      ? "px-[4px] pl-2"
-                      : "px-[8px]"
-                  }
-                />
-              </Link>
-            </div> */}
             </Motion.div>
           </>
         )}
