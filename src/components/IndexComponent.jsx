@@ -1,18 +1,25 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useDeviceType } from "../hooks/useDeviceType";
-import { sliderData } from "../data/sliderData";
+import { useSliderStore } from "../store/sliderStore";
 import Frame from "./utils/Frame";
 
 export default function IndexComponent() {
   const sliderRef = useRef(null);
   const { isVerticalMobile, isHorizontalMobile } = useDeviceType();
 
-  const [randomImages] = useState(() => {
-    const shuffled = [...sliderData].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, 8);
-  });
+  const randomImages = useSliderStore((s) => s.selectedImages);
+  const justHandedOff = useSliderStore((s) => s.justHandedOff);
+  const clearHandoff = useSliderStore((s) => s.clearHandoff);
 
   useEffect(() => {
+    if (justHandedOff) {
+      clearHandoff();
+    }
+  }, [justHandedOff, clearHandoff]);
+
+  useEffect(() => {
+    if (!randomImages) return;
+
     const config = {
       SCROLL_SPEED: 1.75,
       LERP_FACTOR: 0.05,
@@ -438,6 +445,8 @@ export default function IndexComponent() {
     const cleanup = initializeSlider();
     return cleanup;
   }, [isVerticalMobile, isHorizontalMobile, randomImages]);
+
+  if (!randomImages) return null;
 
   return (
     <div

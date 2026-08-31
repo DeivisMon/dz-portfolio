@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router";
 import { AnimatePresence } from "framer-motion";
 import { useResponsive } from "./hooks/useResponsive";
+import { useSliderStore } from "./store/sliderStore";
 import DesktopPageTransitions from "./components/layout/DesktopPageTransitions";
-import MobilePageTransition from "./components/layout/MobilePageTransition";
 import Loader from "./components/utils/Loader";
 import Index from "./pages/Index";
 import Portfolio from "./pages/Portfolio";
@@ -15,12 +15,25 @@ import MovingBackground from "./components/utils/MovingBackgound";
 
 export default function App() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const initSelection = useSliderStore((s) => s.initSelection);
+  const markHandoff = useSliderStore((s) => s.markHandoff);
   const location = useLocation();
   const responsive = useResponsive();
 
+  useEffect(() => {
+    initSelection();
+  }, [initSelection]);
+
   return (
     <>
-      {!isLoaded && <Loader onComplete={() => setIsLoaded(true)} />}
+      {!isLoaded && (
+        <Loader
+          onComplete={() => {
+            markHandoff();
+            setIsLoaded(true);
+          }}
+        />
+      )}
 
       {isLoaded && (
         <>
