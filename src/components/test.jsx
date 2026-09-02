@@ -30,7 +30,7 @@ export default function PhotographerAbout() {
 
   return (
     <div
-      className={`relative flex w-[100vw] ${responsive.isMobile || responsive.isTablet ? "h-[calc(100dvh-38px)] mt-[38px]" : "h-[calc(100dvh-64px)] mt-[64px]"} overflow-hidden shadow-xl bg-bckg`}
+      className={`relative flex w-[100vw] ${responsive.isMobile || responsive.isTablet ? "h-[calc(100dvh-38px)] mt-[38px]" : "h-[calc(100dvh-148px)] xl:mt-[148px]"} overflow-hidden shadow-xl`}
       style={{
         // background: "#111110",
         // fontFamily: "'Inter', sans-serif",
@@ -38,55 +38,6 @@ export default function PhotographerAbout() {
       }}
     >
       <Frame />
-      {/* Google Fonts */}
-      <style>{`
-        
-      `}</style>
-
-      {/* ─── LEFT SIDEBAR ─── */}
-      <aside
-        className="flex flex-col justify-between py-8 px-5 relative"
-        style={{ width: "72px", minWidth: "72px", background: "#0d0d0c" }}
-      >
-        {/* Filmstrip holes */}
-        <div className="flex flex-col items-center pt-2">
-          {Array.from({ length: 18 }).map((_, i) => (
-            <div
-              key={i}
-              className={`filmstrip-dot ${[2, 5, 9, 13, 16].includes(i) ? "lit" : ""}`}
-            />
-          ))}
-        </div>
-
-        {/* Vertical name */}
-        {/* <div
-          className="cinzel absolute"
-          style={{
-            writingMode: "vertical-rl",
-            textOrientation: "mixed",
-            transform: "rotate(180deg) translateX(50%)",
-            left: "50%",
-            top: "50%",
-            marginTop: "-80px",
-            fontSize: "0.62rem",
-            letterSpacing: "0.3em",
-            color: "#4a4844",
-            textTransform: "uppercase",
-            whiteSpace: "nowrap",
-          }}
-        >
-          © 2026 Darius Zvinklys
-        </div> */}
-
-        <div className="flex flex-col items-center pb-2">
-          {Array.from({ length: 18 }).map((_, i) => (
-            <div
-              key={i}
-              className={`filmstrip-dot ${[1, 4, 8, 12, 15].includes(i) ? "lit" : ""}`}
-            />
-          ))}
-        </div>
-      </aside>
 
       {/* ─── GOLDEN DIVIDER ─── */}
       <div
@@ -99,7 +50,7 @@ export default function PhotographerAbout() {
         {/* ─── CENTER: PORTRAIT ─── */}
         <div
           className="relative image-container"
-          style={{ width: "42%", flexShrink: 0 }}
+          style={{ width: "50%", flexShrink: 0 }}
         >
           <div className="film-frame " />
 
@@ -107,13 +58,13 @@ export default function PhotographerAbout() {
           <img
             src={`${import.meta.env.BASE_URL}images/About.jpg`}
             alt="Elena Voss — Photographer"
-            className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+            className="w-full h-full object-cover grayscale hover:grayscale-70 transition-all duration-500"
             style={{ objectPosition: "center top" }}
           />
 
           {/* Bottom overlay text */}
           <div
-            className="absolute bottom-0 left-0 right-0 z-20 px-8 pb-8 pt-16"
+            className="absolute bottom-0 left-0 right-0 z-20 px-4 pb-10 pt-16"
             style={{
               background:
                 "linear-gradient(to top, #111110 0%, rgba(17,17,16,0.7) 60%, transparent 100%)",
@@ -131,35 +82,13 @@ export default function PhotographerAbout() {
             >
               "Light is not just illumination — it is the story itself."
             </p>
-            <div
-              style={{
-                width: "2rem",
-                height: "1px",
-                background: "#c9a84c",
-                opacity: 0.6,
-              }}
-            />
           </div>
-
-          {/* Location badge */}
-          {/* <div
-            className="absolute top-6 right-6 z-20 flex items-center gap-1.5"
-            style={{
-              fontSize: "0.6rem",
-              letterSpacing: "0.12em",
-              color: "#7a7570",
-              textTransform: "uppercase",
-            }}
-          >
-            <FiMapPin size={9} style={{ color: "#c9a84c" }} />
-            Klaipeda, LT
-          </div> */}
         </div>
 
         {/* ─── RIGHT: INFO PANEL ─── */}
         <div
           className="flex flex-col justify-between flex-1 px-10 py-8"
-          style={{ background: "#111110", overflowY: "hidden" }}
+          style={{ overflowY: "hidden" }}
         >
           {/* MIDDLE: Name + Bio */}
           <div>
@@ -172,16 +101,17 @@ export default function PhotographerAbout() {
                     color: "#c9a84c",
                     textTransform: "uppercase",
                     marginBottom: "0.5rem",
+                    borderBottom: "1px solid #c9a84c3f",
                   }}
                 >
-                  About the Artist
+                  Apie Mane
                 </p>
                 <h1
-                  className="cinzel"
+                  className="darius"
                   style={{
                     fontSize: "clamp(2.2rem, 3.5vw, 3.6rem)",
                     fontWeight: 600,
-                    letterSpacing: "0.04em",
+                    letterSpacing: "0.24em",
                     lineHeight: 1.05,
                     color: "#f0ede8",
                   }}
@@ -201,7 +131,7 @@ export default function PhotographerAbout() {
                   marginBottom: "0.4rem",
                 }}
               />
-              {/* <span
+              <span
                 className="cormorant"
                 style={{
                   fontSize: "0.85rem",
@@ -210,25 +140,28 @@ export default function PhotographerAbout() {
                   marginBottom: "0.3rem",
                 }}
               >
-                Visual Storyteller
-              </span> */}
+                //////
+              </span>
             </div>
-
-            <p
-              style={{
-                fontSize: "0.83rem",
-                lineHeight: 1.75,
-                color: "#7a7570",
-                maxWidth: "420px",
-                fontWeight: 300,
-              }}
-            >
-              Based in Berlin, I work at the intersection of light and
-              narrative. My practice spans editorial commissions for
-              international publications, long-form documentary work, and
-              gallery-exhibited fine art — always driven by the belief that the
-              decisive moment reveals itself in stillness, not speed.
-            </p>
+            <div className="space-y-4 text-[clamp(0.72rem,1vw,2.5rem)]">
+              <p>
+                Sveiki, aš Darius — fotografas iš Klaipėdos, susitelkęs į
+                atmosferą, žmogaus buvimą ir ramias akimirkas. Tyrinėjantis
+                šviesą, tekstūrą ir judėjimą per vaizdinį pasakojimą.
+              </p>
+              <p>
+                Prieš penkerius metus fotografija man buvo tik pomėgis —
+                šiandien tai būdas sustabdyti akimirkas, kurios kitaip praeitų
+                nepastebėtos. Kiekvienam kadrui taikau tą patį principą:
+                pirmiausia jausmas, tik tada technika.
+              </p>
+              <p>
+                Man svarbu ne poza, o žmogus už jos — todėl dažniausiai renkuosi
+                natūralią šviesą, ramų tempą ir erdvę, kurioje jaustumėtės
+                savimi. Rezultatas — nuotraukos, kurios primena ne kaip
+                atrodėte, o kaip jautėtės.
+              </p>
+            </div>
 
             <p
               style={{
@@ -238,6 +171,7 @@ export default function PhotographerAbout() {
                 maxWidth: "420px",
                 fontWeight: 300,
                 marginTop: "0.75rem",
+                filter: "mix-blend-mode: difference",
               }}
             >
               Formerly represented by Magnum Photos Europe. Published in{" "}
@@ -301,63 +235,6 @@ export default function PhotographerAbout() {
                 </span>
               ))}
             </div>
-          </div>
-
-          {/* BOTTOM: CTA + Socials */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <button className="cta-btn">
-                <span>View Portfolio</span>
-              </button>
-              <button
-                className="cta-btn"
-                style={{ borderColor: "#2e2c28", color: "#4a4844" }}
-              >
-                <span style={{ color: "inherit" }}>Get in Touch</span>
-              </button>
-            </div>
-            {/* 
-            <div className="flex items-center gap-2">
-              <div className="social-btn">
-                <FiInstagram size={13} />
-              </div>
-              <div className="social-btn">
-                <TbBrandBehance size={13} />
-              </div>
-              <div className="social-btn">
-                <FiMail size={13} />
-              </div>
-              <div
-                style={{
-                  width: "1px",
-                  height: "24px",
-                  background: "#2e2c28",
-                  margin: "0 4px",
-                }}
-              />
-              <div className="flex items-center gap-1.5">
-                <FiCamera size={10} style={{ color: "#c9a84c" }} />
-                <span
-                  style={{
-                    fontSize: "0.6rem",
-                    color: "#3a3835",
-                    letterSpacing: "0.1em",
-                  }}
-                >
-                  Available for hire
-                </span>
-                <span
-                  style={{
-                    width: "5px",
-                    height: "5px",
-                    borderRadius: "50%",
-                    background: "#4caf50",
-                    display: "inline-block",
-                    boxShadow: "0 0 6px #4caf5088",
-                  }}
-                />
-              </div>
-            </div> */}
           </div>
         </div>
       </div>

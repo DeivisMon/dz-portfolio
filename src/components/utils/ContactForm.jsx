@@ -196,7 +196,7 @@ export default function ContactForm() {
                 </div>
 
                 {error && (
-                  <p className="absolute bottom-12 left-0 right-0 text-red-400 text-sm text-center tracking-wide">
+                  <p className="absolute bottom-8 left-0 right-0 text-red-400 text-sm text-center tracking-wide">
                     {error}
                   </p>
                 )}
@@ -275,7 +275,7 @@ export default function ContactForm() {
                 </div>
 
                 {error && (
-                  <p className="absolute bottom-12 left-0 right-0 text-red-400 text-sm text-center tracking-wide">
+                  <p className="absolute bottom-10 left-0 right-0 text-red-400 text-sm text-center tracking-wide">
                     {error}
                   </p>
                 )}

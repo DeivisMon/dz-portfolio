@@ -40,7 +40,6 @@ const MenuBtn = ({ isMenuOpen, toggleMenu, springX, springY, isLocked }) => {
         transition-[width] duration-500
         ease-[cubic-bezier(0.075,0.82,0.165,1)]
         will-change-transform
-        cursor-trigger
       `}
       onClick={isLocked ? undefined : toggleMenu}
       style={isCompact ? undefined : { x: springX, y: springY }}
@@ -85,6 +84,7 @@ const MenuBtn = ({ isMenuOpen, toggleMenu, springX, springY, isLocked }) => {
           rounded-full overflow-hidden z-10
           transition-all duration-[850ms]
           ease-[cubic-bezier(0.075,0.82,0.165,1)]
+          cursor-trigger
           ${
             isMenuOpen
               ? "[clip-path:circle(50%_at_50%_50%)] scale-[1.125] bg-transparent border border-accent"

@@ -35,8 +35,9 @@
   position: relative;
   width: 100%;
   height: 100%;
-  transform: scale(2);
+  transform: scale(1);
   will-change: transform;
+  object-fit: cover;
 }
 
 .preloader-header {
@@ -82,5 +83,23 @@
 
   .preloader-header a {
     font-size: 4rem;
+  }
+}
+
+.preloader-border {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30rem;
+  height: 80dvh; /* keep in sync with .preloader-images */
+  z-index: 3; /* above .preloader-images (which has no z-index / stacks below) */
+  will-change: transform;
+}
+
+@media (max-width: 1000px) {
+  .preloader-border {
+    top: 35%;
+    width: 10rem;
+    height: 10rem;
   }
 }

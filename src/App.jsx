@@ -4,7 +4,7 @@ import { AnimatePresence } from "framer-motion";
 import { useResponsive } from "./hooks/useResponsive";
 import { useSliderStore } from "./store/sliderStore";
 import DesktopPageTransitions from "./components/layout/DesktopPageTransitions";
-import Loader from "./components/utils/Loader";
+import Loader from "./components/utils/NewLoader";
 import Index from "./pages/Index";
 import Portfolio from "./pages/Portfolio";
 import AboutMe from "./pages/AboutMe";
@@ -42,7 +42,6 @@ export default function App() {
           !responsive.isMobile ? (
             <>
               <MovingBackground />
-              {/* <div className="fixed right-0 top-0 flex w-full h-[148px] bg-bckg/75 z-[1]"></div> */}
               <NavBar />
               <AnimatePresence mode="wait">
                 <DesktopPageTransitions key={location.pathname}>
@@ -57,7 +56,6 @@ export default function App() {
             </>
           ) : (
             <>
-              {/* <div className="fixed right-0 top-0 flex w-full h-[56px] bg-bckg/35 z-[1]"></div> */}
               <NavBar />
               <AnimatePresence mode="wait">
                 <DesktopPageTransitions key={location.pathname}>

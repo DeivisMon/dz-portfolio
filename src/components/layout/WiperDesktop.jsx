@@ -33,7 +33,7 @@ export default function WiperDesktop() {
       initial={{ scaleY: 1, opacity: 1 }}
       animate={{ scaleY: 0, opacity: 1 }}
       transition={{
-        delay: 0.75,
+        delay: 0.35,
         duration: 0.65,
         ease: [0.65, 0, 0.35, 1],
       }}

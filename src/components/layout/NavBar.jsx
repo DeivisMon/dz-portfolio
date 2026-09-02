@@ -28,6 +28,7 @@ const MAGNETIC_STRENGTH = 0.3;
 const NAV_ITEMS = [
   { path: "/", label: "Pradžia" },
   { path: "/portfolio", label: "Galerija" },
+  { path: "/apie-mane", label: "Apie mane" },
   { path: "/kontaktai", label: "Kontaktai" },
 ];
 
@@ -222,7 +223,7 @@ export default function NavBar() {
                   enableHover={false}
                   scaleX="scale-x-142"
                   textShadow="text-shadow-lg/40"
-                  letterSpacing="px-[clamp(1px,0.35vw,8px)]"
+                  letterSpacing="px-[clamp(1px,0.5vw,10px)]"
                 />
                 {/* <HoverLines translateXminus={-57} translateXplus={57} /> */}
               </div>
@@ -325,7 +326,7 @@ export default function NavBar() {
                       className="overflow-hidden select-none"
                     >
                       <Link
-                        className={`cursor-trigger text-3xl group/button md:text-3xl lg:text-5xl xl:text-[124px] uppercase tracking-[5px] md:tracking-[20px] transition-all duration-500  ${
+                        className={`cursor-trigger text-3xl group/button md:text-3xl lg:text-5xl xl:text-[96px] uppercase tracking-[5px] md:tracking-[20px] transition-all duration-500  ${
                           isActive(item.path)
                             ? "text-accent"
                             : "text-muted opacity-80"
