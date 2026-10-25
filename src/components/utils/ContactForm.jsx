@@ -92,11 +92,11 @@ export default function ContactForm() {
 
   return (
     <div
-      className={`relative w-full lg:w-9/10 flex flex-col items-center ${responsive.isResponsive || responsive.isCompactHeight ? "justify-center " : ""} text-text`}
+      className={`relative w-full lg:w-9/10 flex flex-col items-center justify-center ${responsive.isResponsive || responsive.isCompactHeight ? "justify-center " : ""} text-text`}
       style={{ perspective: "1000px" }}
     >
       <div
-        className="w-full transition-transform duration-700 mt-0 lg:mt-42"
+        className="w-full transition-transform duration-700 mt-0"
         style={{
           transformStyle: "preserve-3d",
           transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
@@ -119,7 +119,7 @@ export default function ContactForm() {
             </h2>
 
             {responsive.isDesktop ? (
-              <>
+              <div className="cursor-no-distort flex flex-col justify-center gap-2 lg:gap-4 ">
                 <div className="input-container">
                   <input
                     className="p-1 md:pt-2 border-b border-white/10 text-muted text-[14px] lg:text-[20px]"
@@ -215,9 +215,9 @@ export default function ContactForm() {
                         : "Siusk žinutę"}
                   </button>
                 </div>
-              </>
+              </div>
             ) : (
-              <div>
+              <div className="cursor-no-distort">
                 <div className="flex gap-1">
                   <div className="w-full">
                     <input

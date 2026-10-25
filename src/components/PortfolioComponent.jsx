@@ -216,8 +216,6 @@ export default function PortfolioComponent() {
   const rightOverlayRef = useRef(null);
   const helper1OverlayRef = useRef(null);
   const helper2OverlayRef = useRef(null);
-  const lastScrollTopRef = useRef(0);
-  const scrollStartRef = useRef(null);
   const controlsVisibleRef = useRef(true);
 
   useEffect(() => {
@@ -233,45 +231,57 @@ export default function PortfolioComponent() {
     const container = itemsRef.current;
     if (!container) return;
 
+    const HIDE_DISTANCE = 100;
+    const SHOW_DISTANCE = 10;
+
+    let anchor = container.scrollTop; // where the current direction started
+    let direction = 0; // 1 = down, -1 = up, 0 = unknown
+    let last = container.scrollTop;
+
     const handleScroll = () => {
-      const currentScrollTop = container.scrollTop;
-      const lastScrollTop = lastScrollTopRef.current;
+      const current = container.scrollTop;
+      const delta = current - last;
+      last = current;
 
-      const delta = currentScrollTop - lastScrollTop;
+      // ignore sub-pixel jitter
+      if (Math.abs(delta) < 0.5) return;
 
-      // Scrolling down
-      if (delta > 0) {
-        if (scrollStartRef.current === null) {
-          scrollStartRef.current = currentScrollTop;
-        }
+      const newDirection = delta > 0 ? 1 : -1;
 
-        const distance = currentScrollTop - scrollStartRef.current;
+      // direction flipped: restart the measurement from here
+      if (newDirection !== direction) {
+        direction = newDirection;
+        anchor = current;
+      }
 
-        if (distance >= 100 && controlsVisibleRef.current) {
+      const distance = Math.abs(current - anchor);
+      const maxScroll = container.scrollHeight - container.clientHeight;
+      const atBottom = current >= maxScroll - 2;
+      const atTop = current <= 2;
+
+      if (direction === 1) {
+        // hide after enough downward travel, or immediately if we hit the bottom
+        if (
+          controlsVisibleRef.current &&
+          (distance >= HIDE_DISTANCE || (atBottom && distance > 0))
+        ) {
           controlsVisibleRef.current = false;
           setMobileControlsVisible(false);
         }
-      }
-
-      // Scrolling up
-      else if (delta < 0) {
-        if (!controlsVisibleRef.current) {
+      } else {
+        // show on upward scroll (or at the very top)
+        if (
+          !controlsVisibleRef.current &&
+          (distance >= SHOW_DISTANCE || atTop)
+        ) {
           controlsVisibleRef.current = true;
           setMobileControlsVisible(true);
-          scrollStartRef.current = null;
         }
       }
-
-      lastScrollTopRef.current = currentScrollTop;
     };
 
-    container.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
-
-    return () => {
-      container.removeEventListener("scroll", handleScroll);
-    };
+    container.addEventListener("scroll", handleScroll, { passive: true });
+    return () => container.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Touch swipe state for lightbox
@@ -649,7 +659,7 @@ export default function PortfolioComponent() {
       if (menuItems?.length) {
         gsap.killTweensOf(menuItems);
         gsap.set(menuItems, { y: -50, opacity: 0 });
-        gsap.set(menu, { x: -100, opacity: 0 });
+        gsap.set(menu, { x: 100, opacity: 0 });
         gsap.to(menuItems, {
           y: 0,
           opacity: 1,
@@ -878,7 +888,7 @@ export default function PortfolioComponent() {
 
   return (
     <div
-      className={`relative w-[100vw] h-[calc(100dvh)] xl:h-[calc(100dvh-148px)] xl:mt-[148px] overflow-hidden bg-bckg/88 xl:bg-bckg/70 `}
+      className={`relative w-[100vw] xl:h-[calc(100dvh-148px)] xl:mt-[148px] h-[calc(100dvh-64px)] mt-[64px] overflow-hidden bg-bckg/88 xl:bg-bckg/70 `}
     >
       <Frame />
 
@@ -886,7 +896,7 @@ export default function PortfolioComponent() {
       <div
         className={`${
           responsive.isMobile || responsive.isTablet ? "hidden" : "flex"
-        } fixed right-[-0.5rem] z-[990] xl:h-[calc(100dvh)] w-1/3 pt-24 flex-col justify-start items-end mix-blend-difference select-none pointer-events-none`}
+        } cursor-no-distort fixed right-[-0.5rem] z-[990] xl:h-[calc(100dvh)] w-1/3 pt-24 flex-col justify-start items-end mix-blend-difference select-none pointer-events-none`}
       >
         {filters.map((filter, index) => (
           <FilterButton
@@ -902,11 +912,11 @@ export default function PortfolioComponent() {
       <div className="relative w-full h-full">
         <div
           ref={itemsRef}
-          className="w-full h-full mx-0 overflow-y-auto scrollable-container overflow-x-hidden pt-21 xl:pt-0"
+          className="w-full h-full mx-0 overflow-y-auto scrollable-container overflow-x-hidden pt-12 xl:pt-0"
         >
           <div ref={contentRef}>
             {galleryContent}
-            <div className="h-12 xl:h-48" />
+            <div className="h-25 xl:h-48" />
           </div>
         </div>
 
@@ -934,7 +944,7 @@ export default function PortfolioComponent() {
         ref={menuWrapperRef}
         initial={false}
         animate={{
-          y: mobileControlsVisible ? 0 : -80,
+          y: mobileControlsVisible ? 0 : -64,
           opacity: mobileControlsVisible ? 1 : 0,
           pointerEvents: mobileControlsVisible ? "auto" : "none",
         }}
@@ -945,12 +955,12 @@ export default function PortfolioComponent() {
         }}
         className={`${
           responsive.isMobile || responsive.isTablet ? "flex" : "hidden"
-        } fixed top-0 left-0 z-[50] w-full flex-col bg-bckg items-start justify-between px-6 pt-2`}
+        } fixed top-16 left-0 z-[50] w-full bg-bckg items-start justify-between px-6 pt-2`}
       >
         {/* Layout */}
         <div
           onClick={openLayoutMenu}
-          className="flex items-center h-9 gap-1 cursor-pointer border-b border-white/50"
+          className="flex items-center h-9 gap-1 cursor-pointer"
         >
           <span className="text-white">Išdėstymas</span>
           {!layoutMenuOpen && (
@@ -1018,7 +1028,7 @@ export default function PortfolioComponent() {
       {mobileMenuOpen && (
         <div
           ref={mobileMenuRef}
-          className="fixed top-[84px] left-0 flex flex-col items-end w-[165px] bg-bckg py-2 overflow-hidden z-[50]"
+          className="fixed top-[104px] right-0 flex flex-col items-end w-[165px] bg-bckg py-2 overflow-hidden z-[50]"
         >
           {filters.map((filter) => (
             <button

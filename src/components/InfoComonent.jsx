@@ -68,7 +68,7 @@ export default function InfoComponent() {
 
   return (
     <div
-      className={`relative w-[100vw] h-[calc(100dvh)] xl:h-[calc(100dvh-148px)] xl:mt-[148px] overflow-hidden shadow-xl bg-bckg/88 xl:bg-bckg/70`}
+      className={`relative w-[100vw] xl:h-[calc(100dvh-148px)] xl:mt-[148px] h-[calc(100dvh-64px)] mt-[64px] overflow-hidden shadow-xl bg-bckg/88 xl:bg-bckg/70`}
     >
       <Frame />
 

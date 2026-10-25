@@ -450,7 +450,7 @@ export default function IndexComponent() {
 
   return (
     <div
-      className="slider h-[calc(100dvh)] xl:h-[calc(100dvh-148px)] xl:mt-[148px] bg-bckg/88 xl:bg-bckg/70"
+      className="slider xl:h-[calc(100dvh-148px)] xl:mt-[148px] h-[calc(100dvh-64px)] mt-[64px] bg-bckg/88 xl:bg-bckg/70"
       ref={sliderRef}
     >
       <Frame />

@@ -1,41 +1,45 @@
-import { useState } from "react";
-import {
-  FiInstagram,
-  FiMail,
-  FiMapPin,
-  FiCamera,
-  FiAward,
-} from "react-icons/fi";
-import { PiFilmStrip } from "react-icons/pi";
-import { TbBrandBehance } from "react-icons/tb";
+import { Link, useNavigate } from "react-router-dom";
 import { useResponsive } from "../hooks/useResponsive";
 import Frame from "./utils/Frame";
 
 const STATS = [
-  { value: "12", label: "Years shooting" },
-  { value: "340+", label: "Projects" },
-  { value: "28", label: "Awards" },
-  { value: "60+", label: "Countries" },
+  { value: "15+", label: "metai patirties" },
+  { value: "10 000+", label: "nuotraukų" },
+  { value: "200+", label: "laimingų klientų" },
 ];
 
-const SPECIALTIES = [
-  "Editorial & Fashion",
-  "Architecture",
-  "Documentary",
-  "Fine Art Portraits",
-];
+const LOCATION = ["Lietuva,", "Klaipėda"];
+
+const ArrowIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="15"
+    height="15"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <line x1="7" y1="17" x2="17" y2="7" />
+    <polyline points="7 7 17 7 17 17" />
+  </svg>
+);
 
 export default function PhotographerAbout() {
   const responsive = useResponsive();
+  const navigate = useNavigate();
+
+  const handleLinkClick = (path) => {
+    setTimeout(() => {
+      navigate(path);
+    }, 100);
+  };
 
   return (
     <div
-      className={`relative flex w-[100vw] ${responsive.isMobile || responsive.isTablet ? "h-[calc(100dvh-38px)] mt-[38px]" : "h-[calc(100dvh-148px)] xl:mt-[148px]"} overflow-hidden shadow-xl`}
-      style={{
-        // background: "#111110",
-        // fontFamily: "'Inter', sans-serif",
-        color: "#f0ede8",
-      }}
+      className={`relative flex w-[100vw] ${responsive.isMobile || responsive.isTablet ? "h-[calc(100dvh-64px)] mt-[64px]" : "h-[calc(100dvh-148px)] xl:mt-[148px]"} overflow-hidden shadow-xl`}
     >
       <Frame />
 
@@ -58,7 +62,7 @@ export default function PhotographerAbout() {
           <img
             src={`${import.meta.env.BASE_URL}images/About.jpg`}
             alt="Elena Voss — Photographer"
-            className="w-full h-full object-cover grayscale hover:grayscale-70 transition-all duration-500"
+            className="w-full h-full object-cover grayscale hover:grayscale-50 transition-all duration-500"
             style={{ objectPosition: "center top" }}
           />
 
@@ -96,7 +100,7 @@ export default function PhotographerAbout() {
               <div>
                 <p
                   style={{
-                    fontSize: "0.6rem",
+                    fontSize: "0.75rem",
                     letterSpacing: "0.3em",
                     color: "#c9a84c",
                     textTransform: "uppercase",
@@ -107,19 +111,25 @@ export default function PhotographerAbout() {
                   Apie Mane
                 </p>
                 <h1
-                  className="darius"
+                  className="darius text-text"
                   style={{
                     fontSize: "clamp(2.2rem, 3.5vw, 3.6rem)",
                     fontWeight: 600,
                     letterSpacing: "0.24em",
                     lineHeight: 1.05,
-                    color: "#f0ede8",
                   }}
                 >
                   Darius
                   <br />
-                  <span style={{ color: "#7a7570", fontWeight: 400 }}>
-                    Zvinklys
+                  <span
+                    style={{
+                      color: "#7a7570",
+                      fontWeight: 400,
+                      letterSpacing: "0.45em",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    Žvinklys
                   </span>
                 </h1>
               </div>
@@ -136,14 +146,14 @@ export default function PhotographerAbout() {
                 style={{
                   fontSize: "0.85rem",
                   fontStyle: "italic",
-                  color: "#4a4844",
+                  color: "#4a4544",
                   marginBottom: "0.3rem",
                 }}
               >
-                //////
+                /////////////////////////////
               </span>
             </div>
-            <div className="space-y-4 text-[clamp(0.72rem,1vw,2.5rem)]">
+            <div className="space-y-4 text-[clamp(0.72rem,1vw,2.5rem)] text-text">
               <p>
                 Sveiki, aš Darius — fotografas iš Klaipėdos, susitelkęs į
                 atmosferą, žmogaus buvimą ir ramias akimirkas. Tyrinėjantis
@@ -163,38 +173,49 @@ export default function PhotographerAbout() {
               </p>
             </div>
 
-            <p
-              style={{
-                fontSize: "0.83rem",
-                lineHeight: 1.75,
-                color: "#4a4844",
-                maxWidth: "420px",
-                fontWeight: 300,
-                marginTop: "0.75rem",
-                filter: "mix-blend-mode: difference",
-              }}
-            >
-              Formerly represented by Magnum Photos Europe. Published in{" "}
-              <em
-                className="cormorant"
-                style={{ color: "#6a6560", fontStyle: "italic" }}
+            <div className="w-full flex justify-start gap-1 mt-8 cursor-no-distort">
+              <Link
+                to="/portfolio"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleLinkClick("/portfolio");
+                }}
+                style={{ border: "1px solid var(--color-border)" }}
+                className="bg-surface/50 text-accent font-bold flex items-center justify-center py-2 px-4 hover:text-muted transition duration-300 ease-in-out"
               >
-                Vogue Italia, Le Monde, Zeit Magazin
-              </em>
-              , and exhibited at Galerie Camera Wien.
-            </p>
+                <span className="mr-2"> Galerija </span> <ArrowIcon />
+              </Link>
+
+              <Link
+                to="/kontaktai"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleLinkClick("/kontaktai");
+                }}
+                className="bg-muted/50 text-bckg font-bold flex items-center justify-center py-2 px-4 hover:text-accent transition duration-300 ease-in-out"
+              >
+                <span className="mr-2"> Susisiekime </span> <ArrowIcon />
+              </Link>
+            </div>
           </div>
 
           {/* STATS */}
-          <div className="grid grid-cols-4 gap-4" style={{ maxWidth: "420px" }}>
+          <div
+            className="mt-2 md:mt-4 flex items-center justify-start
+          gap-x-2 md:gap-x-6 gap-y-1 text-[clamp(0.72rem,1vw,2.5rem)]
+          text-muted font-extralight tracking-wide text-center"
+            style={{ maxWidth: "720px" }}
+          >
             {STATS.map((s) => (
-              <div key={s.label} className="stat-card">
+              <div
+                key={s.label}
+                className="flex flex-col items-start justify-center"
+              >
                 <p
-                  className="cinzel"
                   style={{
                     fontSize: "1.4rem",
                     fontWeight: 600,
-                    color: "#f0ede8",
+                    // color: "#f0ede8",
                     lineHeight: 1,
                   }}
                 >
@@ -202,8 +223,8 @@ export default function PhotographerAbout() {
                 </p>
                 <p
                   style={{
-                    fontSize: "0.58rem",
-                    color: "#4a4844",
+                    fontSize: "0.675rem",
+                    // color: "#4a4844",
                     letterSpacing: "0.08em",
                     textTransform: "uppercase",
                     marginTop: "0.3rem",
@@ -215,24 +236,23 @@ export default function PhotographerAbout() {
             ))}
           </div>
 
-          {/* SPECIALTIES */}
+          {/* LOCATION */}
           <div>
             <p
+              className="flex border-b border-white/10 w-fit mb-1"
               style={{
                 fontSize: "0.58rem",
                 letterSpacing: "0.2em",
-                color: "#3a3835",
+                color: "#aaa7a4",
                 textTransform: "uppercase",
-                marginBottom: "0.6rem",
+                marginBottom: "0.25rem",
               }}
             >
-              Disciplines
+              Lokacija
             </p>
-            <div className="flex flex-wrap gap-2">
-              {SPECIALTIES.map((s) => (
-                <span key={s} className="specialty-tag">
-                  {s}
-                </span>
+            <div className="flex gap-2 text-muted">
+              {LOCATION.map((s) => (
+                <span key={s}>{s}</span>
               ))}
             </div>
           </div>

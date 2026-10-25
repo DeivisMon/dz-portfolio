@@ -11,6 +11,8 @@ import AboutMe from "./pages/AboutMe";
 import Contact from "./pages/Contact";
 import NavBar from "./components/layout/NavBar";
 import CustomCursor from "./components/utils/CustomCursor";
+import DistortionCursor from "./components/utils/DistortionCursor";
+import ShaderCursor from "./components/utils/ShaderCursor";
 import MovingBackground from "./components/utils/MovingBackgound";
 
 export default function App() {
@@ -71,7 +73,13 @@ export default function App() {
           )}
           {responsive.isDesktop &&
             !responsive.isTablet &&
-            !responsive.isMobile && <CustomCursor />}
+            !responsive.isMobile && (
+              <>
+                {/* <ShaderCursor /> */}
+                {/* <DistortionCursor /> */}
+                <CustomCursor />
+              </>
+            )}
         </>
       )}
     </>

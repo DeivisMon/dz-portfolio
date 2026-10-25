@@ -224,14 +224,14 @@ export default function ContactSocials() {
       initial="hidden"
       animate="show"
       className={`
-        relative h-full flex flex-col items-center text-text ${responsive.isResponsive || responsive.isCompactHeight ? "justify-center " : ""}
+        relative h-full flex flex-col items-center justify-center text-text ${responsive.isResponsive || responsive.isCompactHeight ? "justify-center " : ""}
         ${containerWidth}
       `}
     >
       {/* Heading */}
       <Motion.div
         variants={itemVariants}
-        className={`${headingMargin} relative flex flex-col justify-center items-center gap-0 lg:gap-4 w-full mt-0 lg:mt-42 `}
+        className={`${headingMargin} relative flex flex-col justify-center items-start gap-0 lg:gap-4 w-full mt-0 `}
       >
         <h2
           className={`
@@ -249,7 +249,7 @@ export default function ContactSocials() {
       {/* Rows */}
       <div
         className={`
-          flex
+          flex cursor-no-distort
           ${rowsLayout}
           w-full
         `}
@@ -263,7 +263,7 @@ export default function ContactSocials() {
               key={row.id}
               variants={itemVariants}
               className={`
-                 w-full cursor-trigger group relative
+                 w-full cursor-trigger group relative 
                 ${rowBorder}
               `}
               data-cursor-type={row.data}

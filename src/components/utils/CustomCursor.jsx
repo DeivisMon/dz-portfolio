@@ -29,7 +29,7 @@ const ICONS = {
 const lerp = (a, b, n) => (1 - n) * a + n * b;
 
 // Global cursor position
-let globalCursor = { x: 0, y: 0 };
+export const globalCursor = { x: -9999, y: -9999, ready: false };
 
 // Cursor element
 const CursorElement = ({
@@ -252,10 +252,12 @@ const CustomCursor = ({ triggerSelector = ".cursor-trigger" }) => {
   }, []);
 
   // Global mouse position
+  // Global mouse position
   useEffect(() => {
     const updateCursor = (e) => {
       globalCursor.x = e.clientX;
       globalCursor.y = e.clientY;
+      globalCursor.ready = true;
     };
 
     window.addEventListener("mousemove", updateCursor);

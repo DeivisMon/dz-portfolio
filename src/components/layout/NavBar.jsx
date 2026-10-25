@@ -192,14 +192,14 @@ export default function NavBar() {
     <>
       {/* Navbar*/}
       <div
-        className={`navbar fixed transition-[z-index] ${isTransitioning ? "z-[2000]" : "z-[501]"} w-full h-[148px]`}
+        className={`navbar fixed transition-[z-index] ${isTransitioning ? "z-[2000]" : "z-[501]"} w-full xl:h-[148px] h-[64px] bg-bckg/90 backdrop-blur-sm flex items-center justify-between px-4 xl:px-6 pointer-events-none`}
       >
         {/* Shared row: logo left, quote right */}
-        <div className="fixed -top-4 xl:top-6 w-full xl:h-[148px] flex justify-between items-center pointer-events-none ">
+        <div className="fixed xl:top-6 top-0 w-full xl:h-[148px] flex justify-between items-center pointer-events-none ">
           {/* LEFT — logo */}
           <div
             className={`pointer-events-auto transition-[z-index]
-          pt-1 xl:pt-0 mt-0  pl-2
+          pt-1 xl:pt-0 mt-0
           max-w-[66vw] overflow-hidden flex flex-2 xl:flex-1
           ${isTransitioning ? "z-[2000]" : "z-[500]"} `}
           >
@@ -208,7 +208,7 @@ export default function NavBar() {
                 
               ${
                 responsive.isResponsive
-                  ? "text-[3rem]"
+                  ? "text-[clamp(2.5rem,5vw,2.75rem)]"
                   : "text-[clamp(2.5rem,11vw+0.5rem,10.5rem)]"
               }`}
             >
@@ -235,7 +235,7 @@ export default function NavBar() {
             />
             <Motion.div
               {...Animations(lowerLineVariants)}
-              className={`fixed ${responsive.isResponsive ? "top-14" : "top-[147px]"}  left-0 w-full h-[1px] bg-muted/30 origin-right z-1`}
+              className={`fixed ${responsive.isResponsive ? "top-[62px]" : "top-[147px]"}  left-0 w-full h-[1px] bg-muted/30 origin-right z-1`}
             />
           </div>
         </div>

@@ -14,7 +14,7 @@ const ScrollProgressBar = ({
   const idleTimeout = useRef(null);
   const responsive = useResponsive();
 
-  const isPortrait = responsive.isMobilePortrait;
+  // const isPortrait = responsive.isMobilePortrait;
 
   useEffect(() => {
     if (!lenis) return;
@@ -50,56 +50,56 @@ const ScrollProgressBar = ({
    * ─────────────────────────────
    * Vertical progress bar on the left.
    */
-  if (isPortrait) {
-    return (
-      <div className="fixed left-0 top-0 h-full w-auto flex items-center mix-blend-difference z-[101]">
-        {/* Percentage */}
-        {showPercentage && (
-          <div
-            className="pointer-events-none absolute left-2 top-1/2"
-            style={{
-              willChange: "transform, opacity",
-              transform: `translateY(-50%) translateX(${active ? 0 : -50}px)`,
-              transition: "transform 1s cubic-bezier(0.22, -0.5, 0.36, 1)",
-            }}
-          >
-            <span
-              className="text-white text-sm font-medium"
-              style={{
-                WebkitFontSmoothing: "antialiased",
-                textRendering: "optimizeLegibility",
-              }}
-            >
-              {Math.round(progress * 100)}%
-            </span>
-          </div>
-        )}
+  // if (isPortrait) {
+  //   return (
+  //     <div className="fixed left-0 top-0 h-full w-auto flex items-center mix-blend-difference z-[101]">
+  //       {/* Percentage */}
+  //       {showPercentage && (
+  //         <div
+  //           className="pointer-events-none absolute left-2 top-1/2"
+  //           style={{
+  //             willChange: "transform, opacity",
+  //             transform: `translateY(-50%) translateX(${active ? 0 : -50}px)`,
+  //             transition: "transform 1s cubic-bezier(0.22, -0.5, 0.36, 1)",
+  //           }}
+  //         >
+  //           <span
+  //             className="text-white text-sm font-medium"
+  //             style={{
+  //               WebkitFontSmoothing: "antialiased",
+  //               textRendering: "optimizeLegibility",
+  //             }}
+  //           >
+  //             {Math.round(progress * 100)}%
+  //           </span>
+  //         </div>
+  //       )}
 
-        {/* Track */}
-        <div
-          className={`relative h-full w-1 ${backgroundColor}`}
-          style={{
-            opacity: active || progress > 0 ? 1 : 0,
-            transform: `translateX(${active ? 0 : -10}px)`,
-            transition:
-              "opacity 1.8s ease, transform 1s cubic-bezier(0.22, 1, 0.36, 1)",
-          }}
-        >
-          {/* Progress */}
-          <div
-            className={`${progressColor} absolute left-0 top-0 h-full w-full`}
-            style={{
-              transformOrigin: "50% 50%",
-              transform: `scaleY(${progress})`,
-              opacity: active || progress > 0 ? 1 : 0,
-              transition:
-                "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.8s",
-            }}
-          />
-        </div>
-      </div>
-    );
-  }
+  //       {/* Track */}
+  //       <div
+  //         className={`relative h-full w-1 ${backgroundColor}`}
+  //         style={{
+  //           opacity: active || progress > 0 ? 1 : 0,
+  //           transform: `translateX(${active ? 0 : -10}px)`,
+  //           transition:
+  //             "opacity 1.8s ease, transform 1s cubic-bezier(0.22, 1, 0.36, 1)",
+  //         }}
+  //       >
+  //         {/* Progress */}
+  //         <div
+  //           className={`${progressColor} absolute left-0 top-0 h-full w-full`}
+  //           style={{
+  //             transformOrigin: "50% 50%",
+  //             transform: `scaleY(${progress})`,
+  //             opacity: active || progress > 0 ? 1 : 0,
+  //             transition:
+  //               "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.8s",
+  //           }}
+  //         />
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   /*
    * DEFAULT / DESKTOP / LANDSCAPE MOBILE

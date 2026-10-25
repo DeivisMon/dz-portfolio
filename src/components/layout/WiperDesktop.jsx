@@ -34,7 +34,7 @@ export default function WiperDesktop() {
       animate={{ scaleY: 0, opacity: 1 }}
       transition={{
         delay: 0.35,
-        duration: 0.65,
+        duration: 0.95,
         ease: [0.65, 0, 0.35, 1],
       }}
       onAnimationComplete={() => setIsTransitioning(false)}
