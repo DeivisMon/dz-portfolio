@@ -955,7 +955,7 @@ export default function PortfolioComponent() {
         }}
         className={`${
           responsive.isMobile || responsive.isTablet ? "flex" : "hidden"
-        } fixed top-16 left-0 z-[50] w-full bg-bckg items-start justify-between px-6 pt-2`}
+        } fixed top-16 left-0 z-[1000] w-full bg-bckg items-start justify-between px-6 pt-2`}
       >
         {/* Layout */}
         <div

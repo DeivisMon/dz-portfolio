@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import CustomEase from "gsap/CustomEase";
 
+gsap.registerPlugin(CustomEase);
+
 const base = import.meta.env.BASE_URL;
 
 const images = {
@@ -32,6 +34,10 @@ const images = {
 };
 
 const NUMBER_SEQUENCE = [0, 23, 48, 71, 100];
+
+// Cross lines timing (seconds)
+const LINES_IN_DURATION = 0.6;
+const LINES_EXIT_DURATION = 1;
 
 // Desktop: 5 columns, 5 rows each
 const desktopColumns = [
@@ -77,16 +83,55 @@ export default function Loader({ onComplete }) {
     const radius = 45;
     const circumference = 2 * Math.PI * radius;
 
-    const tl = gsap.timeline({ delay: 0.3 });
     CustomEase.create("hop", "0.9, 0, 0.1, 1");
+
+    // Initial states for the cross lines
+    gsap.set(".progress-bar-x", { scaleX: 0 });
+    gsap.set(".progress-bar-y", { scaleY: 0 });
+
+    const tl = gsap.timeline({ delay: 0.5 });
+
+    // =============
+    // CROSS LINES (at the very start)
+    // =============
+
+    // 1. Cross grows in from center
+    tl.addLabel("linesIn")
+      .to(
+        ".progress-bar-x",
+        { scaleX: 1, duration: LINES_IN_DURATION, ease: "hop" },
+        "linesIn",
+      )
+      .to(
+        ".progress-bar-y",
+        { scaleY: 1, duration: LINES_IN_DURATION, ease: "hop" },
+        "linesIn",
+      );
+
+    // 2. Lines start exiting (slow exit)
+    tl.addLabel("linesExit", "linesIn+=0.7");
+    tl.to(
+      ".progress-bar-x",
+      { scaleX: 0, duration: LINES_EXIT_DURATION, ease: "power2.inOut" },
+      "linesExit",
+    ).to(
+      ".progress-bar-y",
+      { scaleY: 0, duration: LINES_EXIT_DURATION, ease: "power2.inOut" },
+      "linesExit",
+    );
+
+    // 3. Counter + circles begin as the lines start to exit
+    tl.addLabel("counterStart", `linesExit+=${LINES_EXIT_DURATION * 0.65}`);
+
     // =============
     // COUNTER + CIRCLE ANIMATION
     // =============
 
     NUMBER_SEQUENCE.forEach((num, i) => {
       const progress = num / 100;
-      // Animate number
+      const pos = `counterStart+=${i * 0.5}`;
 
+      // Animate number
       tl.to(
         numberRef.current,
         {
@@ -96,7 +141,7 @@ export default function Loader({ onComplete }) {
           snap: { innerText: 1 },
           ease: "power2.inOut",
         },
-        i * 0.5,
+        pos,
       );
 
       tl.to(
@@ -108,7 +153,7 @@ export default function Loader({ onComplete }) {
           snap: { innerText: 1 },
           ease: "power2.inOut",
         },
-        i * 0.5,
+        pos,
       );
 
       // Animate circle
@@ -121,7 +166,7 @@ export default function Loader({ onComplete }) {
           rotation: -180,
           transformOrigin: "50% 50%",
         },
-        i * 0.5,
+        pos,
       );
       tl.to(
         circle2Ref.current,
@@ -132,7 +177,7 @@ export default function Loader({ onComplete }) {
           rotation: 90,
           transformOrigin: "50% 50%",
         },
-        i * 0.5,
+        pos,
       );
       tl.to(
         circle3Ref.current,
@@ -143,7 +188,7 @@ export default function Loader({ onComplete }) {
           rotation: 180,
           transformOrigin: "50% 50%",
         },
-        i * 0.5,
+        pos,
       );
       tl.to(
         circle4Ref.current,
@@ -154,7 +199,7 @@ export default function Loader({ onComplete }) {
           rotation: -90,
           transformOrigin: "50% 50%",
         },
-        i * 0.5,
+        pos,
       );
       tl.to(
         circle5Ref.current,
@@ -165,7 +210,7 @@ export default function Loader({ onComplete }) {
           rotation: 90,
           transformOrigin: "50% 50%",
         },
-        i * 0.5,
+        pos,
       );
     });
 
@@ -174,7 +219,7 @@ export default function Loader({ onComplete }) {
       {
         opacity: 0,
         rotateX: 75,
-        duration: 0.75,
+        duration: 0.85,
         scale: 0.75,
         ease: "expo.in",
       },
@@ -312,10 +357,22 @@ export default function Loader({ onComplete }) {
 
   return (
     <div className="fixed inset-0 z-50 w-screen h-[100dvh] overflow-hidden bg-bckg">
+      {/* Cross lines (grow in, then exit) */}
+      <div className="preloader-progress absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
+        <div
+          className="progress-bar-x absolute h-px w-full bg-header"
+          style={{ transform: "scaleX(0)" }}
+        />
+        <div
+          className="progress-bar-y absolute w-px h-full bg-header"
+          style={{ transform: "scaleY(0)" }}
+        />
+      </div>
+
       {/* Counter with Circle (on top) */}
       <div
         ref={counterContainerRef}
-        className="absolute inset-0 flex scale-50 lg:scale-100 items-center justify-center pointer-events-none"
+        className="absolute inset-0 flex scale-50 lg:scale-75 items-center justify-center pointer-events-none"
       >
         <div className="relative flex items-center justify-center">
           <span></span>

@@ -249,7 +249,7 @@ export default function NavBar() {
       </Motion.span>
 
       {/* RIGHT — quote only now */}
-      <div className="fixed h-[148px] w-full pointer-events-auto flex items-evenly">
+      <div className="fixed h-[148px] w-full pointer-events-auto flex items-evenly z-[501] ml-4">
         <div className="flex-1"></div>
         <Motion.span
           {...Animations(dateVariants)}

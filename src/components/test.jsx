@@ -39,61 +39,33 @@ export default function PhotographerAbout() {
 
   return (
     <div
-      className={`relative flex w-[100vw] ${responsive.isMobile || responsive.isTablet ? "h-[calc(100dvh-64px)] mt-[64px]" : "h-[calc(100dvh-148px)] xl:mt-[148px]"} overflow-hidden shadow-xl`}
+      className={`relative flex w-[100vw] ${responsive.isMobile || responsive.isTablet ? "h-[calc(100dvh-64px)] mt-[64px]" : "h-[calc(100dvh-148px)] xl:mt-[148px]"} overflow-hidden`}
     >
       <Frame />
-
-      {/* ─── GOLDEN DIVIDER ─── */}
-      <div
+      {/* <div
         className="gold-rule relative"
         style={{ width: "1px", flexShrink: 0 }}
-      />
+      /> */}
 
       {/* ─── MAIN CONTENT ─── */}
-      <div className="flex flex-1 h-full overflow-hidden">
+      <div
+        className={`flex ${responsive.isMobile && !responsive.isCompactHeight ? "flex-col" : "flex-row"} w-full h-full overflow-hidden`}
+      >
         {/* ─── CENTER: PORTRAIT ─── */}
-        <div
-          className="relative image-container"
-          style={{ width: "50%", flexShrink: 0 }}
-        >
+        <div className="flex-1 relative image-container">
           <div className="film-frame " />
 
           {/* Portrait */}
           <img
             src={`${import.meta.env.BASE_URL}images/About.jpg`}
-            alt="Elena Voss — Photographer"
+            alt="Photographer Darius Žvinklys"
             className="w-full h-full object-cover grayscale hover:grayscale-50 transition-all duration-500"
             style={{ objectPosition: "center top" }}
           />
-
-          {/* Bottom overlay text */}
-          <div
-            className="absolute bottom-0 left-0 right-0 z-20 px-4 pb-10 pt-16"
-            style={{
-              background:
-                "linear-gradient(to top, #111110 0%, rgba(17,17,16,0.7) 60%, transparent 100%)",
-            }}
-          >
-            <p
-              className="cormorant"
-              style={{
-                fontSize: "0.8rem",
-                fontStyle: "italic",
-                color: "#7a7570",
-                letterSpacing: "0.05em",
-                marginBottom: "0.25rem",
-              }}
-            >
-              "Light is not just illumination — it is the story itself."
-            </p>
-          </div>
         </div>
 
         {/* ─── RIGHT: INFO PANEL ─── */}
-        <div
-          className="flex flex-col justify-between flex-1 px-10 py-8"
-          style={{ overflowY: "hidden" }}
-        >
+        <div className="flex flex-col justify-between flex-1 px-10 py-8 scrollable-container overflow-x-hidden">
           {/* MIDDLE: Name + Bio */}
           <div>
             <div className="flex items-end gap-4 mb-5">
@@ -150,7 +122,7 @@ export default function PhotographerAbout() {
                   marginBottom: "0.3rem",
                 }}
               >
-                /////////////////////////////
+                {/* ///////////////////////////// */}
               </span>
             </div>
             <div className="space-y-4 text-[clamp(0.72rem,1vw,2.5rem)] text-text">

@@ -83,6 +83,7 @@ body {
   overscroll-behavior: none;
   overflow: hidden;
   text-shadow: #0f0d0b;
+  background-color: #0a0908;
 }
 
 * {
@@ -121,11 +122,11 @@ body {
   /* font-weight: 100; */
   /* background-color: #0a0908; */
   /* background: #0a0908; */
-  background-image: url("/images/background.jpg");
+  /* background-image: url("/images/background.jpg");
   background-position: bottom;
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 100dvh;
+  min-height: 100dvh; */
 }
 
 .logo {
@@ -144,13 +145,13 @@ body {
   font-weight: 600;
 }
 
-.bg {
+/* .bg {
   background-image: url("/images/background.jpg");
   background-size: 500px;
   background-position: top;
   background-repeat: repeat;
   opacity: 1;
-}
+} */
 
 .border {
   color: #443a33;
