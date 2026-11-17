@@ -192,7 +192,7 @@ export default function NavBar() {
     <>
       {/* Navbar*/}
       <div
-        className={`navbar fixed transition-[z-index] ${isTransitioning ? "z-[2000]" : "z-[501]"} w-full xl:h-[148px] h-[64px] bg-bckg/90 backdrop-blur-sm flex items-center justify-between px-4 xl:px-6 pointer-events-none`}
+        className={`navbar fixed transition-[z-index] ${isTransitioning ? "z-[2000]" : "z-[501]"} w-full xl:h-[148px] h-[64px] flex items-center justify-between px-4 xl:px-6 pointer-events-none`}
       >
         {/* Shared row: logo left, quote right */}
         <div className="fixed xl:top-6 top-0 w-full xl:h-[148px] flex justify-between items-center pointer-events-none ">
@@ -243,17 +243,19 @@ export default function NavBar() {
       {/* Clock — fixed */}
       <Motion.span
         {...Animations(dateVariants)}
-        className="fixed hidden xl:block right-4 top-0 text-[15px] text-muted/50 uppercase whitespace-nowrap z-1"
+        className="fixed hidden xl:block right-4 top-0 text-[15px] text-muted/50 uppercase whitespace-nowrap z-[501] pointer-events-none"
       >
         <ClockWithCity />
       </Motion.span>
 
       {/* RIGHT — quote only now */}
-      <div className="fixed h-[148px] w-full pointer-events-auto flex items-evenly z-[501] ml-4">
+      <div
+        className={`${responsive.isResponsive ? "hidden" : "flex"} fixed h-[148px] w-full pointer-events-auto items-evenly z-[501] ml-12`}
+      >
         <div className="flex-1"></div>
         <Motion.span
           {...Animations(dateVariants)}
-          className="flex-1 hidden xl:block text-[18px] xl:text-[64px] text-header mix-blend-difference"
+          className={`flex-1 text-[18px] xl:text-[64px] text-header mix-blend-difference`}
         >
           <PhotographerQuoteSlide
             textColor="text-header"

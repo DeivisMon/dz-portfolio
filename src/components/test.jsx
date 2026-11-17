@@ -58,8 +58,8 @@ export default function PhotographerAbout() {
           {/* Portrait */}
           <img
             src={`${import.meta.env.BASE_URL}images/About.jpg`}
-            alt="Photographer Darius Žvinklys"
-            className="w-full h-full object-cover grayscale hover:grayscale-50 transition-all duration-500"
+            alt="Fotografas Darius Žvinklys"
+            className="w-full h-full object-cover grayscale hover:grayscale-30 transition-all duration-500"
             style={{ objectPosition: "center top" }}
           />
         </div>
@@ -83,7 +83,7 @@ export default function PhotographerAbout() {
                   Apie Mane
                 </p>
                 <h1
-                  className="darius text-text"
+                  className="text-text hidden xl:block"
                   style={{
                     fontSize: "clamp(2.2rem, 3.5vw, 3.6rem)",
                     fontWeight: 600,
@@ -94,9 +94,10 @@ export default function PhotographerAbout() {
                   Darius
                   <br />
                   <span
+                    className=""
                     style={{
                       color: "#7a7570",
-                      fontWeight: 400,
+                      fontWeight: 600,
                       letterSpacing: "0.45em",
                       textTransform: "uppercase",
                     }}
@@ -106,6 +107,7 @@ export default function PhotographerAbout() {
                 </h1>
               </div>
               <div
+                className="hidden xl:block"
                 style={{
                   width: "3rem",
                   height: "1px",
@@ -145,7 +147,7 @@ export default function PhotographerAbout() {
               </p>
             </div>
 
-            <div className="w-full flex justify-start gap-1 mt-8 cursor-no-distort">
+            <div className="w-full hidden xl:flex justify-start gap-1 mt-8 cursor-no-distort">
               <Link
                 to="/portfolio"
                 onClick={(e) => {
@@ -153,7 +155,7 @@ export default function PhotographerAbout() {
                   handleLinkClick("/portfolio");
                 }}
                 style={{ border: "1px solid var(--color-border)" }}
-                className="bg-surface/50 text-accent font-bold flex items-center justify-center py-2 px-4 hover:text-muted transition duration-300 ease-in-out"
+                className="bg-surface/50 text-accent font-bold flex items-center justify-center py-2 px-4 hover:text-muted hover:bg-surface transition-all duration-300 ease-in-out"
               >
                 <span className="mr-2"> Galerija </span> <ArrowIcon />
               </Link>
@@ -173,7 +175,7 @@ export default function PhotographerAbout() {
 
           {/* STATS */}
           <div
-            className="mt-2 md:mt-4 flex items-center justify-start
+            className="mt-2 md:mt-4 hidden xl:flex items-center justify-start
           gap-x-2 md:gap-x-6 gap-y-1 text-[clamp(0.72rem,1vw,2.5rem)]
           text-muted font-extralight tracking-wide text-center"
             style={{ maxWidth: "720px" }}
@@ -209,7 +211,7 @@ export default function PhotographerAbout() {
           </div>
 
           {/* LOCATION */}
-          <div>
+          <div className="hidden xl:block">
             <p
               className="flex border-b border-white/10 w-fit mb-1"
               style={{

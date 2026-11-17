@@ -4,6 +4,7 @@ import { AnimatePresence } from "framer-motion";
 import { useResponsive } from "./hooks/useResponsive";
 import { useSliderStore } from "./store/sliderStore";
 import DesktopPageTransitions from "./components/layout/DesktopPageTransitions";
+import MobilePageTransition from "./components/layout/MobilePageTransition";
 import Loader from "./components/utils/Loader";
 import Index from "./pages/Index";
 import Portfolio from "./pages/Portfolio";

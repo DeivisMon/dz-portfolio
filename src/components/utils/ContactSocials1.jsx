@@ -389,7 +389,7 @@ export default function ContactSocials() {
               {!isCompact && (
                 <div
                   className="
-                    absolute bottom-0 left-3 right-3 h-px
+                    absolute -bottom-4 left-3 right-3 h-px
                     transition-opacity duration-200
                   "
                   style={{

@@ -21,7 +21,7 @@ export default function AboutMe() {
       </PageSlideInTransitions>
 
       {/* <Footer /> */}
-      {!isTouchDevice ? <WiperDesktop /> : ""}
+      {!isTouchDevice ? <WiperDesktop /> : <WiperDesktop />}
     </>
   );
 }
